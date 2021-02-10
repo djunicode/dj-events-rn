@@ -10,10 +10,11 @@ import {
   StatusBar,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import ProfileStats from '../../components/profilestats';
+import ProfileStats from '../../components/ProfileStats';
 
 const image = require('../../images/profile.jpg');
-const profile = () => {
+
+const Profile = () => {
   return (
     <SafeAreaView style={styles.body}>
       <StatusBar backgroundColor="#0C233D" />
@@ -97,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default profile;
+export default Profile;

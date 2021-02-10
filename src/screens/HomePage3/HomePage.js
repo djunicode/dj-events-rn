@@ -10,7 +10,7 @@ import SearchBar from '../../components/SearchBar';
 import MyTopTabs from '../../components/TopTabBarNav';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
 import Committee from '../Committeescreen/CommitteeScreen';
-import profile from '../profilescreen/profile';
+import Profile from '../ProfileScreen/Profile';
 
 const image = require('../../images/profile.jpg');
 
@@ -107,7 +107,7 @@ export default class MyBottomTabs extends React.Component {
         />
         <BottomTab.Screen
           name="Profile"
-          component={profile}
+          component={Profile}
           options={{
             tabBarColor: '#0C233D',
             tabBarIcon: ({focused}) => (

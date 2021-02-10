@@ -36,7 +36,6 @@ const ProfileStats = () => {
               color: '#fff',
               textAlign: 'center',
               fontSize: 24,
-              fontFamily: 'roboto',
             }}>
             {' '}
             Creatives Mentee
@@ -90,7 +89,7 @@ const ProfileStats = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                REFERAL COUNT
+                REFERRAL COUNT
               </Text>
             </LinearGradient>
           </TouchableOpacity>
