@@ -1,6 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/PasswordTextBox';
 import TextField from '../../components/TextField';
@@ -8,6 +14,7 @@ import TextField from '../../components/TextField';
 export default function SignUp() {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#0C233D" />
       <Text style={styles.basetext}>Let's get {'\n'}you started !</Text>
       <View style={{paddingTop: 41}}>
         <TextField title={'Full Name'} />
