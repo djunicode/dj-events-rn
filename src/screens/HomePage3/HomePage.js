@@ -9,14 +9,28 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import SearchBar from '../../components/SearchBar';
 import MyTopTabs from '../../components/TopTabBarNav';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
+import Committee from '../Committeescreen/CommitteeScreen';
+import profile from '../profilescreen/profile';
 
 const image = require('../../images/profile.jpg');
 
 export function HomePage() {
+  // const [isEnabled, setIsEnabled] = useState(false);
+  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <SafeAreaProvider>
-      <Header containerStyle={{height: 3, backgroundColor: '#1c2e4a'}} />
+      <Header
+        containerStyle={{height: 3, backgroundColor: '#1c2e4a'}}
+        statusBarProps={{backgroundColor: '#0C233D'}}
+      />
       <View style={styles.container}>
+        {/* <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        /> */}
         <View style={styles.upperRow}>
           <Text style={styles.title}>Hi, Adithya</Text>
           <TouchableOpacity style={styles.profileImgContainer}>
@@ -35,22 +49,6 @@ export function HomePage() {
       <View style={{height: 20, backgroundColor: '#1c2e4a'}} />
       <MyTopTabs />
     </SafeAreaProvider>
-  );
-}
-
-function CommitteeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Committee!</Text>
-    </View>
-  );
-}
-
-function ProfileScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Profile!</Text>
-    </View>
   );
 }
 
@@ -95,7 +93,7 @@ export default class MyBottomTabs extends React.Component {
         />
         <BottomTab.Screen
           name="Committee"
-          component={CommitteeScreen}
+          component={Committee}
           options={{
             tabBarColor: '#0C233D',
             tabBarIcon: ({focused}) => (
@@ -109,7 +107,7 @@ export default class MyBottomTabs extends React.Component {
         />
         <BottomTab.Screen
           name="Profile"
-          component={ProfileScreen}
+          component={profile}
           options={{
             tabBarColor: '#0C233D',
             tabBarIcon: ({focused}) => (

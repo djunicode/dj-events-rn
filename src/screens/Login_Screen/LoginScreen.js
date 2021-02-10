@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/PasswordTextBox';
@@ -18,6 +19,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <StatusBar backgroundColor="#0C233D" />
         <Text style={styles.basetext}>Welcome {'\n'}Back !</Text>
         <View style={{paddingTop: 62}}>
           <TextField title={'SAP ID or Username'} />

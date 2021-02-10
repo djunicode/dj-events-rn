@@ -7,6 +7,8 @@ import Upcoming from './src/screens/HomePage3/Upcoming';
 import Latest from './src/screens/HomePage3/Latest';
 import Following from './src/screens/HomePage3/FollowCommittees';
 import EventsScreen from './src/screens/HomePage3/EventsScreen';
+import Committee from './src/screens/Committeescreen/CommitteeScreen';
+import profile from './src/screens/profilescreen/profile';
 import {NavigationContainer} from '@react-navigation/native';
 
 export class Page extends React.Component {
@@ -29,6 +31,8 @@ export default class App extends React.Component {
           <Stack.Screen name="Latest" component={Latest} />
           <Stack.Screen name="Committees you follow" component={Following} />
           <Stack.Screen name="Events Description" component={EventsScreen} />
+          <Stack.Screen name="Committee Page" component={Committee} />
+          <Stack.Screen name="Profile Page" component={profile} />
         </Stack.Navigator>
       </NavigationContainer>
     );
