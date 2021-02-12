@@ -2,13 +2,17 @@
 import React from 'react';
 import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
+import * as Animatable from 'react-native-animatable';
 const image = require('../images/events.jpg');
 
 const EventCard = (props) => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <Animatable.View
+      style={styles.container}
+      animation="slideInLeft"
+      duration={2000}
+      delay={2000}>
       <TouchableOpacity
         onPress={() => navigation.navigate('Events Description')}>
         <Image source={image} style={{width: 370}} />
@@ -26,7 +30,7 @@ const EventCard = (props) => {
           <Text style={styles.committee}>COMMITTEE NAME</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 

@@ -5,40 +5,67 @@ import {
   Text,
   View,
   TouchableOpacity,
-  StatusBar,
+  KeyboardAvoidingView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/PasswordTextBox';
 import TextField from '../../components/TextField';
+import * as Animatable from 'react-native-animatable';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export default function SignUp() {
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#0C233D" />
-      <Text style={styles.basetext}>Let's get {'\n'}you started !</Text>
-      <View style={{paddingTop: 41}}>
-        <TextField title={'Full Name'} />
-      </View>
-      <View style={{paddingTop: 9}}>
-        <TextField title={'SAP ID'} />
-      </View>
-      <View style={{paddingTop: 41}}>
-        <TextField title={'Username'} />
-      </View>
-      <View style={{paddingTop: 9}}>
-        <Password title={'Password'} />
-      </View>
-      <View style={{paddingTop: 9}}>
-        <Password title={'Confirm Password'} />
-      </View>
-      <View style={{paddingTop: 41}}>
-        <TouchableOpacity>
-          <LinearGradient colors={['#F54B64', '#F78361']} style={styles.button}>
-            <Text style={styles.ltext}>SIGNUP AS A STUDENT</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <ScrollView style={styles.container}>
+      <KeyboardAvoidingView>
+        <View>
+          <Animatable.Text
+            style={styles.basetext}
+            animation="fadeInDown"
+            duration={2000}
+            delay={500}>
+            Let's get {'\n'}you started !
+          </Animatable.Text>
+          <Animatable.View
+            animation="bounceInLeft"
+            duration={2000}
+            delay={1000}>
+            <View style={{paddingTop: 41}}>
+              <TextField title={'Full Name'} />
+            </View>
+            <View style={{paddingTop: 9}}>
+              <TextField title={'SAP ID'} />
+            </View>
+          </Animatable.View>
+          <Animatable.View
+            animation="bounceInRight"
+            duration={2000}
+            delay={1500}>
+            <View style={{paddingTop: 41}}>
+              <TextField title={'Username'} />
+            </View>
+            <View style={{paddingTop: 9}}>
+              <Password title={'Password'} />
+            </View>
+            <View style={{paddingTop: 9}}>
+              <Password title={'Confirm Password'} />
+            </View>
+          </Animatable.View>
+          <Animatable.View
+            style={{paddingTop: 41}}
+            animation="fadeInUp"
+            duration={2000}
+            delay={2000}>
+            <TouchableOpacity>
+              <LinearGradient
+                colors={['#F54B64', '#F78361']}
+                style={styles.button}>
+                <Text style={styles.ltext}>SIGNUP AS A STUDENT</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </Animatable.View>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 

@@ -14,6 +14,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Header} from 'react-native-elements';
 import Tabs from '../../components/Tabs';
 import {useNavigation} from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 
 const EventsScreen = (props) => {
   //const [about, setAbout] = useState();
@@ -54,8 +55,10 @@ const EventsScreen = (props) => {
             }
             centerComponent={<Text style={styles.title}>{title}</Text>}
           />
-          <View style={styles.filler} />
-          <Image
+          <Animatable.Image
+            animation="flipInX"
+            duration={2000}
+            delay={1000}
             source={{
               uri:
                 'https://cdn.octopix.in/uploads/company-logo/2019/04/22/digihunts-RQEK86REtocLMlz1UA481VYaAGxxwG2ZIQyvqHD5D5LgiT92BhymWV6aK665KkCo1kD74mMjYakzvWaU-350x350.jpg',
