@@ -5,6 +5,7 @@ import {Text, View, StyleSheet, Image, Linking, Platform} from 'react-native';
 import {Title, Paragraph} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import * as Animatable from 'react-native-animatable';
 
 const ContactInfo = ({name, number}) => {
   return (
@@ -42,21 +43,23 @@ const About = () => {
   const {aboutInfo, setAboutInfo} = useState();
   return (
     <View style={{flex: 1, backgroundColor: '#1C2E4A'}}>
-      <Title style={styles.question}>What is this event about?</Title>
-      <Paragraph
-        style={
-          (styles.paragraph,
-          {
-            paddingLeft: 13,
-            borderLeftColor: 'white',
-            borderLeftWidth: 1,
-            marginLeft: 31,
-            color: 'white',
-          })
-        }>
-        jbdjfhedujef jkhuidehfjk hjgeyurghjag hgwhdbnkhyiubd nbhjgdejbm
-        xhbsdbfdj asgdgjsbdmn hgshd sn
-      </Paragraph>
+      <Animatable.View animation="fadeInLeftBig" duration={2000} delay={1500}>
+        <Title style={styles.question}>What is this event about?</Title>
+        <Paragraph
+          style={
+            (styles.paragraph,
+            {
+              paddingLeft: 13,
+              borderLeftColor: 'white',
+              borderLeftWidth: 1,
+              marginLeft: 31,
+              color: 'white',
+            })
+          }>
+          jbdjfhedujef jkhuidehfjk hjgeyurghjag hgwhdbnkhyiubd nbhjgdejbm
+          xhbsdbfdj asgdgjsbdmn hgshd sn
+        </Paragraph>
+      </Animatable.View>
     </View>
   );
 };

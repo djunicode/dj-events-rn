@@ -1,15 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
 import {height, width} from '../Constants';
+import * as Animatable from 'react-native-animatable';
 
-const ComCard = ({name, followers, image}) => {
+const ComCard = ({name, followers, image, time}) => {
   const [added, setAdded] = useState(false);
 
   return (
-    <View
+    <Animatable.View
+      animation="bounceInUp"
+      duration={2000}
+      delay={1000}
       style={{width: '50%', paddingTop: 20, paddingLeft: 6, paddingRight: 6}}>
       <Image source={{uri: image}} style={styles.image} />
       <View style={styles.info}>
@@ -32,23 +36,20 @@ const ComCard = ({name, followers, image}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              {added ? (
-                <Feather name="check" style={styles.addIcon} />
-              ) : (
-                <Feather
-                  name="plus"
-                  style={styles.addIcon}
-                  onPress={() => {
+              <Feather
+                name={added ? 'check' : 'plus'}
+                style={styles.addIcon}
+                onPress={() => {
+                  if (!added) {
                     setAdded(true);
-                    console.log('works');
-                  }}
-                />
-              )}
+                  }
+                }}
+              />
             </View>
           </LinearGradient>
         </View>
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 
