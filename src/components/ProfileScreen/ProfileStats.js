@@ -7,7 +7,7 @@ const ProfileStats = () => {
   return (
     <View
       style={{
-        margin: 30,
+        margin: 10,
         height: 170,
         borderRadius: 20,
         backgroundColor: '#a9a9a9',
@@ -67,7 +67,6 @@ const ProfileStats = () => {
                   fontSize: 14,
                   color: 'white',
                   textAlign: 'center',
-                  fontWeight: 'bold',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
@@ -85,7 +84,6 @@ const ProfileStats = () => {
                   fontSize: 14,
                   color: 'white',
                   textAlign: 'center',
-                  fontWeight: 'bold',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>

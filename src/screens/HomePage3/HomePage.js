@@ -15,8 +15,6 @@ import Profile from '../ProfileScreen/Profile';
 const image = require('../../images/profile.jpg');
 
 export function HomePage() {
-  // const [isEnabled, setIsEnabled] = useState(false);
-  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <SafeAreaProvider>
       <Header
@@ -24,13 +22,6 @@ export function HomePage() {
         statusBarProps={{backgroundColor: '#0C233D'}}
       />
       <View style={styles.container}>
-        {/* <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        /> */}
         <View style={styles.upperRow}>
           <Text style={styles.title}>Hi, Adithya</Text>
           <TouchableOpacity style={styles.profileImgContainer}>
@@ -41,12 +32,12 @@ export function HomePage() {
         <View style={styles.icon}>
           <SearchBar title={'Search for an event'} />
           <View style={{width: 8}} />
-          <View style={styles.sort}>
+          <TouchableOpacity style={styles.sort}>
             <Entypo name="sound-mix" size={25} color={'#dadada'} />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={{height: 20, backgroundColor: '#1c2e4a'}} />
+      <View style={{height: 25, backgroundColor: '#1c2e4a'}} />
       <MyTopTabs />
     </SafeAreaProvider>
   );

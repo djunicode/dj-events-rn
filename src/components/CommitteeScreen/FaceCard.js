@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 
-const image = require('../images/events.jpg');
+const image = require('../../images/events.jpg');
 
 const Faccard = (props) => {
   //   const [added, setAdded] = useState(false);

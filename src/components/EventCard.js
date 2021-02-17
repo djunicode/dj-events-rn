@@ -3,6 +3,8 @@ import React from 'react';
 import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
+import LinearGradient from 'react-native-linear-gradient';
+
 const image = require('../images/events.jpg');
 
 const EventCard = (props) => {
@@ -15,7 +17,16 @@ const EventCard = (props) => {
       delay={2000}>
       <TouchableOpacity
         onPress={() => navigation.navigate('Events Description')}>
-        <Image source={image} style={{width: 370}} />
+        <View>
+          <LinearGradient
+            colors={['rgba(0,0,0,0.87)', 'rgba(0,0,0,0.47)']}
+            start={{x: 0, y: 1}}
+            end={{x: 1, y: 0}}>
+            <View>
+              <Image source={image} style={{width: 370, opacity: 0.65}} />
+            </View>
+          </LinearGradient>
+        </View>
         <Text style={styles.title}>DIGIHUNT</Text>
         <Text style={styles.text}>
           It is a long established fact that a reader will be distracted by the
@@ -54,6 +65,7 @@ const styles = StyleSheet.create({
     paddingTop: 110,
     fontSize: 27,
     position: 'absolute',
+    fontWeight: 'bold',
   },
   info: {
     flexDirection: 'row',

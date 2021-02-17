@@ -10,8 +10,8 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import Faccard from '../../components/faccard';
-import Profilecard from '../../components/Profilecard';
+import Faccard from '../../components/CommitteeScreen/FaceCard';
+import Profilecard from '../../components/CommitteeScreen/Profilecard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -77,7 +77,6 @@ const Committee = () => {
                 style={{
                   color: '#F54B64',
                   fontSize: 18,
-                  fontFamily: 'roboto',
                 }}>
                 {' '}
                 Faculty Members
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 30,
     color: 'white',
-    marginHorizontal: 20,
+    marginHorizontal: 6,
     textDecorationLine: 'underline',
     fontFamily: 'Merriweather-Regular',
     textAlign: 'center',

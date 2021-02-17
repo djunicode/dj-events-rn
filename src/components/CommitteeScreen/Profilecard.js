@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 
-const image = require('../images/profile.jpg');
+const image = require('../../images/profile.jpg');
 
 const Profilecard = (props) => {
   //   const [added, setAdded] = useState(false);

@@ -10,7 +10,7 @@ import {
   StatusBar,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import ProfileStats from '../../components/ProfileStats';
+import ProfileStats from '../../components/ProfileScreen/ProfileStats';
 
 const image = require('../../images/profile.jpg');
 
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontSize: 28,
-    fontWeight: 'bold',
     paddingTop: 21,
   },
   emailtext: {

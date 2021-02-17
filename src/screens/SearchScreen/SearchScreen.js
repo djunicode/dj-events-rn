@@ -6,22 +6,23 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import ComCard from '../../components/ComCard';
+import ComCard from '../../components/SearchScreen/ComCard';
 import SearchBar from '../../components/SearchBar';
 
 const Committees = [
-  {name: 'Committee 1'},
-  {name: 'Committee 2'},
-  {name: 'Committee 3'},
-  {name: 'Committee 4'},
-  {name: 'Committee 5'},
-  {name: 'Committee 6'},
-  {name: 'Committee 7'},
-  {name: 'Committee 8'},
-  {name: 'Committee 9'},
-  {name: 'Committee 10'},
+  {name: 'Committee 1', followers: 43},
+  {name: 'Committee 2', followers: 43},
+  {name: 'Committee 3', followers: 43},
+  {name: 'Committee 4', followers: 43},
+  {name: 'Committee 5', followers: 43},
+  {name: 'Committee 6', followers: 43},
+  {name: 'Committee 7', followers: 43},
+  {name: 'Committee 8', followers: 43},
+  {name: 'Committee 9', followers: 43},
+  {name: 'Committee 10', followers: 43},
 ];
 
 const SearchScreen = () => {
@@ -32,9 +33,9 @@ const SearchScreen = () => {
       <View style={{flexDirection: 'row', paddingLeft: 19, paddingRight: 19}}>
         <SearchBar title={'Search Committees'} />
         <View style={{width: 8}} />
-        <View style={styles.sort}>
+        <TouchableOpacity style={styles.sort}>
           <Entypo name="sound-mix" size={25} color={'#dadada'} />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={{marginTop: 20, marginLeft: 20, marginRight: 20}}>
         <FlatList
@@ -46,7 +47,7 @@ const SearchScreen = () => {
             return (
               <ComCard
                 name={item.name}
-                followers={43}
+                followers={item.followers}
                 image={
                   'https://www.acm.org/binaries/content/gallery/acm/ctas/ambassadors-for-acm.jpg/ambassadors-for-acm.jpg/acm%3Adesktopcta'
                 }
