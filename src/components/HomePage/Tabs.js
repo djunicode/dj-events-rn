@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {About, Contact, Register, Gallery} from '../components/EventContents';
-import {width} from '../Constants';
+import {About, Contact, Register, Gallery} from '../HomePage/EventContents.js';
+import {width} from '../../Constants';
 
 const Tabs = () => {
   const Tab = createMaterialTopTabNavigator();

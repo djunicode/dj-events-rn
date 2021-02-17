@@ -4,7 +4,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
@@ -12,7 +11,7 @@ import {
 import {width} from '../../Constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Header} from 'react-native-elements';
-import Tabs from '../../components/Tabs';
+import Tabs from '../../components/HomePage/Tabs';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 
@@ -35,6 +34,7 @@ const EventsScreen = (props) => {
     if (!didSpread) {
       spreadTitle();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

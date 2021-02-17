@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
-import {height, width} from '../Constants';
+import {height, width} from '../../Constants';
 import * as Animatable from 'react-native-animatable';
 
 const ComCard = ({name, followers, image, time}) => {
@@ -55,14 +55,12 @@ const ComCard = ({name, followers, image, time}) => {
 
 const styles = StyleSheet.create({
   image: {
-    //width: '47%',
     height: (width * 42) / 100,
     borderRadius: 5,
   },
   info: {
     backgroundColor: '#4E586E',
     height: (height * 9.4) / 100,
-    //width: '47%',
     borderRadius: 5,
   },
   name: {

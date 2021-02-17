@@ -15,7 +15,7 @@ const SearchBar = (props) => {
       <TextInput
         placeholder={props.title}
         placeholderTextColor="rgba(255, 255, 255, 0.54)"
-        style={{flex: 1, fontSize: 16, paddingLeft: 17}}
+        style={{flex: 1, fontSize: 16, paddingLeft: 17, color: 'white'}}
       />
     </View>
   );
