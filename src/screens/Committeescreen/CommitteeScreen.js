@@ -8,15 +8,13 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import Faccard from '../../components/CommitteeScreen/FaceCard';
 import Profilecard from '../../components/CommitteeScreen/Profilecard';
+import About from '../../components/CommitteeScreen/AboutComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const image = require('../../images/events.jpg');
 
 const Committee = () => {
   const [notify, setNotify] = useState(false);
@@ -52,16 +50,13 @@ const Committee = () => {
               />
             )}
           </View>
-          <View>
-            <Image source={image} style={styles.image} />
-          </View>
+          <About />
           <View>
             <View style={{margin: 3, flexDirection: 'row'}}>
               <Text
                 style={{
                   color: '#F54B64',
                   fontSize: 18,
-                  fontFamily: 'roboto',
                 }}>
                 {' '}
                 Events related to this committee
@@ -165,6 +160,7 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingTop: 35,
     paddingBottom: 20,
+    position: 'absolute',
   },
   header: {
     flexDirection: 'row',
@@ -176,12 +172,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontFamily: 'Merriweather-Regular',
     textAlign: 'center',
-  },
-  image: {
-    width: '80%',
-    height: 140,
-    borderRadius: 10,
-    margin: 20,
   },
   text: {
     backgroundColor: '#4E586E',
