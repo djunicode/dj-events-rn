@@ -3,4 +3,20 @@ import {Dimensions} from 'react-native';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-export {width, height};
+const bgColor = '#1C2E4A';
+const textColor = '#F54B64';
+const statusbarColor = '#0C233D';
+const backDropColor = '#4E586E';
+const subtextColor = 'white';
+const linearColor = '#F78361';
+
+export {
+  width,
+  height,
+  bgColor,
+  textColor,
+  statusbarColor,
+  backDropColor,
+  subtextColor,
+  linearColor,
+};

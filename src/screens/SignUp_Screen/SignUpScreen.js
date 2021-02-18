@@ -12,6 +12,13 @@ import Password from '../../components/SignUpLogin/PasswordTextBox';
 import TextField from '../../components/SignUpLogin/TextField';
 import * as Animatable from 'react-native-animatable';
 import {ScrollView} from 'react-native-gesture-handler';
+import {
+  backDropColor,
+  bgColor,
+  linearColor,
+  subtextColor,
+  textColor,
+} from '../../Constants';
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -62,7 +69,7 @@ export default class SignUp extends React.Component {
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Login')}>
                 <LinearGradient
-                  colors={['#F54B64', '#F78361']}
+                  colors={[textColor, linearColor]}
                   style={styles.button}>
                   <Text style={styles.ltext}>SIGNUP AS A STUDENT</Text>
                 </LinearGradient>
@@ -81,17 +88,17 @@ const styles = StyleSheet.create({
     paddingRight: 41,
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#1c2e4a',
+    backgroundColor: bgColor,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 38,
     paddingTop: 72,
-    color: 'white',
+    color: subtextColor,
   },
   textinput: {
     fontFamily: 'OpenSans-Regular',
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     height: 47,
     width: 315,
     borderRadius: 40,
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
   ltext: {
     textAlign: 'center',
     paddingTop: 15,
-    color: '#FFFFFF',
+    color: subtextColor,
     fontSize: 17,
     fontFamily: 'OpenSans-Regular',
   },

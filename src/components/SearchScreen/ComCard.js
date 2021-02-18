@@ -3,7 +3,14 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
-import {height, width} from '../../Constants';
+import {
+  backDropColor,
+  height,
+  linearColor,
+  subtextColor,
+  textColor,
+  width,
+} from '../../Constants';
 import * as Animatable from 'react-native-animatable';
 
 const ComCard = ({name, followers, image, time}) => {
@@ -23,7 +30,7 @@ const ComCard = ({name, followers, image, time}) => {
             <Text style={styles.followers}>{followers} followers</Text>
           </View>
           <LinearGradient
-            colors={['#F54B64', '#F78361']}
+            colors={[textColor, linearColor]}
             start={{x: 0, y: 1}}
             end={{x: 1, y: 0}}
             locations={[0.29, 1.0]}
@@ -59,7 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   info: {
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
     height: (height * 9.4) / 100,
     borderRadius: 5,
   },
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 7,
     marginTop: 14,
-    color: 'white',
+    color: subtextColor,
   },
   followers: {
     fontFamily: 'Oxygen',
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
     marginTop: 23,
   },
   addIcon: {
-    color: 'white',
+    color: subtextColor,
     fontSize: 18,
   },
 });

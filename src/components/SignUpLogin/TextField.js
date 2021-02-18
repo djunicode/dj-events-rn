@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextInput, StyleSheet} from 'react-native';
+import {backDropColor, subtextColor} from '../../Constants';
 
 const TextField = (props) => {
   return (
@@ -15,13 +16,13 @@ const TextField = (props) => {
 const styles = StyleSheet.create({
   textinput: {
     fontFamily: 'OpenSans-Regular',
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     height: 47,
     width: 315,
     borderRadius: 40,
     fontSize: 15,
     paddingLeft: 22,
-    color: 'white',
+    color: subtextColor,
   },
 });
 

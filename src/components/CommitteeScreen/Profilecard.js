@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
+import {backDropColor, subtextColor} from '../../Constants';
 
 const image = require('../../images/profile.jpg');
 
@@ -18,7 +19,7 @@ const Profilecard = (props) => {
         </View>
       </View>
       <View style={styles.textcontent}>
-        <Text style={{fontSize: 12, color: 'white'}}> JOHN SMITH</Text>
+        <Text style={{fontSize: 12, color: subtextColor}}> JOHN SMITH</Text>
         <Text style={{fontSize: 12, color: 'rgba(255,255,255,0.54)'}}>
           {' '}
           CHAIRPERSON
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 5,
     marginHorizontal: 10,
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
   },
 });
 export default Profilecard;

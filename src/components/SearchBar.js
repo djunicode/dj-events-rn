@@ -2,6 +2,7 @@
 import React from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {backDropColor, subtextColor} from '../Constants';
 
 const SearchBar = (props) => {
   return (
@@ -15,7 +16,7 @@ const SearchBar = (props) => {
       <TextInput
         placeholder={props.title}
         placeholderTextColor="rgba(255, 255, 255, 0.54)"
-        style={{flex: 1, fontSize: 16, paddingLeft: 17, color: 'white'}}
+        style={{flex: 1, fontSize: 16, paddingLeft: 17, color: subtextColor}}
       />
     </View>
   );
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
   sectionStyle: {
     flexDirection: 'row',
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     borderRadius: 100,
     width: '85%',
     height: 46,

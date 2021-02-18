@@ -3,6 +3,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Upcoming from '../screens/HomePage3/Upcoming';
 import Latest from '../screens/HomePage3/Latest';
 import Following from '../screens/HomePage3/FollowCommittees';
+import {bgColor, subtextColor, textColor} from '../Constants';
 
 const TopTab = createMaterialTopTabNavigator();
 export default function MyTopTabs() {
@@ -10,15 +11,15 @@ export default function MyTopTabs() {
     <TopTab.Navigator
       backBehavior="Upcoming"
       tabBarOptions={{
-        indicatorStyle: {backgroundColor: '#F54B64'},
+        indicatorStyle: {backgroundColor: textColor},
         labelStyle: {
           fontSize: 19,
-          color: 'white',
+          color: subtextColor,
           textTransform: 'none',
           fontFamily: 'OpenSans-Regular',
         },
         tabStyle: {width: 139, height: 60},
-        style: {backgroundColor: '#1c2e4a'},
+        style: {backgroundColor: bgColor},
       }}>
       <TopTab.Screen
         name="Upcoming"

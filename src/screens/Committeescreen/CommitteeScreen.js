@@ -15,19 +15,25 @@ import About from '../../components/CommitteeScreen/AboutComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {
+  bgColor,
+  statusbarColor,
+  textColor,
+  backDropColor,
+  subtextColor,
+} from '../../Constants';
 const Committee = () => {
   const [notify, setNotify] = useState(false);
   return (
     <>
-      <StatusBar backgroundColor="#0C233D" />
+      <StatusBar backgroundColor={statusbarColor} />
       <SafeAreaView style={styles.body}>
         <ScrollView>
           <View style={styles.header}>
             <Ionicons
               name="chevron-back-outline"
               size={40}
-              style={{color: '#fff', marginHorizontal: 8}}
+              style={{color: subtextColor, marginHorizontal: 8}}
             />
             <Text style={styles.heading}>ACM COMMITTEE</Text>
             {notify ? (
@@ -55,7 +61,7 @@ const Committee = () => {
             <View style={{margin: 3, flexDirection: 'row'}}>
               <Text
                 style={{
-                  color: '#F54B64',
+                  color: textColor,
                   fontSize: 18,
                 }}>
                 {' '}
@@ -70,7 +76,7 @@ const Committee = () => {
             <View style={{margin: 10, flexDirection: 'row'}}>
               <Text
                 style={{
-                  color: '#F54B64',
+                  color: textColor,
                   fontSize: 18,
                 }}>
                 {' '}
@@ -81,7 +87,7 @@ const Committee = () => {
                   borderRadius: 10,
                   width: 90,
                   height: 30,
-                  backgroundColor: '#4E586E',
+                  backgroundColor: backDropColor,
                   marginLeft: 152,
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -89,7 +95,7 @@ const Committee = () => {
                 }}>
                 <Text
                   style={{
-                    color: '#fff',
+                    color: subtextColor,
                     fontWeight: 'bold',
                     paddingHorizontal: 8,
                   }}>
@@ -98,7 +104,7 @@ const Committee = () => {
                 <FontAwesome
                   name="caret-down"
                   size={20}
-                  style={{color: 'white'}}
+                  style={{color: subtextColor}}
                 />
               </TouchableOpacity>
             </View>
@@ -110,7 +116,7 @@ const Committee = () => {
             <View style={{margin: 10, flexDirection: 'row'}}>
               <Text
                 style={{
-                  color: '#F54B64',
+                  color: textColor,
                   fontSize: 18,
                   fontFamily: 'roboto',
                 }}>
@@ -122,7 +128,7 @@ const Committee = () => {
                   borderRadius: 10,
                   width: 90,
                   height: 30,
-                  backgroundColor: '#4E586E',
+                  backgroundColor: backDropColor,
                   marginLeft: 80,
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -130,7 +136,7 @@ const Committee = () => {
                 }}>
                 <Text
                   style={{
-                    color: '#fff',
+                    color: subtextColor,
                     fontWeight: 'bold',
                     paddingHorizontal: 8,
                   }}>
@@ -139,7 +145,7 @@ const Committee = () => {
                 <FontAwesome
                   name="caret-down"
                   size={20}
-                  style={{color: 'white'}}
+                  style={{color: subtextColor}}
                 />
               </TouchableOpacity>
             </View>
@@ -156,7 +162,7 @@ const Committee = () => {
 };
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: '#1C2E4A',
+    backgroundColor: bgColor,
     height: '100%',
     paddingTop: 35,
     paddingBottom: 20,
@@ -167,23 +173,23 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 30,
-    color: 'white',
+    color: subtextColor,
     marginHorizontal: 6,
     textDecorationLine: 'underline',
     fontFamily: 'Merriweather-Regular',
     textAlign: 'center',
   },
   text: {
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
   },
   years: {
     borderRadius: 10,
     width: 70,
     height: 30,
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
   },
   icon: {
-    color: '#fff',
+    color: subtextColor,
     marginLeft: 30,
     marginVertical: 6,
   },
