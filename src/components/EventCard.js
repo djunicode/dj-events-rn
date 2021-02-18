@@ -4,6 +4,7 @@ import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
+import {backDropColor, subtextColor, textColor} from '../Constants';
 
 const image = require('../images/events.jpg');
 
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     height: 237,
     width: 370,
-    backgroundColor: '#3e4658',
+    backgroundColor: backDropColor,
   },
   text: {
     paddingLeft: 15,
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.87)',
   },
   title: {
-    color: 'white',
+    color: subtextColor,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 110,
@@ -74,11 +75,11 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   know: {
-    color: '#F54B64',
+    color: textColor,
     fontSize: 15,
   },
   committee: {
-    color: '#F54B64',
+    color: textColor,
     fontSize: 15,
     paddingLeft: 106,
   },

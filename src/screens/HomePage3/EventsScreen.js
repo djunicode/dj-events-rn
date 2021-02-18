@@ -8,7 +8,13 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import {width} from '../../Constants';
+import {
+  bgColor,
+  statusbarColor,
+  subtextColor,
+  textColor,
+  width,
+} from '../../Constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Header} from 'react-native-elements';
 import Tabs from '../../components/HomePage/Tabs';
@@ -38,12 +44,12 @@ const EventsScreen = (props) => {
   }, []);
 
   return (
-    <SafeAreaView style={{backgroundColor: '#1C2E4A'}}>
+    <SafeAreaView style={{backgroundColor: bgColor}}>
       <ScrollView>
         <View>
           <Header
-            statusBarProps={{backgroundColor: '#0C233D'}}
-            backgroundColor={'#1C2E4A'}
+            statusBarProps={{backgroundColor: statusbarColor}}
+            backgroundColor={bgColor}
             style={styles.Header}
             leftComponent={
               <TouchableOpacity
@@ -84,13 +90,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Open Sans',
     fontSize: 26,
     fontWeight: '700',
-    color: 'white',
+    color: subtextColor,
     marginTop: 8,
   },
   arrow: {
     marginLeft: 18.51,
     marginTop: 10,
-    color: 'white',
+    color: subtextColor,
     fontSize: 26,
   },
   tabStyle: {},
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   filler: {
-    backgroundColor: '#1C2E4A',
+    backgroundColor: bgColor,
     position: 'absolute',
     marginTop: 77,
     width: width,
@@ -112,10 +118,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Open Sans',
     fontWeight: '400',
     fontSize: 16,
-    color: 'white',
+    color: subtextColor,
   },
   question: {
-    color: '#F54B64',
+    color: textColor,
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '500',

@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {backDropColor, subtextColor} from '../../Constants';
 
 const Password = (props) => {
   const [value, setValue] = useState('');
@@ -37,17 +38,17 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'OpenSans-Regular',
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     width: 280,
     height: 47,
     borderBottomLeftRadius: 30,
     borderTopLeftRadius: 30,
     fontSize: 15,
     paddingLeft: 22,
-    color: 'white',
+    color: subtextColor,
   },
   icon: {
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     width: 40,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,

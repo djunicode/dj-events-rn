@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
+import {bgColor} from '../../Constants';
 
 const Events = [
   {name: 'Event 1'},
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#1c2e4a',
+    backgroundColor: bgColor,
     paddingLeft: 23,
     paddingTop: 17,
   },

@@ -6,13 +6,15 @@ import {Title, Paragraph} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
+import {bgColor, subtextColor, textColor} from '../../Constants';
 
 const ContactInfo = ({name, number}) => {
   return (
     <View style={styles.contact}>
       <View style={{flexDirection: 'row'}}>
         <MaterialCommunityIcons name="account" style={styles.icon} />
-        <Text style={(styles.paragraph, {color: 'white', marginLeft: 15.33})}>
+        <Text
+          style={(styles.paragraph, {color: subtextColor, marginLeft: 15.33})}>
           {name}
         </Text>
       </View>
@@ -22,7 +24,11 @@ const ContactInfo = ({name, number}) => {
         <Text
           style={
             (styles.paragraph,
-            {color: 'white', marginLeft: 7, textDecorationLine: 'underline'})
+            {
+              color: subtextColor,
+              marginLeft: 7,
+              textDecorationLine: 'underline',
+            })
           }
           onPress={() => {
             let num = '';
@@ -42,7 +48,7 @@ const ContactInfo = ({name, number}) => {
 const About = () => {
   const {aboutInfo, setAboutInfo} = useState();
   return (
-    <View style={{flex: 1, backgroundColor: '#1C2E4A'}}>
+    <View style={{flex: 1, backgroundColor: bgColor}}>
       <Animatable.View animation="fadeInLeftBig" duration={2000} delay={1500}>
         <Title style={styles.question}>What is this event about?</Title>
         <Paragraph
@@ -50,10 +56,10 @@ const About = () => {
             (styles.paragraph,
             {
               paddingLeft: 13,
-              borderLeftColor: 'white',
+              borderLeftColor: subtextColor,
               borderLeftWidth: 1,
               marginLeft: 31,
-              color: 'white',
+              color: subtextColor,
             })
           }>
           jbdjfhedujef jkhuidehfjk hjgeyurghjag hgwhdbnkhyiubd nbhjgdejbm
@@ -66,7 +72,7 @@ const About = () => {
 
 const Gallery = () => {
   return (
-    <View style={{flex: 1, backgroundColor: '#1C2E4A'}}>
+    <View style={{flex: 1, backgroundColor: bgColor}}>
       <Title style={styles.question}>Have a look at pictures of Digihunt</Title>
       <View style={{alignSelf: 'center'}}>
         <View style={{marginTop: 14, flexDirection: 'row'}}>
@@ -107,7 +113,7 @@ const Gallery = () => {
 
 const Register = () => {
   return (
-    <View style={{flex: 1, backgroundColor: '#1C2E4A'}}>
+    <View style={{flex: 1, backgroundColor: bgColor}}>
       <Title style={styles.question}>Interested? Register Now!</Title>
       <Paragraph
         onPress={() =>
@@ -121,7 +127,7 @@ const Register = () => {
             marginLeft: 40,
             marginRight: 40,
             marginTop: 12,
-            color: 'white',
+            color: subtextColor,
             textDecorationLine: 'underline',
           })
         }>
@@ -133,7 +139,7 @@ const Register = () => {
 
 const Contact = () => {
   return (
-    <View style={{flex: 1, backgroundColor: '#1C2E4A'}}>
+    <View style={{flex: 1, backgroundColor: bgColor}}>
       <Title style={styles.question}>Facing a problem? Contact us</Title>
       <ContactInfo name="Shourya" number="1234567890" />
       <ContactInfo name="Vansh" number="9876543210" />
@@ -145,10 +151,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Open Sans',
     fontWeight: '400',
     fontSize: 16,
-    color: 'white',
+    color: subtextColor,
   },
   question: {
-    color: '#F54B64',
+    color: textColor,
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '500',
@@ -167,7 +173,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 15,
-    color: 'white',
+    color: subtextColor,
   },
 });
 

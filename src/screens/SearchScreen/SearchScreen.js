@@ -11,6 +11,12 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import ComCard from '../../components/SearchScreen/ComCard';
 import SearchBar from '../../components/SearchBar';
+import {
+  backDropColor,
+  bgColor,
+  statusbarColor,
+  subtextColor,
+} from '../../Constants';
 
 const Committees = [
   {name: 'Committee 1', followers: 43},
@@ -27,8 +33,8 @@ const Committees = [
 
 const SearchScreen = () => {
   return (
-    <SafeAreaView style={{backgroundColor: '#1C2E4A', paddingTop: 40}}>
-      <StatusBar backgroundColor="#0C233D" />
+    <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40}}>
+      <StatusBar backgroundColor={statusbarColor} />
 
       <View style={{flexDirection: 'row', paddingLeft: 19, paddingRight: 19}}>
         <SearchBar title={'Search Committees'} />
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginTop: 27,
     marginLeft: 19,
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
   },
   searchInput: {
     fontSize: 20,
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     paddingTop: 9,
     paddingBottom: 9,
-    color: 'white',
+    color: subtextColor,
   },
   filter: {
     marginLeft: 8,
@@ -83,11 +89,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 40,
     borderRadius: 100,
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
     marginRight: 19,
   },
   sort: {
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     borderRadius: 100,
     width: 60,
     height: 46,

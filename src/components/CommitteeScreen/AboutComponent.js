@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
+import {backDropColor, subtextColor} from '../../Constants';
 
 const logo = require('../../images/acm_logo.png');
 
@@ -27,7 +28,7 @@ const About = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     margin: 15,
     borderRadius: 15,
   },
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 25,
-    color: 'white',
+    color: subtextColor,
     textDecorationLine: 'underline',
   },
   text: {

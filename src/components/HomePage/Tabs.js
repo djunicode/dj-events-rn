@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {About, Contact, Register, Gallery} from '../HomePage/EventContents.js';
-import {width} from '../../Constants';
+import {bgColor, subtextColor, textColor, width} from '../../Constants';
 
 const Tabs = () => {
   const Tab = createMaterialTopTabNavigator();
@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Open Sans',
     fontWeight: '400',
     fontSize: 15,
-    color: 'white',
+    color: subtextColor,
     textTransform: 'none',
   },
   indicator: {
-    borderColor: '#F54B64',
+    borderColor: textColor,
     borderWidth: 1,
     alignContent: 'center',
   },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: (width * 6) / 7,
     alignSelf: 'center',
     elevation: 0,
-    backgroundColor: '#1C2E4A',
+    backgroundColor: bgColor,
   },
 });
 

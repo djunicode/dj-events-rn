@@ -2,6 +2,12 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {
+  backDropColor,
+  linearColor,
+  subtextColor,
+  textColor,
+} from '../../Constants';
 
 const ProfileStats = () => {
   return (
@@ -25,7 +31,7 @@ const ProfileStats = () => {
       <View
         style={{
           width: '70%',
-          backgroundColor: '#4E586E',
+          backgroundColor: backDropColor,
           borderBottomRightRadius: 10,
           borderTopRightRadius: 10,
           paddingTop: 29,
@@ -33,7 +39,7 @@ const ProfileStats = () => {
         <View>
           <Text
             style={{
-              color: '#fff',
+              color: subtextColor,
               textAlign: 'center',
               fontSize: 24,
             }}>
@@ -60,12 +66,12 @@ const ProfileStats = () => {
           <TouchableOpacity
             style={{margin: 10, marginTop: 26, height: 26, width: 80}}>
             <LinearGradient
-              colors={['#F54B64', '#F78361']}
+              colors={[textColor, linearColor]}
               style={{borderRadius: 5, height: 26}}>
               <Text
                 style={{
                   fontSize: 14,
-                  color: 'white',
+                  color: subtextColor,
                   textAlign: 'center',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -77,12 +83,12 @@ const ProfileStats = () => {
           <TouchableOpacity
             style={{margin: 10, marginTop: 26, height: 26, width: 130}}>
             <LinearGradient
-              colors={['#F54B64', '#F78361']}
+              colors={[textColor, linearColor]}
               style={{borderRadius: 5, height: 26}}>
               <Text
                 style={{
                   fontSize: 14,
-                  color: 'white',
+                  color: subtextColor,
                   textAlign: 'center',
                   justifyContent: 'center',
                   alignItems: 'center',

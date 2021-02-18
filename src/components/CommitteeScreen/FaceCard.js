@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
+import {backDropColor, subtextColor} from '../../Constants';
 
 const image = require('../../images/events.jpg');
 
@@ -18,7 +19,7 @@ const Faccard = (props) => {
         </View>
       </View>
       <View style={styles.textcontent}>
-        <Text style={{fontSize: 12, color: 'white', paddingTop: 5}}>
+        <Text style={{fontSize: 12, color: subtextColor, paddingTop: 5}}>
           {' '}
           DIGIHUNT
         </Text>
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 5,
     margin: 10,
-    backgroundColor: '#4E586E',
+    backgroundColor: backDropColor,
   },
 });
 export default Faccard;

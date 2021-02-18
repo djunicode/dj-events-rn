@@ -6,17 +6,27 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/SignUpLogin/PasswordTextBox';
 import TextField from '../../components/SignUpLogin/TextField';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  backDropColor,
+  bgColor,
+  linearColor,
+  statusbarColor,
+  subtextColor,
+  textColor,
+} from '../../Constants';
 
 const Login = ({navigation}) => {
   const [remember, setRemember] = useState(false);
   return (
     <ScrollView style={styles.container}>
+      <StatusBar backgroundColor={statusbarColor} />
       <Animatable.Text
         style={styles.basetext}
         animation="fadeInDown"
@@ -36,7 +46,7 @@ const Login = ({navigation}) => {
               name={
                 remember ? 'checkbox-marked-outline' : 'checkbox-blank-outline'
               }
-              style={{color: 'white'}}
+              style={{color: subtextColor}}
               size={20}
               onPress={() => {
                 setRemember(!remember);
@@ -47,7 +57,7 @@ const Login = ({navigation}) => {
             style={{
               fontSize: 17,
               fontFamily: 'OpenSans-Regular',
-              color: 'white',
+              color: subtextColor,
             }}>
             Remember Me
           </Text>
@@ -57,7 +67,7 @@ const Login = ({navigation}) => {
                 textDecorationLine: 'underline',
                 fontSize: 17,
                 fontFamily: 'OpenSans-Regular',
-                color: 'white',
+                color: subtextColor,
               }}>
               Forgot Password?
             </Text>
@@ -68,7 +78,7 @@ const Login = ({navigation}) => {
         <View style={{paddingTop: 33}}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <LinearGradient
-              colors={['#F54B64', '#F78361']}
+              colors={[textColor, linearColor]}
               style={styles.button}>
               <Text style={styles.ltext}>LOGIN</Text>
             </LinearGradient>
@@ -80,24 +90,24 @@ const Login = ({navigation}) => {
             alignItems: 'center',
             paddingTop: 48,
           }}>
-          <View style={{flex: 1, height: 1, backgroundColor: 'white'}} />
+          <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
           <View>
             <Text
               style={{
                 fontSize: 17,
                 fontFamily: 'OpenSans-Regular',
-                color: 'white',
+                color: subtextColor,
               }}>
               {' '}
               Don't Have an Account?{' '}
             </Text>
           </View>
-          <View style={{flex: 1, height: 1, backgroundColor: 'white'}} />
+          <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
         </View>
         <View style={{paddingTop: 14}}>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <LinearGradient
-              colors={['#F54B64', '#F78361']}
+              colors={[textColor, linearColor]}
               style={styles.button}>
               <Text style={styles.ltext}>SIGNUP AS A STUDENT</Text>
             </LinearGradient>
@@ -112,7 +122,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#1c2e4a',
+    backgroundColor: bgColor,
     paddingLeft: 43,
     paddingRight: 42,
   },
@@ -120,11 +130,11 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     fontSize: 38,
     paddingTop: 72,
-    color: 'white',
+    color: subtextColor,
   },
   textinput: {
     fontFamily: 'OpenSans-Regular',
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     height: 47,
     width: 315,
     borderRadius: 40,
@@ -138,7 +148,7 @@ const styles = StyleSheet.create({
   ltext: {
     textAlign: 'center',
     paddingTop: 15,
-    color: '#FFFFFF',
+    color: subtextColor,
     fontSize: 17,
     fontFamily: 'OpenSans-Regular',
   },

@@ -11,19 +11,20 @@ import {
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ProfileStats from '../../components/ProfileScreen/ProfileStats';
+import {bgColor, statusbarColor, subtextColor} from '../../Constants';
 
 const image = require('../../images/profile.jpg');
 
 const Profile = () => {
   return (
     <SafeAreaView style={styles.body}>
-      <StatusBar backgroundColor="#0C233D" />
+      <StatusBar backgroundColor={statusbarColor} />
       <ScrollView>
         <View style={{marginLeft: 360, marginTop: 20}}>
           <MaterialIcons
             name="mode-edit"
             size={40}
-            style={{color: '#fff', marginTop: 20}}
+            style={{color: subtextColor, marginTop: 20}}
             onPress={() => {}}
           />
         </View>
@@ -50,11 +51,11 @@ const Profile = () => {
 };
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: '#1C2E4A',
+    backgroundColor: bgColor,
     height: '100%',
   },
   nametext: {
-    color: '#fff',
+    color: subtextColor,
     textAlign: 'center',
     fontSize: 28,
     paddingTop: 21,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 18,
-    color: 'white',
+    color: subtextColor,
     textAlign: 'center',
     paddingTop: 10,
   },

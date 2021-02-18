@@ -11,6 +11,13 @@ import MyTopTabs from '../../components/TopTabBarNav';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
 import Committee from '../Committeescreen/CommitteeScreen';
 import Profile from '../ProfileScreen/Profile';
+import {
+  backDropColor,
+  bgColor,
+  statusbarColor,
+  subtextColor,
+  textColor,
+} from '../../Constants';
 
 const image = require('../../images/profile.jpg');
 
@@ -18,8 +25,8 @@ export function HomePage() {
   return (
     <SafeAreaProvider>
       <Header
-        containerStyle={{height: 3, backgroundColor: '#1c2e4a'}}
-        statusBarProps={{backgroundColor: '#0C233D'}}
+        containerStyle={{height: 3, backgroundColor: bgColor}}
+        statusBarProps={{backgroundColor: statusbarColor}}
       />
       <View style={styles.container}>
         <View style={styles.upperRow}>
@@ -37,7 +44,7 @@ export function HomePage() {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{height: 25, backgroundColor: '#1c2e4a'}} />
+      <View style={{height: 25, backgroundColor: bgColor}} />
       <MyTopTabs />
     </SafeAreaProvider>
   );
@@ -58,11 +65,11 @@ export default class MyBottomTabs extends React.Component {
           name="Home"
           component={HomePage}
           options={{
-            tabBarColor: '#0C233D',
+            tabBarColor: statusbarColor,
             tabBarIcon: ({focused}) => (
               <Icon
                 name={focused ? 'home' : 'home-outline'}
-                color={'#F54B64'}
+                color={textColor}
                 size={26}
               />
             ),
@@ -72,11 +79,11 @@ export default class MyBottomTabs extends React.Component {
           name="Search"
           component={SearchScreen}
           options={{
-            tabBarColor: '#0C233D',
+            tabBarColor: statusbarColor,
             tabBarIcon: ({focused}) => (
               <Icon
                 name={focused ? 'md-search-sharp' : 'md-search-outline'}
-                color={'#F54B64'}
+                color={textColor}
                 size={27}
               />
             ),
@@ -86,11 +93,11 @@ export default class MyBottomTabs extends React.Component {
           name="Committee"
           component={Committee}
           options={{
-            tabBarColor: '#0C233D',
+            tabBarColor: statusbarColor,
             tabBarIcon: ({focused}) => (
               <Icon
                 name={focused ? 'people' : 'people-outline'}
-                color={'#F54B64'}
+                color={textColor}
                 size={26}
               />
             ),
@@ -100,11 +107,11 @@ export default class MyBottomTabs extends React.Component {
           name="Profile"
           component={Profile}
           options={{
-            tabBarColor: '#0C233D',
+            tabBarColor: statusbarColor,
             tabBarIcon: ({focused}) => (
               <Icon
                 name={focused ? 'person' : 'person-outline'}
-                color={'#F54B64'}
+                color={textColor}
                 size={26}
               />
             ),
@@ -118,7 +125,7 @@ export default class MyBottomTabs extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    backgroundColor: '#1c2e4a',
+    backgroundColor: bgColor,
     paddingLeft: 27,
     paddingRight: 26,
   },
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     paddingTop: 27,
     paddingRight: 57,
-    color: 'white',
+    color: subtextColor,
     fontSize: 25,
   },
   profileImgContainer: {
@@ -152,7 +159,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   sort: {
-    backgroundColor: '#4e586e',
+    backgroundColor: backDropColor,
     borderRadius: 100,
     width: 60,
     height: 46,
