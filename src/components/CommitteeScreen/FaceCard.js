@@ -5,7 +5,7 @@ import {backDropColor, subtextColor} from '../../Constants';
 
 const image = require('../../images/events.jpg');
 
-const Faccard = (props) => {
+const Faccard = ({name, committee}) => {
   //   const [added, setAdded] = useState(false);
 
   return (
@@ -20,8 +20,7 @@ const Faccard = (props) => {
       </View>
       <View style={styles.textcontent}>
         <Text style={{fontSize: 12, color: subtextColor, paddingTop: 5}}>
-          {' '}
-          DIGIHUNT
+          {name}
         </Text>
         <Text
           style={{
@@ -29,8 +28,7 @@ const Faccard = (props) => {
             color: 'rgba(255,255,255,0.54)',
             paddingTop: 5,
           }}>
-          {' '}
-          ACM CO-COMMITTEE
+          {committee}
         </Text>
       </View>
     </View>

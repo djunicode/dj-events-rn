@@ -1,11 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, Image, Linking, Platform} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Linking,
+  Platform,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
 import {Title, Paragraph} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
+import {useNavigation} from '@react-navigation/native';
+import {WebView} from 'react-native-webview';
 import {bgColor, subtextColor, textColor} from '../../Constants';
 
 const ContactInfo = ({name, number}) => {
@@ -112,27 +123,41 @@ const Gallery = () => {
 };
 
 const Register = () => {
+  const link =
+    'https://docs.google.com/forms/d/e/1FAIpQLScAyCuaeWKUME7LXEwTBs5rkN-admC1X9-8hUPgEsR-UeHjhg/viewform';
+  const [visible, setVisible] = useState(false);
+  const isSubmit = (url) => {
+    if (url.url !== link) {
+      console.log('Submitted');
+      console.log(url);
+    }
+  };
   return (
     <View style={{flex: 1, backgroundColor: bgColor}}>
       <Title style={styles.question}>Interested? Register Now!</Title>
-      <Paragraph
-        onPress={() =>
-          Linking.openURL(
-            'https://www.canva.com/design/DAEUBYdJGJM/share/preview?token=x_QNKdTxXn_alHy-Igl',
-          )
-        }
-        style={
-          (styles.paragraph,
-          {
-            marginLeft: 40,
-            marginRight: 40,
-            marginTop: 12,
-            color: subtextColor,
-            textDecorationLine: 'underline',
-          })
-        }>
-        https://www.canva.com/design/DAEUBYdJGJM/share/preview?token=x_QNKdTxXn_alHy-Igl
-      </Paragraph>
+      <TouchableOpacity
+        onPress={() => {
+          setVisible(true);
+        }}
+        style={styles.paragraph}>
+        <Text style={styles.link}>{link}</Text>
+      </TouchableOpacity>
+      <View style={styles.centeredView}>
+        <Modal
+          visible={visible}
+          onRequestClose={() => {
+            setVisible(!visible);
+          }}>
+          <WebView
+            source={{
+              uri:
+                'https://docs.google.com/forms/d/e/1FAIpQLScAyCuaeWKUME7LXEwTBs5rkN-admC1X9-8hUPgEsR-UeHjhg/viewform',
+            }}
+            onNavigationStateChange={isSubmit}
+          />
+          {/* <Text>This is Webview</Text> */}
+        </Modal>
+      </View>
     </View>
   );
 };
@@ -174,6 +199,31 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 15,
     color: subtextColor,
+  },
+  link: {
+    marginLeft: 40,
+    marginRight: 40,
+    marginTop: 12,
+    color: subtextColor,
+    textDecorationLine: 'underline',
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
   },
 });
 
