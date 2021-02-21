@@ -11,12 +11,6 @@ import Committee from './src/screens/Committeescreen/CommitteeScreen';
 import Profile from './src/screens/ProfileScreen/Profile';
 import {NavigationContainer} from '@react-navigation/native';
 
-export class Page extends React.Component {
-  render() {
-    return <HomePage />;
-  }
-}
-
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {

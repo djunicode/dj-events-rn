@@ -8,6 +8,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import Faccard from '../../components/CommitteeScreen/FaceCard';
 import Profilecard from '../../components/CommitteeScreen/Profilecard';
@@ -22,6 +23,22 @@ import {
   backDropColor,
   subtextColor,
 } from '../../Constants';
+
+const Events = [
+  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 0},
+  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 1},
+  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 2},
+  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 3},
+  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 4},
+];
+
+const Members = [
+  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 0},
+  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 1},
+  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 2},
+  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 3},
+  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 4},
+];
 const Committee = () => {
   const [notify, setNotify] = useState(false);
   return (
@@ -59,40 +76,24 @@ const Committee = () => {
           <About />
           <View>
             <View style={{margin: 3, flexDirection: 'row'}}>
-              <Text
-                style={{
-                  color: textColor,
-                  fontSize: 18,
-                }}>
-                {' '}
+              <Text style={{color: textColor, fontSize: 18}}>
                 Events related to this committee
               </Text>
             </View>
-            <ScrollView style={{marginVertical: 2}} horizontal={true}>
-              <Faccard />
-              <Faccard />
-              <Faccard />
-            </ScrollView>
+            <FlatList
+              contentContainerStyle={{marginVertical: 2}}
+              keyExtractor={(event) => event.key}
+              data={Events}
+              horizontal={true}
+              renderItem={({item}) => {
+                return <Faccard name={item.name} committee={item.committee} />;
+              }}
+            />
             <View style={{margin: 10, flexDirection: 'row'}}>
-              <Text
-                style={{
-                  color: textColor,
-                  fontSize: 18,
-                }}>
-                {' '}
+              <Text style={{color: textColor, fontSize: 18}}>
                 Faculty Members
               </Text>
-              <TouchableOpacity
-                style={{
-                  borderRadius: 10,
-                  width: 90,
-                  height: 30,
-                  backgroundColor: backDropColor,
-                  marginLeft: 152,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                }}>
+              <TouchableOpacity style={[styles.dropdown, {marginLeft: 152}]}>
                 <Text
                   style={{
                     color: subtextColor,
@@ -108,32 +109,22 @@ const Committee = () => {
                 />
               </TouchableOpacity>
             </View>
-            <ScrollView style={{marginVertical: 5}} horizontal={true}>
-              <Profilecard />
-              <Profilecard />
-              <Profilecard />
-            </ScrollView>
+            <FlatList
+              contentContainerStyle={{marginVertical: 5}}
+              keyExtractor={(member) => member.key}
+              data={Members}
+              horizontal={true}
+              renderItem={({item}) => {
+                return (
+                  <Profilecard name={item.name} position={item.position} />
+                );
+              }}
+            />
             <View style={{margin: 10, flexDirection: 'row'}}>
-              <Text
-                style={{
-                  color: textColor,
-                  fontSize: 18,
-                  fontFamily: 'roboto',
-                }}>
-                {' '}
+              <Text style={{color: textColor, fontSize: 18}}>
                 Core Committee Members
               </Text>
-              <TouchableOpacity
-                style={{
-                  borderRadius: 10,
-                  width: 90,
-                  height: 30,
-                  backgroundColor: backDropColor,
-                  marginLeft: 80,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                }}>
+              <TouchableOpacity style={[styles.dropdown, {marginLeft: 80}]}>
                 <Text
                   style={{
                     color: subtextColor,
@@ -149,17 +140,24 @@ const Committee = () => {
                 />
               </TouchableOpacity>
             </View>
-            <ScrollView style={{marginVertical: 5}} horizontal={true}>
-              <Profilecard />
-              <Profilecard />
-              <Profilecard />
-            </ScrollView>
+            <FlatList
+              contentContainerStyle={{marginVertical: 5}}
+              keyExtractor={(member) => member.key}
+              data={Members}
+              horizontal={true}
+              renderItem={({item}) => {
+                return (
+                  <Profilecard name={item.name} position={item.position} />
+                );
+              }}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>
     </>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     backgroundColor: bgColor,
@@ -193,5 +191,15 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginVertical: 6,
   },
+  dropdown: {
+    borderRadius: 10,
+    width: 90,
+    height: 30,
+    backgroundColor: backDropColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
+
 export default Committee;

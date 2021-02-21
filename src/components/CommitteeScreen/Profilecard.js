@@ -5,7 +5,7 @@ import {backDropColor, subtextColor} from '../../Constants';
 
 const image = require('../../images/profile.jpg');
 
-const Profilecard = (props) => {
+const Profilecard = ({name, position}) => {
   //   const [added, setAdded] = useState(false);
 
   return (
@@ -19,10 +19,9 @@ const Profilecard = (props) => {
         </View>
       </View>
       <View style={styles.textcontent}>
-        <Text style={{fontSize: 12, color: subtextColor}}> JOHN SMITH</Text>
+        <Text style={{fontSize: 12, color: subtextColor}}> {name}</Text>
         <Text style={{fontSize: 12, color: 'rgba(255,255,255,0.54)'}}>
-          {' '}
-          CHAIRPERSON
+          {position}
         </Text>
       </View>
     </View>
