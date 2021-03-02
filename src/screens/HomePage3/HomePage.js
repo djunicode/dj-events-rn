@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Header} from 'react-native-elements';
@@ -18,6 +18,7 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import axios from '../../controllers/axios';
 
 const image = require('../../images/profile.jpg');
 

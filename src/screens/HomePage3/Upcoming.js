@@ -1,30 +1,61 @@
 import React from 'react';
+import {ActivityIndicator} from 'react-native';
 import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
-import {bgColor} from '../../Constants';
+import {bgColor, textColor} from '../../Constants';
+import axios from '../../controllers/axios';
 
 const Events = [
-  {name: 'Event 1'},
-  {name: 'Event 2'},
-  {name: 'Event 3'},
-  {name: 'Event 4'},
-  {name: 'Event 5'},
-  {name: 'Event 6'},
+  {eventName: 'Event 1'},
+  {eventName: 'Event 2'},
+  {eventName: 'Event 3'},
+  {eventName: 'Event 4'},
+  {eventName: 'Event 5'},
+  {eventName: 'Event 6'},
 ];
 
 export default class Upcoming extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: Events,
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    this.getUpcoming();
+  }
+
+  async getUpcoming() {
+    let res = await axios.get('/events');
+    //console.log(res.data);
+    this.setState({
+      data: res.data,
+      loading: false,
+    });
   }
   render() {
-    return (
+    return this.state.loading ? (
+      <ActivityIndicator
+        style={styles.container}
+        color={textColor}
+        size={'large'}
+      />
+    ) : (
       <FlatList
-        keyExtractor={(event) => event.name}
-        data={Events}
+        keyExtractor={(event, index) => index.toString()}
+        data={this.state.data}
         renderItem={({item}) => {
+          //console.log(item);
           return (
             <View style={styles.container}>
-              <EventCard />
+              <EventCard
+                name={item.eventName}
+                id={item.id}
+                summary={item.eventSummary}
+                likes={item.likes}
+              />
             </View>
           );
         }}
