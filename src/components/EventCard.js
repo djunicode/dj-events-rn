@@ -1,46 +1,84 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import LinearGradient from 'react-native-linear-gradient';
 import {backDropColor, subtextColor, textColor} from '../Constants';
+import {ImageBackground} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const image = require('../images/events.jpg');
 
-const EventCard = (props) => {
+const EventCard = ({id, name, summary, likes}) => {
+  const [didLike, setdidLike] = useState(false);
+  const [notify, setNotify] = useState(false);
+
   const navigation = useNavigation();
   return (
     <Animatable.View
       style={styles.container}
       animation="slideInLeft"
       duration={2000}
-      delay={2000}>
+      delay={1000}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Events Description')}>
-        <View>
-          <LinearGradient
-            colors={['rgba(0,0,0,0.87)', 'rgba(0,0,0,0.47)']}
-            start={{x: 0, y: 1}}
-            end={{x: 1, y: 0}}>
-            <View>
-              <Image source={image} style={{width: 370, opacity: 0.65}} />
-            </View>
-          </LinearGradient>
-        </View>
-        <Text style={styles.title}>DIGIHUNT</Text>
-        <Text style={styles.text}>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page.
-        </Text>
+        onPress={() => navigation.navigate('Events Description', {id: id})}>
+        <ImageBackground source={image} style={{height: 160, width: 370}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: 8,
+              justifyContent: 'space-between',
+            }}>
+            <Text
+              style={{
+                color: subtextColor,
+                fontSize: 16,
+                marginLeft: 5,
+              }}>
+              {likes} Likes
+            </Text>
+
+            <Text
+              style={{
+                color: subtextColor,
+                fontSize: 16,
+                marginRight: 5,
+              }}>
+              ACM - CoCommittee
+            </Text>
+          </View>
+          <Text style={styles.title}>{name}</Text>
+        </ImageBackground>
+        <Text style={styles.text}>{summary}</Text>
       </TouchableOpacity>
       <View style={styles.info}>
         <TouchableOpacity>
           <Text style={styles.know}>KNOW MORE</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.committee}>COMMITTEE NAME</Text>
-        </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: 100,
+            justifyContent: 'space-between',
+          }}>
+          <FontAwesome
+            name={didLike ? 'heart' : 'heart-o'}
+            color={didLike ? textColor : subtextColor}
+            onPress={() => {
+              didLike ? setdidLike(false) : setdidLike(true);
+            }}
+            size={20}
+          />
+          <FontAwesome
+            name={notify ? 'bell' : 'bell-o'}
+            color={notify ? textColor : subtextColor}
+            onPress={() => {
+              notify ? setNotify(false) : setNotify(true);
+            }}
+            size={20}
+          />
+          <FontAwesome name="share-alt" size={20} color={subtextColor} />
+        </View>
       </View>
     </Animatable.View>
   );
@@ -63,7 +101,7 @@ const styles = StyleSheet.create({
     color: subtextColor,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 110,
+    paddingTop: 120,
     fontSize: 27,
     position: 'absolute',
     fontWeight: 'bold',
@@ -73,6 +111,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     paddingLeft: 15,
     paddingRight: 15,
+    justifyContent: 'space-between',
   },
   know: {
     color: textColor,

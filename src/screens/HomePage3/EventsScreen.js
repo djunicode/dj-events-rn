@@ -20,8 +20,9 @@ import {Header} from 'react-native-elements';
 import Tabs from '../../components/HomePage/Tabs';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
+import axios from 'axios';
 
-const EventsScreen = (props) => {
+const EventsScreen = ({route}) => {
   //const [about, setAbout] = useState();
   const [title, setTitle] = useState('DIGIHUNT');
   const [didSpread, setDidSpread] = useState(false);
@@ -36,6 +37,12 @@ const EventsScreen = (props) => {
     setTitle(title1);
     setDidSpread(true);
   };
+
+  const getEvent = async () => {
+    let resp = await axios.get(`/events/${route.params.id}`);
+    console.log(resp);
+  };
+
   useEffect(() => {
     if (!didSpread) {
       spreadTitle();
