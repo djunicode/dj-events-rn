@@ -5,7 +5,7 @@ import {backDropColor, subtextColor} from '../../Constants';
 
 const logo = require('../../images/acm_logo.png');
 
-const About = () => {
+const About = (props) => {
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.image} />
@@ -18,6 +18,7 @@ const About = () => {
             events. As a student-run body, we proactively try to give back to
             the college through these events, promoting a holistic approach
             learning computer science.
+            {/* {props.about} */}
           </Text>
         </View>
       </View>
