@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -18,20 +18,27 @@ import {
   subtextColor,
 } from '../../Constants';
 
-const Committees = [
-  {name: 'Committee 1', followers: 43},
-  {name: 'Committee 2', followers: 43},
-  {name: 'Committee 3', followers: 43},
-  {name: 'Committee 4', followers: 43},
-  {name: 'Committee 5', followers: 43},
-  {name: 'Committee 6', followers: 43},
-  {name: 'Committee 7', followers: 43},
-  {name: 'Committee 8', followers: 43},
-  {name: 'Committee 9', followers: 43},
-  {name: 'Committee 10', followers: 43},
-];
 
 const SearchScreen = () => {
+
+  const [committee,setCommittee] = useState([]);
+  const committeename=[];
+
+  useEffect(()=>{fetch('http://aryan122.pythonanywhere.com/api/committees/')
+  .then(resp => resp.json())
+  .then(json=>setCommittee(json))
+  .catch(err => console.log(err));
+
+  },[]);
+  //console.log(committee.length);
+  for(let i=0;i< committee.length;i++){
+    committeename.push({name:committee[i].committeeName,id:committee[i].id});
+
+  }
+  //console.log(committeename);
+
+
+
   return (
     <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40}}>
       <StatusBar backgroundColor={statusbarColor} />
@@ -46,14 +53,14 @@ const SearchScreen = () => {
       <View style={{marginTop: 20, marginLeft: 20, marginRight: 20}}>
         <FlatList
           contentContainerStyle={{paddingBottom: 120}}
-          keyExtractor={(committee) => committee.name}
-          data={Committees}
+          keyExtractor={(committee) => committee.id}
+          data={committeename}
           numColumns={2}
           renderItem={({item}) => {
             return (
               <ComCard
                 name={item.name}
-                followers={item.followers}
+                followers= {42}
                 image={
                   'https://www.acm.org/binaries/content/gallery/acm/ctas/ambassadors-for-acm.jpg/ambassadors-for-acm.jpg/acm%3Adesktopcta'
                 }
