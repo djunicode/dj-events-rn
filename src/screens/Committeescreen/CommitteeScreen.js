@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,13 +24,7 @@ import {
   subtextColor,
 } from '../../Constants';
 
-const Events = [
-  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 0},
-  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 1},
-  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 2},
-  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 3},
-  {name: 'DIGIHUNT', committee: 'ACM COMMITTEE', key: 4},
-];
+
 
 const Members = [
   {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 0},
@@ -41,6 +35,32 @@ const Members = [
 ];
 const Committee = () => {
   const [notify, setNotify] = useState(false);
+  const [data,setData]= useState([]);
+  const faculty=[];
+  const Events=[];
+  const core=[];
+  useEffect(()=>{
+    fetch('http://aryan122.pythonanywhere.com/api/committee_detail/1/')
+    .then(resp=>resp.json())
+    .then(json=>setData(json))
+    .catch(err=> console.log(err));
+
+  },[]);
+
+  //console.log(data.coreCommitteeMembers);
+  for(let i=0;i< data.events.length;i++){
+    Events.push({name: data.events[i].eventName,id:data.events[i].id,committee:data.committeeName});
+  }
+  for(let i=0;i<data.facultyMembers.length;i++){
+    faculty.push({name:data.facultyMembers[i].name,id:data.facultyMembers[i].id,position:data.facultyMembers[i].positionAssigned});
+
+  }
+  for(let i=0;i<data.coreCommitteeMembers.length;i++){
+    core.push({name:data.coreCommitteeMembers[i].student,id:data.coreCommitteeMembers[i].id,position:data.coreCommitteeMembers[i].positionAssigned});
+  }
+  console.log(core);
+
+
   return (
     <>
       <StatusBar backgroundColor={statusbarColor} />
@@ -52,7 +72,7 @@ const Committee = () => {
               size={40}
               style={{color: subtextColor, marginHorizontal: 8}}
             />
-            <Text style={styles.heading}>ACM COMMITTEE</Text>
+            <Text style={styles.heading}>{data.committeeName}</Text>
             {notify ? (
               <MaterialCommunityIcons
                 name="bell-ring"
@@ -73,7 +93,7 @@ const Committee = () => {
               />
             )}
           </View>
-          <About />
+          <About about={data.committeeDescription} />
           <View>
             <View style={{margin: 3, flexDirection: 'row'}}>
               <Text style={{color: textColor, fontSize: 18}}>
@@ -82,7 +102,7 @@ const Committee = () => {
             </View>
             <FlatList
               contentContainerStyle={{marginVertical: 2}}
-              keyExtractor={(event) => event.key}
+              keyExtractor={(event) => event.id}
               data={Events}
               horizontal={true}
               renderItem={({item}) => {
@@ -111,8 +131,8 @@ const Committee = () => {
             </View>
             <FlatList
               contentContainerStyle={{marginVertical: 5}}
-              keyExtractor={(member) => member.key}
-              data={Members}
+              keyExtractor={(member) => member.id}
+              data={faculty}
               horizontal={true}
               renderItem={({item}) => {
                 return (
@@ -142,8 +162,8 @@ const Committee = () => {
             </View>
             <FlatList
               contentContainerStyle={{marginVertical: 5}}
-              keyExtractor={(member) => member.key}
-              data={Members}
+              keyExtractor={(member) => member.id}
+              data={core}
               horizontal={true}
               renderItem={({item}) => {
                 return (
@@ -172,10 +192,11 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 30,
     color: subtextColor,
-    marginHorizontal: 6,
+    marginHorizontal: 20,
     textDecorationLine: 'underline',
     fontFamily: 'Merriweather-Regular',
     textAlign: 'center',
+    alignItems:'center',
   },
   text: {
     backgroundColor: backDropColor,
@@ -188,8 +209,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: subtextColor,
-    marginLeft: 30,
+    marginLeft: 370,
     marginVertical: 6,
+    position:"absolute"
+    
   },
   dropdown: {
     borderRadius: 10,
