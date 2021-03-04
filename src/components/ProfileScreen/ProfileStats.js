@@ -1,21 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {
-  backDropColor,
-  linearColor,
-  subtextColor,
-  textColor,
-} from '../../Constants';
+import {View, Text} from 'react-native';
+import {backDropColor, subtextColor} from '../../Constants';
 
-const ProfileStats = () => {
+const ProfileStats = ({position, name}) => {
   return (
     <View
       style={{
-        margin: 10,
-        height: 170,
-        borderRadius: 20,
+        margin: 15,
+        height: 100,
         backgroundColor: '#a9a9a9',
         flexDirection: 'row',
       }}>
@@ -23,18 +16,13 @@ const ProfileStats = () => {
         style={{
           width: '30%',
           backgroundColor: '#505050',
-          borderBottomLeftRadius: 10,
-          borderTopLeftRadius: 10,
-          paddingTop: 29,
         }}
       />
       <View
         style={{
           width: '70%',
           backgroundColor: backDropColor,
-          borderBottomRightRadius: 10,
-          borderTopRightRadius: 10,
-          paddingTop: 29,
+          paddingTop: 20,
         }}>
         <View>
           <Text
@@ -43,8 +31,7 @@ const ProfileStats = () => {
               textAlign: 'center',
               fontSize: 24,
             }}>
-            {' '}
-            Creatives Mentee
+            {position}
           </Text>
           <Text
             style={{
@@ -52,51 +39,8 @@ const ProfileStats = () => {
               color: 'lightgrey',
               textAlign: 'center',
             }}>
-            {' '}
-            ACM CO-COMMITTEE
+            {name}
           </Text>
-        </View>
-        <View
-          style={{
-            marginTop: 20,
-            flexDirection: 'row',
-            borderTopColor: 'black',
-            borderTopWidth: 0.3,
-          }}>
-          <TouchableOpacity
-            style={{margin: 10, marginTop: 26, height: 26, width: 80}}>
-            <LinearGradient
-              colors={[textColor, linearColor]}
-              style={{borderRadius: 5, height: 26}}>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: subtextColor,
-                  textAlign: 'center',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                TASK
-              </Text>
-            </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{margin: 10, marginTop: 26, height: 26, width: 130}}>
-            <LinearGradient
-              colors={[textColor, linearColor]}
-              style={{borderRadius: 5, height: 26}}>
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: subtextColor,
-                  textAlign: 'center',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                REFERRAL COUNT
-              </Text>
-            </LinearGradient>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
