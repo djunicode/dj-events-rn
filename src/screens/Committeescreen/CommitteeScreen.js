@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,14 +7,12 @@ import {
   View,
   Text,
   StatusBar,
-  TouchableOpacity,
   FlatList,
 } from 'react-native';
 import Faccard from '../../components/CommitteeScreen/FaceCard';
 import Profilecard from '../../components/CommitteeScreen/Profilecard';
 import About from '../../components/CommitteeScreen/AboutComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   bgColor,
@@ -24,42 +22,26 @@ import {
   subtextColor,
 } from '../../Constants';
 
-
-
-const Members = [
-  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 0},
-  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 1},
-  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 2},
-  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 3},
-  {name: 'JOHN SMITH', position: 'CHAIRPERSON', key: 4},
-];
 const Committee = () => {
   const [notify, setNotify] = useState(false);
-  const [data,setData]= useState([]);
-  const faculty=[];
-  const Events=[];
-  const core=[];
-  useEffect(()=>{
-    fetch('http://aryan122.pythonanywhere.com/api/committee_detail/1/')
-    .then(resp=>resp.json())
-    .then(json=>setData(json))
-    .catch(err=> console.log(err));
-
-  },[]);
-
-  //console.log(data.coreCommitteeMembers);
-  for(let i=0;i< data.events.length;i++){
-    Events.push({name: data.events[i].eventName,id:data.events[i].id,committee:data.committeeName});
-  }
-  for(let i=0;i<data.facultyMembers.length;i++){
-    faculty.push({name:data.facultyMembers[i].name,id:data.facultyMembers[i].id,position:data.facultyMembers[i].positionAssigned});
-
-  }
-  for(let i=0;i<data.coreCommitteeMembers.length;i++){
-    core.push({name:data.coreCommitteeMembers[i].student,id:data.coreCommitteeMembers[i].id,position:data.coreCommitteeMembers[i].positionAssigned});
-  }
-  console.log(core);
-
+  const [data, setData] = useState([]);
+  const [faculty, setFaculty] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [core, setCore] = useState([]);
+  const fetchCommitteeData = async () => {
+    await fetch('http://aryan122.pythonanywhere.com/api/committee_detail/1/')
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json);
+        setEvents(json.events);
+        setFaculty(json.facultyMembers);
+        setCore(json.coreCommitteeMembers);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    fetchCommitteeData();
+  }, []);
 
   return (
     <>
@@ -102,18 +84,23 @@ const Committee = () => {
             </View>
             <FlatList
               contentContainerStyle={{marginVertical: 2}}
-              keyExtractor={(event) => event.id}
-              data={Events}
+              keyExtractor={(event) => event.id.toString()}
+              data={events}
               horizontal={true}
               renderItem={({item}) => {
-                return <Faccard name={item.name} committee={item.committee} />;
+                return (
+                  <Faccard
+                    name={item.eventName}
+                    committee={data.committeeName}
+                  />
+                );
               }}
             />
             <View style={{margin: 10, flexDirection: 'row'}}>
               <Text style={{color: textColor, fontSize: 18}}>
                 Faculty Members
               </Text>
-              <TouchableOpacity style={[styles.dropdown, {marginLeft: 152}]}>
+              <View style={[styles.dropdown, {marginLeft: 152}]}>
                 <Text
                   style={{
                     color: subtextColor,
@@ -122,21 +109,16 @@ const Committee = () => {
                   }}>
                   2020-21
                 </Text>
-                <FontAwesome
-                  name="caret-down"
-                  size={20}
-                  style={{color: subtextColor}}
-                />
-              </TouchableOpacity>
+              </View>
             </View>
             <FlatList
               contentContainerStyle={{marginVertical: 5}}
-              keyExtractor={(member) => member.id}
+              keyExtractor={(member) => member.id.toString()}
               data={faculty}
               horizontal={true}
               renderItem={({item}) => {
                 return (
-                  <Profilecard name={item.name} position={item.position} />
+                  <Profilecard name={item.name} position={item.department} />
                 );
               }}
             />
@@ -144,7 +126,7 @@ const Committee = () => {
               <Text style={{color: textColor, fontSize: 18}}>
                 Core Committee Members
               </Text>
-              <TouchableOpacity style={[styles.dropdown, {marginLeft: 80}]}>
+              <View style={[styles.dropdown, {marginLeft: 80}]}>
                 <Text
                   style={{
                     color: subtextColor,
@@ -153,21 +135,19 @@ const Committee = () => {
                   }}>
                   2020-21
                 </Text>
-                <FontAwesome
-                  name="caret-down"
-                  size={20}
-                  style={{color: subtextColor}}
-                />
-              </TouchableOpacity>
+              </View>
             </View>
             <FlatList
               contentContainerStyle={{marginVertical: 5}}
-              keyExtractor={(member) => member.id}
+              keyExtractor={(member) => member.id.toString()}
               data={core}
               horizontal={true}
               renderItem={({item}) => {
                 return (
-                  <Profilecard name={item.name} position={item.position} />
+                  <Profilecard
+                    name={item.student}
+                    position={item.positionAssigned}
+                  />
                 );
               }}
             />
@@ -196,7 +176,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontFamily: 'Merriweather-Regular',
     textAlign: 'center',
-    alignItems:'center',
+    alignItems: 'center',
   },
   text: {
     backgroundColor: backDropColor,
@@ -211,8 +191,7 @@ const styles = StyleSheet.create({
     color: subtextColor,
     marginLeft: 370,
     marginVertical: 6,
-    position:"absolute"
-    
+    position: 'absolute',
   },
   dropdown: {
     borderRadius: 10,

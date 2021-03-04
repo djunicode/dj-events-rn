@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import {backDropColor, subtextColor, textColor} from '../Constants';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const image = require('../images/events.jpg');
 
@@ -69,9 +70,9 @@ const EventCard = ({id, name, summary, likes}) => {
             }}
             size={20}
           />
-          <FontAwesome
-            name={notify ? 'bell' : 'bell-o'}
-            color={notify ? textColor : subtextColor}
+          <MaterialCommunityIcons
+            name={notify ? 'bell-ring' : 'bell'}
+            color={subtextColor}
             onPress={() => {
               notify ? setNotify(false) : setNotify(true);
             }}
