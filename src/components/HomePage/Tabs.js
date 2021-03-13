@@ -4,7 +4,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {About, Contact, Register, Gallery} from '../HomePage/EventContents.js';
 import {bgColor, subtextColor, textColor, width} from '../../Constants';
 
-const Tabs = () => {
+const Tabs = ({data}) => {
   const Tab = createMaterialTopTabNavigator();
 
   return (
@@ -17,10 +17,19 @@ const Tabs = () => {
           style: styles.tabBar,
         }}
         initialRouteName="About">
-        <Tab.Screen name="About" component={About} />
-        <Tab.Screen name="Gallery" component={Gallery} />
-        <Tab.Screen name="Register" component={Register} />
-        <Tab.Screen name="Contact" component={Contact} />
+        <Tab.Screen
+          name="About"
+          children={() => <About about={data.eventDescription} />}
+        />
+        <Tab.Screen name="Gallery" children={() => <Gallery />} />
+        <Tab.Screen
+          name="Register"
+          children={() => <Register register={data.registrationLink} />}
+        />
+        <Tab.Screen
+          name="Contact"
+          children={() => <Contact contact={data} />}
+        />
       </Tab.Navigator>
     </View>
   );

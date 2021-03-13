@@ -20,33 +20,26 @@ import {Header} from 'react-native-elements';
 import Tabs from '../../components/HomePage/Tabs';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import axios from 'axios';
 
 const EventsScreen = ({route}) => {
   //const [about, setAbout] = useState();
-  const [title, setTitle] = useState('DIGIHUNT');
-  const [didSpread, setDidSpread] = useState(false);
+  const [title, setTitle] = useState('');
+  const [eventsdata, setEventsdata] = useState({});
   const navigation = useNavigation();
 
-  const spreadTitle = () => {
-    var length = title.length;
-    let title1 = '';
-    for (var i = 0; i < length; i++) {
-      title1 = title1 + title[i] + ' ';
-    }
-    setTitle(title1);
-    setDidSpread(true);
-  };
-
   const getEvent = async () => {
-    let resp = await axios.get(`/events/${route.params.id}`);
-    console.log(resp);
+    let v = route.params.id.toString();
+    let api = 'http://aryan123456.pythonanywhere.com/api/events/' + v;
+    await fetch(api)
+      .then((res) => res.json())
+      .then((data) => {
+        setEventsdata(data);
+        setTitle(data.eventName);
+      });
   };
 
   useEffect(() => {
-    if (!didSpread) {
-      spreadTitle();
-    }
+    getEvent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -80,7 +73,7 @@ const EventsScreen = ({route}) => {
           />
         </View>
         <View style={{marginTop: 13}}>
-          <Tabs />
+          <Tabs data={eventsdata} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -99,6 +92,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: subtextColor,
     marginTop: 8,
+    letterSpacing: 5,
   },
   arrow: {
     marginLeft: 18.51,

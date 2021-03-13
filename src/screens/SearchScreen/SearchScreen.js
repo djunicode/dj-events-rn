@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -18,26 +18,19 @@ import {
   subtextColor,
 } from '../../Constants';
 
-
 const SearchScreen = () => {
+  const [data, setData] = useState([]);
+  const getSearchData = async () => {
+    await fetch('http://aryan123456.pythonanywhere.com/api/committees')
+      .then((res) => res.json())
+      .then((search) => {
+        setData(search);
+      });
+  };
 
-  const [committee,setCommittee] = useState([]);
-  const committeename=[];
-
-  useEffect(()=>{fetch('http://aryan122.pythonanywhere.com/api/committees/')
-  .then(resp => resp.json())
-  .then(json=>setCommittee(json))
-  .catch(err => console.log(err));
-
-  },[]);
-  //console.log(committee.length);
-  for(let i=0;i< committee.length;i++){
-    committeename.push({name:committee[i].committeeName,id:committee[i].id});
-
-  }
-  //console.log(committeename);
-
-
+  useEffect(() => {
+    getSearchData();
+  }, []);
 
   return (
     <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40}}>
@@ -53,14 +46,14 @@ const SearchScreen = () => {
       <View style={{marginTop: 20, marginLeft: 20, marginRight: 20}}>
         <FlatList
           contentContainerStyle={{paddingBottom: 120}}
-          keyExtractor={(committee) => committee.id}
-          data={committeename}
+          keyExtractor={(committee) => committee.id.toString()}
+          data={data}
           numColumns={2}
           renderItem={({item}) => {
             return (
               <ComCard
-                name={item.name}
-                followers= {42}
+                name={item.committeeName}
+                followers={42}
                 image={
                   'https://www.acm.org/binaries/content/gallery/acm/ctas/ambassadors-for-acm.jpg/ambassadors-for-acm.jpg/acm%3Adesktopcta'
                 }

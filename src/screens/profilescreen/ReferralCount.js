@@ -15,7 +15,7 @@ const ReferralCount = () => {
           size={40}
           style={styles.backIcon}
           onPress={() => {
-            navigation.navigate('Profile Page');
+            navigation.goBack();
           }}
         />
         <Text style={styles.heading}>REFERRAL COUNT</Text>

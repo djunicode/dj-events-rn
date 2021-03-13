@@ -29,7 +29,7 @@ const Committee = () => {
   const [events, setEvents] = useState([]);
   const [core, setCore] = useState([]);
   const fetchCommitteeData = async () => {
-    await fetch('http://aryan122.pythonanywhere.com/api/committee_detail/1/')
+    await fetch('http://aryan123456.pythonanywhere.com/api/committee_detail/3/')
       .then((res) => res.json())
       .then((json) => {
         setData(json);

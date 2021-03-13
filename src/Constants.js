@@ -9,7 +9,7 @@ const statusbarColor = '#0C233D';
 const backDropColor = '#4E586E';
 const subtextColor = 'white';
 const linearColor = '#F78361';
-const baseURL = 'http://aryan122.pythonanywhere.com/api';
+const baseURL = 'http://aryan123456.pythonanywhere.com/api';
 
 export {
   width,

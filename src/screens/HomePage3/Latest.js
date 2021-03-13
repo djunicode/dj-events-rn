@@ -1,23 +1,15 @@
 import React from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList, ActivityIndicator} from 'react-native';
 import EventCard from '../../components/EventCard';
-import {bgColor} from '../../Constants';
+import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
-
-const Events = [
-  {name: 'Event 1'},
-  {name: 'Event 2'},
-  {name: 'Event 3'},
-  {name: 'Event 4'},
-  {name: 'Event 5'},
-  {name: 'Event 6'},
-];
 
 export default class Latest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: Events,
+      data: [],
+      loading: true,
     };
   }
 
@@ -30,11 +22,18 @@ export default class Latest extends React.Component {
     //console.log(res.data);
     this.setState({
       data: res.data,
+      loading: false,
     });
   }
 
   render() {
-    return (
+    return this.state.loading ? (
+      <ActivityIndicator
+        style={styles.container}
+        color={textColor}
+        size={'large'}
+      />
+    ) : (
       <FlatList
         keyExtractor={(event, index) => index.toString()}
         data={this.state.data}
@@ -45,6 +44,8 @@ export default class Latest extends React.Component {
                 name={item.eventName}
                 id={item.id}
                 summary={item.eventSummary}
+                likes={item.likes}
+                committee={item.organisingCommitteeName}
               />
             </View>
           );
