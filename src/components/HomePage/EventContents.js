@@ -56,7 +56,7 @@ const ContactInfo = ({name, number}) => {
     </View>
   );
 };
-const About = () => {
+const About = ({about}) => {
   const {aboutInfo, setAboutInfo} = useState();
   return (
     <View style={{flex: 1, backgroundColor: bgColor}}>
@@ -73,8 +73,7 @@ const About = () => {
               color: subtextColor,
             })
           }>
-          jbdjfhedujef jkhuidehfjk hjgeyurghjag hgwhdbnkhyiubd nbhjgdejbm
-          xhbsdbfdj asgdgjsbdmn hgshd sn
+          {about}
         </Paragraph>
       </Animatable.View>
     </View>
@@ -122,14 +121,13 @@ const Gallery = () => {
   );
 };
 
-const Register = () => {
-  const link =
-    'https://docs.google.com/forms/d/e/1FAIpQLScAyCuaeWKUME7LXEwTBs5rkN-admC1X9-8hUPgEsR-UeHjhg/viewform';
+const Register = ({register}) => {
+  //'https://docs.google.com/forms/d/e/1FAIpQLScAyCuaeWKUME7LXEwTBs5rkN-admC1X9-8hUPgEsR-UeHjhg/viewform'
+  const link = register;
   const [visible, setVisible] = useState(false);
   const isSubmit = (url) => {
     if (url.url !== link) {
       console.log('Submitted');
-      console.log(url);
     }
   };
   return (
@@ -162,12 +160,18 @@ const Register = () => {
   );
 };
 
-const Contact = () => {
+const Contact = ({contact}) => {
   return (
     <View style={{flex: 1, backgroundColor: bgColor}}>
       <Title style={styles.question}>Facing a problem? Contact us</Title>
-      <ContactInfo name="Shourya" number="1234567890" />
-      <ContactInfo name="Vansh" number="9876543210" />
+      <ContactInfo
+        name={contact.contactName1}
+        number={contact.contactNumber1}
+      />
+      <ContactInfo
+        name={contact.contactName2}
+        number={contact.contactNumber2}
+      />
     </View>
   );
 };

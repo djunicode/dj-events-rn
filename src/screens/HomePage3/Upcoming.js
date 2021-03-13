@@ -5,20 +5,11 @@ import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
 
-const Events = [
-  {eventName: 'Event 1'},
-  {eventName: 'Event 2'},
-  {eventName: 'Event 3'},
-  {eventName: 'Event 4'},
-  {eventName: 'Event 5'},
-  {eventName: 'Event 6'},
-];
-
 export default class Upcoming extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: Events,
+      data: [],
       loading: true,
     };
   }
@@ -47,7 +38,6 @@ export default class Upcoming extends React.Component {
         keyExtractor={(event, index) => index.toString()}
         data={this.state.data}
         renderItem={({item}) => {
-          //console.log(item);
           return (
             <View style={styles.container}>
               <EventCard
@@ -55,6 +45,7 @@ export default class Upcoming extends React.Component {
                 id={item.id}
                 summary={item.eventSummary}
                 likes={item.likes}
+                committee={item.organisingCommitteeName}
               />
             </View>
           );

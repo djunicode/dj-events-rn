@@ -10,7 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const image = require('../images/events.jpg');
 
-const EventCard = ({id, name, summary, likes}) => {
+const EventCard = ({id, name, summary, likes, committee}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
 
@@ -23,6 +23,7 @@ const EventCard = ({id, name, summary, likes}) => {
       delay={1000}>
       <TouchableOpacity
         onPress={() => navigation.navigate('Events Description', {id: id})}>
+        {/* onPress={() => console.log(id)}> */}
         <ImageBackground source={image} style={{height: 160, width: 370}}>
           <View
             style={{
@@ -45,7 +46,7 @@ const EventCard = ({id, name, summary, likes}) => {
                 fontSize: 16,
                 marginRight: 5,
               }}>
-              ACM - CoCommittee
+              {committee}
             </Text>
           </View>
           <Text style={styles.title}>{name}</Text>

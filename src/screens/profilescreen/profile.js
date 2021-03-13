@@ -31,7 +31,7 @@ const Profile = () => {
   const [coCommittee, setCoCommittee] = useState([]);
 
   const fetchProfileData = async () => {
-    await fetch('http://aryan122.pythonanywhere.com/api/student_profile/4/')
+    await fetch('http://aryan123456.pythonanywhere.com/api/student_profile/3/')
       .then((res) => res.json())
       .then((data) => {
         var user = data.first_name + ' ' + data.last_name;
