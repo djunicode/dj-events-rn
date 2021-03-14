@@ -24,6 +24,34 @@ import {
 
 const Login = ({navigation}) => {
   const [remember, setRemember] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleUser = (text) => {
+    setUsername(text);
+  };
+
+  const handlePassword = (text) => {
+    setPassword(text);
+  };
+
+  const _userLogin = async () => {
+    var user = username;
+    var pass = password;
+    if (user && pass) {
+      fetch('http://aryan123456.pythonanywhere.com/api/student_login', {
+        method: 'POST',
+        body: JSON.stringify({
+          username: user,
+          password: pass,
+        }),
+      })
+        .then((res) => res.json())
+        .then((responseData) => {
+          console.log(responseData);
+        });
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
@@ -35,10 +63,10 @@ const Login = ({navigation}) => {
       </Animatable.Text>
       <Animatable.View animation="fadeInRight" delay={1000} duration={1000}>
         <View style={{paddingTop: 62}}>
-          <TextField title={'SAP ID or Username'} />
+          <TextField title={'SAP ID or Username'} function={handleUser} />
         </View>
         <View style={{paddingTop: 17}}>
-          <Password title={'Password'} />
+          <Password title={'Password'} function={handlePassword} />
         </View>
         <View style={styles.row}>
           <View style={{paddingRight: 5, paddingTop: 2}}>
@@ -77,6 +105,7 @@ const Login = ({navigation}) => {
       <Animatable.View animation="fadeInUp" duration={1000} delay={1500}>
         <View style={{paddingTop: 33}}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            {/* <TouchableOpacity onPress={_userLogin}> */}
             <LinearGradient
               colors={[textColor, linearColor]}
               style={styles.button}>
@@ -98,8 +127,7 @@ const Login = ({navigation}) => {
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
               }}>
-              {' '}
-              Don't Have an Account?{' '}
+              Don't Have an Account?
             </Text>
           </View>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
