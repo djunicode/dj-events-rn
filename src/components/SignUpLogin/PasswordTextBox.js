@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {backDropColor, subtextColor} from '../../Constants';
 
 const Password = (props) => {
-  const [value, setValue] = useState('');
   const [visible, setVisibility] = useState(false);
   const icon = !visible ? 'eye-off' : 'eye';
   return (
@@ -15,8 +14,7 @@ const Password = (props) => {
         placeholderTextColor="rgba(255, 255, 255, 0.85)"
         textAlign="left"
         style={styles.text}
-        value={value}
-        onChangeText={(text) => setValue(text)}
+        onChangeText={props.function}
         secureTextEntry={!visible}
       />
       <View style={styles.icon}>

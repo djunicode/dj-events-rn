@@ -9,6 +9,7 @@ const TextField = (props) => {
       placeholder={props.title}
       placeholderTextColor="rgba(255, 255, 255, 0.85)"
       textAlign="left"
+      onChangeText={props.function}
     />
   );
 };

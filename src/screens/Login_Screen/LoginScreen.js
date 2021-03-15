@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/SignUpLogin/PasswordTextBox';
@@ -24,6 +25,46 @@ import {
 
 const Login = ({navigation}) => {
   const [remember, setRemember] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleUser = (text) => {
+    setUsername(text);
+  };
+
+  const handlePassword = (text) => {
+    setPassword(text);
+  };
+
+  const _userLogin = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    var raw = JSON.stringify({username: username, password: password});
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/student_login/',
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.Message === 'Internal Server Error') {
+          console.log('Error occurred');
+          Alert.alert('Login Failed', 'Invalid username or password', [
+            {text: 'OK', onPress: () => console.log('okay')},
+          ]);
+        } else {
+          console.log(result);
+          navigation.navigate('Home');
+        }
+      })
+      .catch((error) => console.log('error', error));
+  };
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
@@ -35,10 +76,10 @@ const Login = ({navigation}) => {
       </Animatable.Text>
       <Animatable.View animation="fadeInRight" delay={1000} duration={1000}>
         <View style={{paddingTop: 62}}>
-          <TextField title={'SAP ID or Username'} />
+          <TextField title={'SAP ID or Username'} function={handleUser} />
         </View>
         <View style={{paddingTop: 17}}>
-          <Password title={'Password'} />
+          <Password title={'Password'} function={handlePassword} />
         </View>
         <View style={styles.row}>
           <View style={{paddingRight: 5, paddingTop: 2}}>
@@ -76,7 +117,8 @@ const Login = ({navigation}) => {
       </Animatable.View>
       <Animatable.View animation="fadeInUp" duration={1000} delay={1500}>
         <View style={{paddingTop: 33}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}> */}
+          <TouchableOpacity onPress={_userLogin}>
             <LinearGradient
               colors={[textColor, linearColor]}
               style={styles.button}>
@@ -98,8 +140,7 @@ const Login = ({navigation}) => {
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
               }}>
-              {' '}
-              Don't Have an Account?{' '}
+              Don't Have an Account?
             </Text>
           </View>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
