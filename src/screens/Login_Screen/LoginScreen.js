@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/SignUpLogin/PasswordTextBox';
@@ -35,23 +36,35 @@ const Login = ({navigation}) => {
     setPassword(text);
   };
 
-  const _userLogin = async () => {
-    var user = username;
-    var pass = password;
-    if (user && pass) {
-      fetch('http://aryan123456.pythonanywhere.com/api/student_login', {
-        method: 'POST',
-        body: JSON.stringify({
-          username: user,
-          password: pass,
-        }),
+  const _userLogin = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    var raw = JSON.stringify({username: username, password: password});
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/student_login/',
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.Message === 'Internal Server Error') {
+          console.log('Error occurred');
+          Alert.alert('Login Failed', 'Invalid username or password', [
+            {text: 'OK', onPress: () => console.log('okay')},
+          ]);
+        } else {
+          console.log(result);
+          navigation.navigate('Home');
+        }
       })
-        .then((res) => res.json())
-        .then((responseData) => {
-          console.log(responseData);
-        });
-    }
+      .catch((error) => console.log('error', error));
   };
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
@@ -104,8 +117,8 @@ const Login = ({navigation}) => {
       </Animatable.View>
       <Animatable.View animation="fadeInUp" duration={1000} delay={1500}>
         <View style={{paddingTop: 33}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            {/* <TouchableOpacity onPress={_userLogin}> */}
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}> */}
+          <TouchableOpacity onPress={_userLogin}>
             <LinearGradient
               colors={[textColor, linearColor]}
               style={styles.button}>
