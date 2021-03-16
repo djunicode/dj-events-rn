@@ -20,7 +20,8 @@ const EventCard = ({id, name, summary, likes, committee}) => {
       style={styles.container}
       animation="slideInLeft"
       duration={2000}
-      delay={1000}>
+      delay={1000}
+      useNativeDriver={true}>
       <TouchableOpacity
         onPress={() => navigation.navigate('Events Description', {id: id})}>
         {/* onPress={() => console.log(id)}> */}

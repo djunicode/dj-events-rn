@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Header} from 'react-native-elements';
@@ -18,10 +18,13 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const image = require('../../images/profile.jpg');
 
 export function HomePage() {
+  const {currentUser} = useContext(AuthContext);
+  //console.log(currentUser);
   return (
     <SafeAreaProvider>
       <Header

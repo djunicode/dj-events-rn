@@ -8,6 +8,8 @@ target 'dj_events_rn' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'dj_events_rnTests' do
     inherit! :complete
     # Pods for testing

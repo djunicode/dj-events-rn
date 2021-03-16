@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {createRef, useContext, useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -22,11 +22,13 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const Login = ({navigation}) => {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {signIn, currentUser} = useContext(AuthContext);
 
   const handleUser = (text) => {
     setUsername(text);
@@ -36,7 +38,7 @@ const Login = ({navigation}) => {
     setPassword(text);
   };
 
-  const _userLogin = () => {
+  /*const _userLogin = () => {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     var raw = JSON.stringify({username: username, password: password});
@@ -63,7 +65,7 @@ const Login = ({navigation}) => {
         }
       })
       .catch((error) => console.log('error', error));
-  };
+  };*/
 
   return (
     <ScrollView style={styles.container}>
@@ -71,10 +73,15 @@ const Login = ({navigation}) => {
       <Animatable.Text
         style={styles.basetext}
         animation="fadeInDown"
-        duration={2000}>
+        duration={2000}
+        useNativeDriver={true}>
         Welcome {'\n'}Back !
       </Animatable.Text>
-      <Animatable.View animation="fadeInRight" delay={1000} duration={1000}>
+      <Animatable.View
+        animation="fadeInRight"
+        delay={1000}
+        duration={1000}
+        useNativeDriver={true}>
         <View style={{paddingTop: 62}}>
           <TextField title={'SAP ID or Username'} function={handleUser} />
         </View>
@@ -115,10 +122,18 @@ const Login = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </Animatable.View>
-      <Animatable.View animation="fadeInUp" duration={1000} delay={1500}>
+      <Animatable.View
+        animation="fadeInUp"
+        duration={1000}
+        delay={1500}
+        useNativeDriver={true}>
         <View style={{paddingTop: 33}}>
           {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}> */}
-          <TouchableOpacity onPress={_userLogin}>
+          <TouchableOpacity
+            onPress={() => {
+              signIn(username, password);
+              navigation.navigate('Home');
+            }}>
             <LinearGradient
               colors={[textColor, linearColor]}
               style={styles.button}>
