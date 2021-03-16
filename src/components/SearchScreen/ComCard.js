@@ -21,10 +21,11 @@ const ComCard = ({name, followers, image, time}) => {
       animation="bounceInUp"
       duration={2000}
       delay={1000}
-      style={{width: '50%', paddingTop: 20, paddingLeft: 6, paddingRight: 6}}>
+      style={{width: '50%', paddingTop: 20, paddingLeft: 6, paddingRight: 6}}
+      useNativeDriver={true}>
       <Image source={{uri: image}} style={styles.image} />
       <View style={styles.info}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View>
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.followers}>{followers} followers</Text>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     height: 28,
     width: 28,
     borderRadius: 50,
-    marginLeft: 10,
+    marginRight: 10,
     marginTop: 23,
   },
   addIcon: {

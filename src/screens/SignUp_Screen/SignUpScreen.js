@@ -33,13 +33,15 @@ export default class SignUp extends React.Component {
               style={styles.basetext}
               animation="fadeInDown"
               duration={2000}
-              delay={500}>
+              delay={500}
+              useNativeDriver={true}>
               Let's get {'\n'}you started !
             </Animatable.Text>
             <Animatable.View
               animation="bounceInLeft"
               duration={2000}
-              delay={1000}>
+              delay={1000}
+              useNativeDriver={true}>
               <View style={{paddingTop: 41}}>
                 <TextField title={'Full Name'} />
               </View>
@@ -50,7 +52,8 @@ export default class SignUp extends React.Component {
             <Animatable.View
               animation="bounceInRight"
               duration={2000}
-              delay={1500}>
+              delay={1500}
+              useNativeDriver={true}>
               <View style={{paddingTop: 41}}>
                 <TextField title={'Username'} />
               </View>
@@ -65,7 +68,8 @@ export default class SignUp extends React.Component {
               style={{paddingTop: 41}}
               animation="fadeInUp"
               duration={2000}
-              delay={2000}>
+              delay={2000}
+              useNativeDriver={true}>
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Login')}>
                 <LinearGradient
