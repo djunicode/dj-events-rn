@@ -7,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {
   bgColor,
@@ -25,6 +26,7 @@ const EventsScreen = ({route}) => {
   //const [about, setAbout] = useState();
   const [title, setTitle] = useState('');
   const [eventsdata, setEventsdata] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   const getEvent = async () => {
@@ -35,6 +37,7 @@ const EventsScreen = ({route}) => {
       .then((data) => {
         setEventsdata(data);
         setTitle(data.eventName);
+        setLoading(false);
       });
   };
 
@@ -43,7 +46,17 @@ const EventsScreen = ({route}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return loading ? (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: bgColor,
+      }}>
+      <ActivityIndicator size="large" color={textColor} />
+    </View>
+  ) : (
     <SafeAreaView style={{backgroundColor: bgColor}}>
       <ScrollView>
         <View>

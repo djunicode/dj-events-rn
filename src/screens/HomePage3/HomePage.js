@@ -24,6 +24,7 @@ const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
+  console.log(currentUser);
   return (
     <SafeAreaProvider>
       <Header
@@ -32,12 +33,12 @@ export function HomePage() {
       />
       <View style={styles.container}>
         <View style={styles.upperRow}>
-          <Text style={styles.title}>Hi, Aryan Parekh</Text>
+          <Text style={styles.title}>Hi, {currentUser.Name}</Text>
           <TouchableOpacity style={styles.profileImgContainer}>
             <Image source={image} style={styles.profileImg} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.subtitle}>adithya2410</Text>
+        <Text style={styles.subtitle}>{currentUser.Username}</Text>
         <View style={styles.icon}>
           <SearchBar title={'Search for an event'} />
           <View style={{width: 8}} />
@@ -52,7 +53,7 @@ export function HomePage() {
   );
 }
 
-const BottomTab = createMaterialBottomTabNavigator();
+/*const BottomTab = createMaterialBottomTabNavigator();
 
 export default class MyBottomTabs extends React.Component {
   render() {
@@ -122,7 +123,7 @@ export default class MyBottomTabs extends React.Component {
       </BottomTab.Navigator>
     );
   }
-}
+}*/
 
 const styles = StyleSheet.create({
   container: {

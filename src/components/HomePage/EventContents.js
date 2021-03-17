@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -10,6 +10,7 @@ import {
   Platform,
   TouchableOpacity,
   Modal,
+  ActivityIndicator,
 } from 'react-native';
 import {Title, Paragraph} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -57,7 +58,6 @@ const ContactInfo = ({name, number}) => {
   );
 };
 const About = ({about}) => {
-  const {aboutInfo, setAboutInfo} = useState();
   return (
     <View style={{flex: 1, backgroundColor: bgColor}}>
       <Animatable.View animation="fadeInLeftBig" duration={2000} delay={1500}>

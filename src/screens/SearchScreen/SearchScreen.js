@@ -7,6 +7,7 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ComCard from '../../components/SearchScreen/ComCard';
@@ -16,21 +17,39 @@ import {
   bgColor,
   statusbarColor,
   subtextColor,
+  textColor,
 } from '../../Constants';
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
   const getSearchData = async () => {
+    setIsLoading(true);
     await fetch('http://aryan123456.pythonanywhere.com/api/committees')
       .then((res) => res.json())
       .then((search) => {
         setData(search);
+        setIsLoading(false);
       });
   };
 
   useEffect(() => {
     getSearchData();
   }, []);
+
+  if (isloading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: bgColor,
+        }}>
+        <ActivityIndicator size="large" color={textColor} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40}}>

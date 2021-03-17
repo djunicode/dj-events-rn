@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {About, Contact, Register, Gallery} from '../HomePage/EventContents.js';
 import {bgColor, subtextColor, textColor, width} from '../../Constants';
