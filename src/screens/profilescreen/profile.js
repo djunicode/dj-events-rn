@@ -19,6 +19,7 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import axios from '../../controllers/axios';
 
 const image = require('../../images/profile.jpg');
 
@@ -31,17 +32,20 @@ const Profile = () => {
   const [coCommittee, setCoCommittee] = useState([]);
 
   const fetchProfileData = async () => {
-    await fetch('http://aryan123456.pythonanywhere.com/api/student_profile/3/')
-      .then((res) => res.json())
-      .then((data) => {
-        var user = data.first_name + ' ' + data.last_name;
-        setSAP(data.sap);
-        setEmail(data.email);
+    try {
+      await axios.get('/student_profile/2').then((response) => {
+        console.log(response.data);
+        var user = response.data.first_name + ' ' + response.data.last_name;
+        setSAP(response.data.sap);
+        setEmail(response.data.email);
         setName(user);
-        setDepartment(data.department);
-        setCore(data.coreCommittees);
-        setCoCommittee(data.coCommittees);
+        setDepartment(response.data.department);
+        setCore(response.data.coreCommittees);
+        setCoCommittee(response.data.coCommittees);
       });
+    } catch (e) {
+      console.log(e);
+    }
   };
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);

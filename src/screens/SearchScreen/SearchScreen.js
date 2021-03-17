@@ -19,18 +19,21 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import axios from '../../controllers/axios';
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   const getSearchData = async () => {
     setIsLoading(true);
-    await fetch('http://aryan123456.pythonanywhere.com/api/committees')
-      .then((res) => res.json())
-      .then((search) => {
-        setData(search);
+    try {
+      await axios.get('/committees').then((search) => {
+        setData(search.data);
         setIsLoading(false);
       });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {

@@ -24,7 +24,7 @@ const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
-  console.log(currentUser);
+  //console.log(currentUser);
   return (
     <SafeAreaProvider>
       <Header
