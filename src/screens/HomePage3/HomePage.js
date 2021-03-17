@@ -24,7 +24,6 @@ const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
-  //console.log(currentUser);
   return (
     <SafeAreaProvider>
       <Header
@@ -33,7 +32,7 @@ export function HomePage() {
       />
       <View style={styles.container}>
         <View style={styles.upperRow}>
-          <Text style={styles.title}>Hi, Adithya</Text>
+          <Text style={styles.title}>Hi, Aryan Parekh</Text>
           <TouchableOpacity style={styles.profileImgContainer}>
             <Image source={image} style={styles.profileImg} />
           </TouchableOpacity>
@@ -134,12 +133,11 @@ const styles = StyleSheet.create({
   },
   upperRow: {
     flexDirection: 'row',
-    alignContent: 'space-between',
+    alignContent: 'space-around',
   },
   title: {
     fontFamily: 'OpenSans-Regular',
     paddingTop: 27,
-    paddingRight: 57,
     color: subtextColor,
     fontSize: 25,
   },
