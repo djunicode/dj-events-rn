@@ -21,6 +21,7 @@ import {
   backDropColor,
   subtextColor,
 } from '../../Constants';
+import axios from '../../controllers/axios';
 
 const Committee = () => {
   const [notify, setNotify] = useState(false);
@@ -29,15 +30,16 @@ const Committee = () => {
   const [events, setEvents] = useState([]);
   const [core, setCore] = useState([]);
   const fetchCommitteeData = async () => {
-    await fetch('http://aryan123456.pythonanywhere.com/api/committee_detail/3/')
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-        setEvents(json.events);
-        setFaculty(json.facultyMembers);
-        setCore(json.coreCommitteeMembers);
-      })
-      .catch((err) => console.log(err));
+    try {
+      await axios.get('/committee_detail/3/').then((json) => {
+        setData(json.data);
+        setEvents(json.data.events);
+        setFaculty(json.data.facultyMembers);
+        setCore(json.data.coreCommitteeMembers);
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
   useEffect(() => {
     fetchCommitteeData();

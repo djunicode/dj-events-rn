@@ -7,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {
   bgColor,
@@ -20,22 +21,27 @@ import {Header} from 'react-native-elements';
 import Tabs from '../../components/HomePage/Tabs';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
+import axios from '../../controllers/axios';
 
 const EventsScreen = ({route}) => {
   //const [about, setAbout] = useState();
   const [title, setTitle] = useState('');
   const [eventsdata, setEventsdata] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   const getEvent = async () => {
     let v = route.params.id.toString();
-    let api = 'http://aryan123456.pythonanywhere.com/api/events/' + v;
-    await fetch(api)
-      .then((res) => res.json())
-      .then((data) => {
-        setEventsdata(data);
-        setTitle(data.eventName);
+    try {
+      await axios.get(`/events/${v}`).then((response) => {
+        //console.log(data.data);
+        setEventsdata(response.data);
+        setTitle(response.data.eventName);
+        setLoading(false);
       });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -43,7 +49,17 @@ const EventsScreen = ({route}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return loading ? (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: bgColor,
+      }}>
+      <ActivityIndicator size="large" color={textColor} />
+    </View>
+  ) : (
     <SafeAreaView style={{backgroundColor: bgColor}}>
       <ScrollView>
         <View>

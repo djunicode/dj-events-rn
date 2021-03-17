@@ -6,13 +6,15 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <AuthContext.Provider
       value={{
         currentUser,
-        setCurrentUser,
-        signIn: async (username, password, button) => {
+        isLoading,
+        signIn: async (username, password) => {
+          setIsLoading(true);
           var myHeaders = new Headers();
           myHeaders.append('Content-Type', 'application/json');
           var raw = JSON.stringify({username: username, password: password});
@@ -27,12 +29,14 @@ export const AuthProvider = ({children}) => {
               .then((response) => response.json())
               .then((result) => {
                 if (result.Message === 'Internal Server Error') {
+                  setIsLoading(false);
                   console.log('Error occurred');
                   Alert.alert('Login Failed', 'Invalid username or password', [
                     {text: 'OK', onPress: () => console.log('okay')},
                   ]);
                 } else {
                   setCurrentUser(result);
+                  setIsLoading(false);
                 }
               });
           } catch (E) {

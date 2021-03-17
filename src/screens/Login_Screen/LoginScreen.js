@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {createRef, useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -102,7 +102,6 @@ const Login = ({navigation}) => {
           <TouchableOpacity
             onPress={() => {
               signIn(username, password);
-              navigation.navigate('Home');
             }}>
             <LinearGradient
               colors={[textColor, linearColor]}

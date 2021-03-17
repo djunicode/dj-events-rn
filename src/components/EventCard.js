@@ -22,8 +22,7 @@ const EventCard = ({id, name, summary, likes, committee}) => {
       duration={2000}
       delay={1000}
       useNativeDriver={true}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Events Description', {id: id})}>
+      <TouchableOpacity onPress={() => navigation.navigate('Event', {id: id})}>
         {/* onPress={() => console.log(id)}> */}
         <ImageBackground source={image} style={{height: 160, width: 370}}>
           <View

@@ -19,74 +19,80 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView>
-          <View>
-            <Animatable.Text
-              style={styles.basetext}
-              animation="fadeInDown"
-              duration={2000}
-              delay={500}
-              useNativeDriver={true}>
-              Let's get {'\n'}you started !
-            </Animatable.Text>
-            <Animatable.View
-              animation="bounceInLeft"
-              duration={2000}
-              delay={1000}
-              useNativeDriver={true}>
-              <View style={{paddingTop: 41}}>
-                <TextField title={'Full Name'} />
-              </View>
-              <View style={{paddingTop: 9}}>
-                <TextField title={'SAP ID'} />
-              </View>
-            </Animatable.View>
-            <Animatable.View
-              animation="bounceInRight"
-              duration={2000}
-              delay={1500}
-              useNativeDriver={true}>
-              <View style={{paddingTop: 41}}>
-                <TextField title={'Username'} />
-              </View>
-              <View style={{paddingTop: 9}}>
-                <Password title={'Password'} />
-              </View>
-              <View style={{paddingTop: 9}}>
-                <Password title={'Confirm Password'} />
-              </View>
-            </Animatable.View>
-            <Animatable.View
-              style={{paddingTop: 41}}
-              animation="fadeInUp"
-              duration={2000}
-              delay={2000}
-              useNativeDriver={true}>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Login')}>
-                <LinearGradient
-                  colors={[textColor, linearColor]}
-                  style={styles.button}>
-                  <Text style={styles.ltext}>SIGNUP AS A STUDENT</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            </Animatable.View>
-          </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
-    );
-  }
-}
+const SignUp = ({navigation}) => {
+  return (
+    <ScrollView style={styles.container}>
+      <KeyboardAvoidingView>
+        <View>
+          <Animatable.View
+            animation="fadeInDown"
+            duration={2000}
+            delay={500}
+            useNativeDriver={true}>
+            <Ionicons
+              name="arrow-back"
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            />
+            <Text style={styles.basetext}>Let's get {'\n'}you started !</Text>
+          </Animatable.View>
+          <Animatable.View
+            animation="bounceInLeft"
+            duration={2000}
+            delay={1000}
+            useNativeDriver={true}>
+            <View style={{paddingTop: 41}}>
+              <TextField title={'Full Name'} />
+            </View>
+            <View style={{paddingTop: 9}}>
+              <TextField title={'SAP ID'} />
+            </View>
+          </Animatable.View>
+          <Animatable.View
+            animation="bounceInRight"
+            duration={2000}
+            delay={1500}
+            useNativeDriver={true}>
+            <View style={{paddingTop: 41}}>
+              <TextField title={'Username'} />
+            </View>
+            <View style={{paddingTop: 9}}>
+              <Password title={'Password'} />
+            </View>
+            <View style={{paddingTop: 9}}>
+              <Password title={'Confirm Password'} />
+            </View>
+          </Animatable.View>
+          <Animatable.View
+            style={{paddingTop: 41}}
+            animation="fadeInUp"
+            duration={2000}
+            delay={2000}
+            useNativeDriver={true}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Login')}>
+              <LinearGradient
+                colors={[textColor, linearColor]}
+                style={styles.button}>
+                <Text style={styles.ltext}>SIGNUP AS A STUDENT</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </Animatable.View>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
+  backButton: {
+    color: subtextColor,
+    fontSize: 36,
+    alignSelf: 'flex-start',
+    marginTop: 20,
+  },
   container: {
     paddingLeft: 44,
     paddingRight: 41,
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
   basetext: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 38,
-    paddingTop: 72,
+    paddingTop: 30,
     color: subtextColor,
   },
   textinput: {
@@ -121,3 +127,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
+
+export default SignUp;
