@@ -1,22 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Header} from 'react-native-elements';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Entypo from 'react-native-vector-icons/Entypo';
-import Icon from 'react-native-vector-icons/Ionicons';
 import SearchBar from '../../components/SearchBar';
 import MyTopTabs from '../../components/TopTabBarNav';
-import SearchScreen from '../../screens/SearchScreen/SearchScreen';
-import Committee from '../Committeescreen/CommitteeScreen';
-import Profile from '../ProfileScreen/Profile';
 import {
   backDropColor,
   bgColor,
   statusbarColor,
   subtextColor,
-  textColor,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 
@@ -24,7 +18,7 @@ const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
-  //console.log(currentUser);
+
   return (
     <SafeAreaProvider>
       <Header

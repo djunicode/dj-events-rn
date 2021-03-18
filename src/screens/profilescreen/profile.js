@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -19,37 +19,45 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
-import axios from '../../controllers/axios';
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const image = require('../../images/profile.jpg');
 
 const Profile = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [sap, setSAP] = useState(0);
-  const [dept, setDepartment] = useState('');
   const [core, setCore] = useState([]);
   const [coCommittee, setCoCommittee] = useState([]);
+  const {currentUser} = useContext(AuthContext);
+  var id = currentUser.id;
 
   const fetchProfileData = async () => {
-    try {
-      await axios.get('/student_profile/2').then((response) => {
-        console.log(response.data);
-        var user = response.data.first_name + ' ' + response.data.last_name;
-        setSAP(response.data.sap);
-        setEmail(response.data.email);
-        setName(user);
-        setDepartment(response.data.department);
-        setCore(response.data.coreCommittees);
-        setCoCommittee(response.data.coCommittees);
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Token 5029bb69eb71700190df6ac516718695394a4ed0',
+    );
+    myHeaders.append('Content-Type', 'application/json');
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/student_profile/' + id,
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setCore(result.coreCommittees);
+        setCoCommittee(result.coCommittees);
+      })
+      .catch((error) => console.log('error', error));
   };
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     fetchProfileData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <SafeAreaView style={styles.body}>
@@ -58,11 +66,11 @@ const Profile = () => {
         <View style={styles.profile}>
           <Image source={image} style={styles.propic} />
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.nametext}> {name}</Text>
-            <Text style={styles.saptext}> ({sap})</Text>
+            <Text style={styles.nametext}> {currentUser.Name}</Text>
+            <Text style={styles.saptext}> ({currentUser.SapID})</Text>
           </View>
-          <Text style={styles.emailtext}>{email}</Text>
-          <Text style={styles.info}>Department: {dept}</Text>
+          <Text style={styles.emailtext}>{currentUser.Email}</Text>
+          <Text style={styles.info}>Department: {currentUser.Department}</Text>
         </View>
         <Text style={styles.coretext}>CORE COMMITTEE:</Text>
         <View style={{flexDirection: 'row'}}>
