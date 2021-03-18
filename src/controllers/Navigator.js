@@ -1,4 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useContext} from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import EventsScreen from '../screens/HomePage3/EventsScreen';

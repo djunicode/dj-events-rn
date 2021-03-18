@@ -21,6 +21,8 @@ import {
 } from '../../Constants';
 import axios from '../../controllers/axios';
 
+const image = require('../../images/Logo.jpg');
+
 const SearchScreen = () => {
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
@@ -73,13 +75,7 @@ const SearchScreen = () => {
           numColumns={2}
           renderItem={({item}) => {
             return (
-              <ComCard
-                name={item.committeeName}
-                followers={42}
-                image={
-                  'https://www.acm.org/binaries/content/gallery/acm/ctas/ambassadors-for-acm.jpg/ambassadors-for-acm.jpg/acm%3Adesktopcta'
-                }
-              />
+              <ComCard name={item.committeeName} followers={42} image={image} />
             );
           }}
         />

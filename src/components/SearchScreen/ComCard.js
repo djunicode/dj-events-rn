@@ -23,7 +23,7 @@ const ComCard = ({name, followers, image, time}) => {
       delay={1000}
       style={{width: '50%', paddingTop: 20, paddingLeft: 6, paddingRight: 6}}
       useNativeDriver={true}>
-      <Image source={{uri: image}} style={styles.image} />
+      <Image source={image} style={styles.image} />
       <View style={styles.info}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View>
@@ -64,6 +64,7 @@ const ComCard = ({name, followers, image, time}) => {
 const styles = StyleSheet.create({
   image: {
     height: (width * 42) / 100,
+    width: width * 0.42,
     borderRadius: 5,
   },
   info: {
