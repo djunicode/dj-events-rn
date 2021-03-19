@@ -17,6 +17,8 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ToastAndroid} from 'react-native';
 
 const ForgotPasswordScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -28,13 +30,25 @@ const ForgotPasswordScreen = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
+      <Ionicons
+        name="arrow-back"
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      />
       <Text style={styles.basetext}> Enter your SAP ID</Text>
-      <View style={{paddingTop: 62}}>
+      <View style={{paddingTop: 50}}>
         <TextField title={'Enter your SAP ID'} function={handleUser} />
       </View>
       <View style={{paddingTop: 33}}>
-        <TouchableOpacity>
-          {/* onPress={navigation.navigate('OtpScreen')}> */}
+        <TouchableOpacity
+          style={{marginTop: 15}}
+          onPress={() => {
+            navigation.navigate('OtpScreen');
+            ToastAndroid.show(
+              'We have sent you a Mail with the OTP',
+              ToastAndroid.SHORT,
+            );
+          }}>
           <LinearGradient
             colors={[textColor, linearColor]}
             style={styles.button}>
@@ -54,6 +68,12 @@ const styles = StyleSheet.create({
     paddingLeft: 43,
     paddingRight: 42,
   },
+  backButton: {
+    color: subtextColor,
+    fontSize: 36,
+    alignSelf: 'flex-start',
+    marginTop: 20,
+  },
   basetext: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 38,
@@ -70,6 +90,7 @@ const styles = StyleSheet.create({
   button: {
     height: 55,
     borderRadius: 8,
+    marginTop: 15,
   },
 });
 
