@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
@@ -7,12 +7,72 @@ import {backDropColor, subtextColor, textColor} from '../Constants';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AuthContext} from '../Authentication/AuthProvider';
 
 const image = require('../images/events.jpg');
 
 const EventCard = ({id, name, summary, likes, committee}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
+  const {currentUser} = useContext(AuthContext);
+  const likeCount = likes;
+
+  const likeEvent = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Token ' + currentUser.Token);
+
+    var raw = '';
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/event_like/' +
+        id +
+        '/' +
+        currentUser.id +
+        '/',
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => console.log('error', error));
+  };
+
+  const unlikeEvent = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Token 5029bb69eb71700190df6ac516718695394a4ed0',
+    );
+
+    var raw = '';
+
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/event_dislike/' +
+        id +
+        '/' +
+        currentUser.id +
+        '/',
+      requestOptions,
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+  };
 
   const navigation = useNavigation();
   return (
@@ -37,7 +97,7 @@ const EventCard = ({id, name, summary, likes, committee}) => {
                 fontSize: 16,
                 marginLeft: 5,
               }}>
-              {likes} Likes
+              {likeCount} Likes
             </Text>
 
             <Text
@@ -67,7 +127,7 @@ const EventCard = ({id, name, summary, likes, committee}) => {
             name={didLike ? 'heart' : 'heart-o'}
             color={didLike ? textColor : subtextColor}
             onPress={() => {
-              didLike ? setdidLike(false) : setdidLike(true);
+              setdidLike(!didLike);
             }}
             size={20}
           />

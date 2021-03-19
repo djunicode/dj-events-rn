@@ -19,6 +19,32 @@ const image = require('../../images/profile.jpg');
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
 
+  const getStatus = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Token 5029bb69eb71700190df6ac516718695394a4ed0',
+    );
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = '';
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/event_like_check/1/2/',
+      requestOptions,
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+  };
+
   return (
     <SafeAreaProvider>
       <Header
@@ -36,7 +62,7 @@ export function HomePage() {
         <View style={styles.icon}>
           <SearchBar title={'Search for an event'} />
           <View style={{width: 8}} />
-          <TouchableOpacity style={styles.sort}>
+          <TouchableOpacity style={styles.sort} onPress={() => getStatus()}>
             <Entypo name="sound-mix" size={25} color={'#dadada'} />
           </TouchableOpacity>
         </View>
