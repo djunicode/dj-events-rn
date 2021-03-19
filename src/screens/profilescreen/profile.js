@@ -31,10 +31,7 @@ const Profile = () => {
 
   const fetchProfileData = async () => {
     var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Token 5029bb69eb71700190df6ac516718695394a4ed0',
-    );
+    myHeaders.append('Authorization', 'Token ' + currentUser.Token);
     myHeaders.append('Content-Type', 'application/json');
 
     var requestOptions = {
