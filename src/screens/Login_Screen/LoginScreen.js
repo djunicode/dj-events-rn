@@ -13,6 +13,7 @@ import Password from '../../components/SignUpLogin/PasswordTextBox';
 import TextField from '../../components/SignUpLogin/TextField';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
 import {
   backDropColor,
   bgColor,
@@ -23,11 +24,12 @@ import {
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 
-const Login = ({navigation}) => {
+const Login = () => {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {signIn, currentUser} = useContext(AuthContext);
+  const navigation = useNavigation();
 
   const handleUser = (text) => {
     setUsername(text);
@@ -79,17 +81,16 @@ const Login = ({navigation}) => {
             }}>
             Remember Me
           </Text>
-          <TouchableOpacity style={{paddingLeft: 40}} onPress={navigation.navigate('ForgotScreen')}>
+          <TouchableOpacity
+            style={{paddingLeft: 40}}
+            onPress={navigation.navigate('ForgotPassword')}>
             <Text
               style={{
                 textDecorationLine: 'underline',
                 fontSize: 17,
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
-                
-              }}
-              onPress={navigation.navigate('ForgotScreen')}>
-              
+              }}>
               Forgot Password?
             </Text>
           </TouchableOpacity>

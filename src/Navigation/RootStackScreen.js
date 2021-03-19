@@ -7,7 +7,6 @@ import OTPScreen from '../screens/Login_Screen/OTPScreen';
 import NewPassword from '../screens/Login_Screen/NewPassword';
 import MainTabScreen from './MainTabScreen';
 
-
 const RootStackScreen = () => {
   const Stack = createStackNavigator();
   return (
@@ -16,7 +15,7 @@ const RootStackScreen = () => {
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
       <Stack.Screen name="OtpScreen" component={OTPScreen} />
       <Stack.Screen name="NewPassword" component={NewPassword} />
       <Stack.Screen name="MainTab" component={MainTabScreen} />

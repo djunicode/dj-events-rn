@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,12 +9,8 @@ import {
   StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Password from '../../components/SignUpLogin/PasswordTextBox';
 import TextField from '../../components/SignUpLogin/TextField';
-import * as Animatable from 'react-native-animatable';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  backDropColor,
   bgColor,
   linearColor,
   statusbarColor,
@@ -22,35 +18,30 @@ import {
   textColor,
 } from '../../Constants';
 
-
-
 const ForgotPasswordScreen = ({navigation}) => {
- 
   const [username, setUsername] = useState('');
-
 
   const handleUser = (text) => {
     setUsername(text);
   };
 
-
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
-      <Text  style={styles.basetext}> Enter your SAP ID</Text>
+      <Text style={styles.basetext}> Enter your SAP ID</Text>
       <View style={{paddingTop: 62}}>
-          <TextField title={'Enter your SAP ID'} function={handleUser} />
-        </View>
-         <View style={{paddingTop: 33}}>
-          <TouchableOpacity onPress={navigation.navigate('OtpScreen')}>
-            <LinearGradient
-              colors={[textColor, linearColor]}
-              style={styles.button}>
-              <Text style={styles.ltext}>GET OTP</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-    
+        <TextField title={'Enter your SAP ID'} function={handleUser} />
+      </View>
+      <View style={{paddingTop: 33}}>
+        <TouchableOpacity>
+          {/* onPress={navigation.navigate('OtpScreen')}> */}
+          <LinearGradient
+            colors={[textColor, linearColor]}
+            style={styles.button}>
+            <Text style={styles.ltext}>GET OTP</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -69,7 +60,7 @@ const styles = StyleSheet.create({
     paddingTop: 72,
     color: subtextColor,
   },
-   ltext: {
+  ltext: {
     textAlign: 'center',
     paddingTop: 15,
     color: subtextColor,

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -19,25 +19,20 @@ import {
   textColor,
 } from '../../Constants';
 
-
-
 const OtpScreen = ({navigation}) => {
- 
   const [username, setUsername] = useState('');
-
 
   const handleUser = (text) => {
     setUsername(text);
   };
 
-
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
-      <Text  style={styles.basetext}> Enter 4-digit number sent</Text>
+      <Text style={styles.basetext}> Enter 4-digit number sent</Text>
       <View style={{paddingTop: 62}}>
-          {/* <TextField  function={handleUser} /> */}
-          <OTPTextView
+        {/* <TextField  function={handleUser} /> */}
+        <OTPTextView
           handleTextChange={handleUser}
           inputCount={4}
           tintColor={bgColor}
@@ -45,19 +40,17 @@ const OtpScreen = ({navigation}) => {
           keyboardType="numeric"
           textInputStyle={styles.roundedTextInput}
         />
-        
-        
-        </View>
-         <View style={{paddingTop: 33}}>
-          <TouchableOpacity onPress={navigation.navigate('NewPass')}>
-            <LinearGradient
-              colors={[textColor, linearColor]}
-              style={styles.button}>
-              <Text style={styles.ltext}>GET OTP</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-    
+      </View>
+      <View style={{paddingTop: 33}}>
+        <TouchableOpacity>
+          {/* onPress={navigation.navigate('NewPassword')}> */}
+          <LinearGradient
+            colors={[textColor, linearColor]}
+            style={styles.button}>
+            <Text style={styles.ltext}>GET OTP</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -78,10 +71,9 @@ const styles = StyleSheet.create({
   },
   roundedTextInput: {
     borderRadius: 10,
-    backgroundColor:backDropColor,
-    
+    backgroundColor: backDropColor,
   },
-  
+
   ltext: {
     textAlign: 'center',
     paddingTop: 15,
@@ -93,7 +85,6 @@ const styles = StyleSheet.create({
     height: 55,
     borderRadius: 8,
   },
-  
 });
 
 export default OtpScreen;
