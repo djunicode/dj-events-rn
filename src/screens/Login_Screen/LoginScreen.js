@@ -79,14 +79,17 @@ const Login = ({navigation}) => {
             }}>
             Remember Me
           </Text>
-          <TouchableOpacity style={{paddingLeft: 40}}>
+          <TouchableOpacity style={{paddingLeft: 40}} onPress={navigation.navigate('ForgotScreen')}>
             <Text
               style={{
                 textDecorationLine: 'underline',
                 fontSize: 17,
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
-              }}>
+                
+              }}
+              onPress={navigation.navigate('ForgotScreen')}>
+              
               Forgot Password?
             </Text>
           </TouchableOpacity>
