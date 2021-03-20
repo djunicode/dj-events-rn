@@ -83,7 +83,7 @@ const Login = () => {
           </Text>
           <TouchableOpacity
             style={{paddingLeft: 40}}
-            onPress={navigation.navigate('ForgotPassword')}>
+            onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
               style={{
                 textDecorationLine: 'underline',
@@ -102,7 +102,6 @@ const Login = () => {
         delay={1500}
         useNativeDriver={true}>
         <View style={{paddingTop: 33}}>
-          {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}> */}
           <TouchableOpacity
             onPress={() => {
               signIn(username, password);

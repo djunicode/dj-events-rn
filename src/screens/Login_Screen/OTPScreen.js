@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
+import {useNavigation} from '@react-navigation/core';
 import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import OTPTextView from 'react-native-otp-textinput';
@@ -19,8 +20,9 @@ import {
   textColor,
 } from '../../Constants';
 
-const OtpScreen = ({navigation}) => {
+const OtpScreen = () => {
   const [username, setUsername] = useState('');
+  const navigation = useNavigation();
 
   const handleUser = (text) => {
     setUsername(text);
@@ -29,9 +31,9 @@ const OtpScreen = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
-      <Text style={styles.basetext}> Enter 4-digit number sent</Text>
+
+      <Text style={styles.basetext}> Enter the 4-digit OTP</Text>
       <View style={{paddingTop: 62}}>
-        {/* <TextField  function={handleUser} /> */}
         <OTPTextView
           handleTextChange={handleUser}
           inputCount={4}
@@ -42,12 +44,11 @@ const OtpScreen = ({navigation}) => {
         />
       </View>
       <View style={{paddingTop: 33}}>
-        <TouchableOpacity>
-          {/* onPress={navigation.navigate('NewPassword')}> */}
+        <TouchableOpacity onPress={() => navigation.navigate('NewPassword')}>
           <LinearGradient
             colors={[textColor, linearColor]}
             style={styles.button}>
-            <Text style={styles.ltext}>GET OTP</Text>
+            <Text style={styles.ltext}>SUBMIT</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>

@@ -16,6 +16,7 @@ import {
   statusbarColor,
   subtextColor,
   textColor,
+  height,
 } from '../../Constants';
 // import {AuthContext} from '../../Authentication/AuthProvider';
 
@@ -34,24 +35,25 @@ const NewPassword = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
+      <View style={{marginTop: height / 6.3}}>
+        <View style={{paddingTop: 20}}>
+          <Text style={styles.basetext}> Enter new password</Text>
+          <Password title={'Password'} function={handleNewPass} />
+        </View>
+        <View style={{paddingTop: 16}}>
+          <Text style={styles.basetext}> Re-enter password</Text>
+          <Password title={'Confirm Password'} function={handlePassword} />
+        </View>
 
-      <View style={{paddingTop: 20}}>
-        <Text style={styles.basetext}> Enter new password</Text>
-        <Password title={'Password'} function={handleNewPass} />
-      </View>
-      <View style={{paddingTop: 16}}>
-        <Text style={styles.basetext}> Re-enter password</Text>
-        <Password title={'Confirm Password'} function={handlePassword} />
-      </View>
-
-      <View style={{paddingTop: 20}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <LinearGradient
-            colors={[textColor, linearColor]}
-            style={styles.button}>
-            <Text style={styles.ltext}>Reset Password</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+        <View style={{paddingTop: 20}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <LinearGradient
+              colors={[textColor, linearColor]}
+              style={styles.button}>
+              <Text style={styles.ltext}>Reset Password</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
