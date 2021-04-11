@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   textLabel: {
     fontFamily: 'Open Sans',
     fontWeight: '400',
-    fontSize: 15,
+    fontSize: 14,
     color: subtextColor,
     textTransform: 'none',
   },

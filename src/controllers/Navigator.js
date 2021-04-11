@@ -4,10 +4,10 @@ import {View, ActivityIndicator} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import EventsScreen from '../screens/HomePage3/EventsScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthContext} from '../Authentication/AuthProvider';
+import {AuthContext} from '../authentication/AuthProvider';
 import {bgColor, textColor} from '../Constants';
-import MainTabScreen from '../Navigation/MainTabScreen';
-import RootStackScreen from '../Navigation/RootStackScreen';
+import MainTabScreen from '../controllers/MainTabScreen';
+import RootStackScreen from '../controllers/RootStackScreen';
 
 const Stack = createStackNavigator();
 

@@ -57,20 +57,6 @@ const MainTabScreen = () => {
         }}
       />
       <BottomTab.Screen
-        name="Committee"
-        component={CommitteeStackScreen}
-        options={{
-          tabBarColor: statusbarColor,
-          tabBarIcon: ({focused}) => (
-            <Icon
-              name={focused ? 'people' : 'people-outline'}
-              color={textColor}
-              size={26}
-            />
-          ),
-        }}
-      />
-      <BottomTab.Screen
         name="Profile"
         component={ProfileStackScreen}
         options={{
@@ -107,6 +93,7 @@ const SearchStackScreen = () => {
         headerShown: false,
       }}>
       <SearchStack.Screen name="Search" component={SearchScreen} />
+      <SearchStack.Screen name="Committee" component={Committee} />
     </SearchStack.Navigator>
   );
 };
@@ -125,12 +112,6 @@ const ProfileStackScreen = () => {
     </ProfileStack.Navigator>
   );
 };
-const CommitteeStackScreen = () => {
-  return (
-    <CommitteeStack.Navigator screenOptions={{headerShown: false}}>
-      <CommitteeStack.Screen name="Committee" component={Committee} />
-    </CommitteeStack.Navigator>
-  );
-};
+
 
 export default MainTabScreen;

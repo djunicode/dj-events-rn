@@ -32,9 +32,9 @@ export default function MyTopTabs() {
         options={{tabBarLabel: 'Latest'}}
       />
       <TopTab.Screen
-        name="Committees you follow"
+        name="Following"
         component={Following}
-        options={{tabBarLabel: 'Committees you follow'}}
+        options={{tabBarLabel: 'Following'}}
       />
     </TopTab.Navigator>
   );

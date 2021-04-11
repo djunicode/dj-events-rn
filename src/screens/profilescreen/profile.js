@@ -10,6 +10,7 @@ import {
   StatusBar,
   FlatList,
   LogBox,
+  ActivityIndicator,
 } from 'react-native';
 import ProfileStats from '../../components/ProfileScreen/ProfileStats';
 import TaskButton from '../../components/ProfileScreen/TaskButton';
@@ -19,7 +20,7 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
-import {AuthContext} from '../../Authentication/AuthProvider';
+import {AuthContext} from '../../authentication/AuthProvider';
 
 const image = require('../../images/profile.jpg');
 
@@ -27,10 +28,12 @@ const Profile = () => {
   const [core, setCore] = useState([]);
   const [coCommittee, setCoCommittee] = useState([]);
   const {currentUser} = useContext(AuthContext);
+  const [isloading, setIsLoading] = useState(true);
   var id = currentUser.id;
 
   const fetchProfileData = async () => {
     var myHeaders = new Headers();
+    setIsLoading(true);
     myHeaders.append('Authorization', 'Token ' + currentUser.Token);
     myHeaders.append('Content-Type', 'application/json');
 
@@ -48,6 +51,7 @@ const Profile = () => {
       .then((result) => {
         setCore(result.coreCommittees);
         setCoCommittee(result.coCommittees);
+        setIsLoading(false);
       })
       .catch((error) => console.log('error', error));
   };
@@ -56,6 +60,19 @@ const Profile = () => {
     fetchProfileData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  if (isloading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: bgColor,
+        }}>
+        <ActivityIndicator size="large" color={textColor} />
+      </View>
+    );
+  }
   return (
     <SafeAreaView style={styles.body}>
       <StatusBar backgroundColor={statusbarColor} />
@@ -95,11 +112,11 @@ const Profile = () => {
         </SafeAreaView>
         <Text style={styles.cotext}>CO-COMMITTEE: </Text>
         <View style={{flexDirection: 'row'}}>
-          <TaskButton width={140} text={'VIEW TASK'} route={'Co View Tasks'} />
+          <TaskButton width={140} text={'VIEW TASKS'} route={'Co View Tasks'} />
           <View style={{width: 17}} />
           <TaskButton
             width={170}
-            text={'REFERRAL COUNT'}
+            text={'REFERRAL'}
             route={'Referral Count'}
           />
         </View>
