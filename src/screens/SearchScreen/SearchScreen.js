@@ -20,6 +20,7 @@ import {
   textColor,
 } from '../../Constants';
 import axios from '../../controllers/axios';
+import { Button } from 'react-native-paper';
 
 const image = require('../../images/Logo.jpg');
 
@@ -69,13 +70,13 @@ const SearchScreen = () => {
       </View>
       <View style={{marginTop: 20, marginLeft: 20, marginRight: 20}}>
         <FlatList
-          contentContainerStyle={{paddingBottom: 120}}
+          contentContainerStyle={{paddingBottom: 200}}
           keyExtractor={(committee) => committee.id.toString()}
           data={data}
           numColumns={2}
           renderItem={({item}) => {
             return (
-              <ComCard name={item.committeeName} followers={42} image={image} />
+              <ComCard name={item.committeeName} followers={42} image={image} id={item.id} />
             );
           }}
         />

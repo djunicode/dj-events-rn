@@ -60,7 +60,7 @@ const EventsScreen = ({route}) => {
       <ActivityIndicator size="large" color={textColor} />
     </View>
   ) : (
-    <SafeAreaView style={{backgroundColor: bgColor}}>
+    <SafeAreaView style={{backgroundColor: bgColor,paddingBottom: 40}}>
       <ScrollView>
         <View>
           <Header

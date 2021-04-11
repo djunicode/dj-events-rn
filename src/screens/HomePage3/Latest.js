@@ -1,59 +1,51 @@
-import React from 'react';
-import {StyleSheet, View, FlatList, ActivityIndicator} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {ActivityIndicator} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
 
-export default class Latest extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      loading: true,
-    };
-  }
+const Latest = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    this.getUpcoming();
-  }
-
-  async getUpcoming() {
+  const getUpcoming = async () => {
     let res = await axios.get('/events');
-    //console.log(res.data);
-    this.setState({
-      data: res.data,
-      loading: false,
-    });
-  }
+    setData(res.data);
+    setLoading(false);
+  };
 
-  render() {
-    return this.state.loading ? (
-      <ActivityIndicator
-        style={styles.container}
-        color={textColor}
-        size={'large'}
-      />
-    ) : (
-      <FlatList
-        keyExtractor={(event, index) => index.toString()}
-        data={this.state.data}
-        renderItem={({item}) => {
-          return (
-            <View style={styles.container}>
-              <EventCard
-                name={item.eventName}
-                id={item.id}
-                summary={item.eventSummary}
-                likes={item.likes}
-                committee={item.organisingCommitteeName}
-              />
-            </View>
-          );
-        }}
-      />
-    );
-  }
-}
+  useEffect(() => {
+    getUpcoming();
+  }, []);
+
+  return loading ? (
+    <ActivityIndicator
+      style={styles.container}
+      color={textColor}
+      size={'large'}
+    />
+  ) : (
+    <FlatList
+      keyExtractor={(event, index) => index.toString()}
+      data={data}
+      renderItem={({item}) => {
+        return (
+          <View style={styles.container}>
+            <EventCard
+              name={item.eventName}
+              id={item.id}
+              summary={item.eventSummary}
+              likes={item.likes}
+              committee={item.organisingCommitteeName}
+              description={item.eventDescription}
+            />
+          </View>
+        );
+      }}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -64,3 +56,5 @@ const styles = StyleSheet.create({
     paddingTop: 17,
   },
 });
+
+export default Latest;

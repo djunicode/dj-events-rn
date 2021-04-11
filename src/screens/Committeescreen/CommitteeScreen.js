@@ -8,6 +8,7 @@ import {
   Text,
   StatusBar,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import Faccard from '../../components/CommitteeScreen/FaceCard';
 import Profilecard from '../../components/CommitteeScreen/Profilecard';
@@ -23,19 +24,24 @@ import {
 } from '../../Constants';
 import axios from '../../controllers/axios';
 
-const Committee = () => {
+const Committee = ({route,navigation}) => {
   const [notify, setNotify] = useState(false);
   const [data, setData] = useState([]);
   const [faculty, setFaculty] = useState([]);
   const [events, setEvents] = useState([]);
   const [core, setCore] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+  
   const fetchCommitteeData = async () => {
+    let v = route.params.id.toString();
+    setIsLoading(true);
     try {
-      await axios.get('/committee_detail/3/').then((json) => {
+      await axios.get(`/committee_detail/${v}/`).then((json) => {
         setData(json.data);
         setEvents(json.data.events);
         setFaculty(json.data.facultyMembers);
         setCore(json.data.coreCommitteeMembers);
+        setIsLoading(false);
       });
     } catch (e) {
       console.log(e);
@@ -44,7 +50,19 @@ const Committee = () => {
   useEffect(() => {
     fetchCommitteeData();
   }, []);
-
+  if (isloading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: bgColor,
+        }}>
+        <ActivityIndicator size="large" color={textColor} />
+      </View>
+    );
+  }
   return (
     <>
       <StatusBar backgroundColor={statusbarColor} />
@@ -55,6 +73,7 @@ const Committee = () => {
               name="chevron-back-outline"
               size={40}
               style={{color: subtextColor, marginHorizontal: 8}}
+              onPress={() => navigation.goBack()}
             />
             <Text style={styles.heading}>{data.committeeName}</Text>
             {notify ? (
@@ -165,8 +184,8 @@ const styles = StyleSheet.create({
     backgroundColor: bgColor,
     height: '100%',
     paddingTop: 35,
-    paddingBottom: 20,
-    position: 'absolute',
+    //paddingBottom: 20,
+    //position: 'absolute',
   },
   header: {
     flexDirection: 'row',

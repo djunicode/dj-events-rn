@@ -13,11 +13,7 @@ const About = (props) => {
         <Text style={styles.title}>About Us</Text>
         <View style={{flexShrink: 1}}>
           <Text style={styles.text}>
-            The DJ Sanghvi Student Chapter of the Association for Computing
-            Machinery, DJSCOE-ACM organizes numerous technical and non-technical
-            events. As a student-run body, we proactively try to give back to
-            the college through these events, promoting a holistic approach
-            learning computer science.
+          It is a long established fact that a reader will be distracted 
             {/* {props.about} */}
           </Text>
         </View>
@@ -32,9 +28,10 @@ const styles = StyleSheet.create({
     backgroundColor: backDropColor,
     margin: 15,
     borderRadius: 15,
+    height: '20%',
   },
   image: {
-    width: '50%',
+    width: '35%',
     height: '100%',
     borderBottomLeftRadius: 15,
     borderTopLeftRadius: 15,

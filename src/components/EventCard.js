@@ -1,79 +1,41 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useContext} from 'react';
-import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity, Share} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import {backDropColor, subtextColor, textColor} from '../Constants';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AuthContext} from '../Authentication/AuthProvider';
+import {AuthContext} from '../authentication/AuthProvider';
 
 const image = require('../images/events.jpg');
 
-const EventCard = ({id, name, summary, likes, committee}) => {
+const EventCard = ({id, name, summary, likes, committee,description}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
   const {currentUser} = useContext(AuthContext);
-  const likeCount = likes;
 
-  const likeEvent = async () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', 'Token ' + currentUser.Token);
-
-    var raw = '';
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch(
-      'http://aryan123456.pythonanywhere.com/api/event_like/' +
-        id +
-        '/' +
-        currentUser.id +
-        '/',
-      requestOptions,
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => console.log('error', error));
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'https://djacm.co.in/events/'+'\n This is the event '+name+' hosted by '+committee+
+          '\n '+description,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
-
-  const unlikeEvent = async () => {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Token 5029bb69eb71700190df6ac516718695394a4ed0',
-    );
-
-    var raw = '';
-
-    var requestOptions = {
-      method: 'DELETE',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch(
-      'http://aryan123456.pythonanywhere.com/api/event_dislike/' +
-        id +
-        '/' +
-        currentUser.id +
-        '/',
-      requestOptions,
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error));
-  };
-
   const navigation = useNavigation();
   return (
     <Animatable.View
@@ -83,7 +45,6 @@ const EventCard = ({id, name, summary, likes, committee}) => {
       delay={1000}
       useNativeDriver={true}>
       <TouchableOpacity onPress={() => navigation.navigate('Event', {id: id})}>
-        {/* onPress={() => console.log(id)}> */}
         <ImageBackground source={image} style={{height: 160, width: 370}}>
           <View
             style={{
@@ -97,7 +58,7 @@ const EventCard = ({id, name, summary, likes, committee}) => {
                 fontSize: 16,
                 marginLeft: 5,
               }}>
-              {likeCount} Likes
+              {likes} Likes
             </Text>
 
             <Text
@@ -139,7 +100,7 @@ const EventCard = ({id, name, summary, likes, committee}) => {
             }}
             size={20}
           />
-          <FontAwesome name="share-alt" size={20} color={subtextColor} />
+          <FontAwesome name="share-alt" size={20} color={subtextColor} onPress={onShare}/>
         </View>
       </View>
     </Animatable.View>

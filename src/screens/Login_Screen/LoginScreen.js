@@ -22,7 +22,7 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
-import {AuthContext} from '../../Authentication/AuthProvider';
+import {AuthContext} from '../../authentication/AuthProvider';
 
 const Login = () => {
   const [remember, setRemember] = useState(false);

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {AuthProvider} from './src/Authentication/AuthProvider';
+import {AuthProvider} from './src/authentication/AuthProvider';
 import Navigator from './src/controllers/Navigator';
 
 const App = () => {
