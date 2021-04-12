@@ -9,6 +9,7 @@ import {
   StatusBar,
   FlatList,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import Faccard from '../../components/CommitteeScreen/FaceCard';
 import Profilecard from '../../components/CommitteeScreen/Profilecard';
@@ -24,14 +25,14 @@ import {
 } from '../../Constants';
 import axios from '../../controllers/axios';
 
-const Committee = ({route,navigation}) => {
+const Committee = ({route, navigation}) => {
   const [notify, setNotify] = useState(false);
   const [data, setData] = useState([]);
   const [faculty, setFaculty] = useState([]);
   const [events, setEvents] = useState([]);
   const [core, setCore] = useState([]);
   const [isloading, setIsLoading] = useState(true);
-  
+
   const fetchCommitteeData = async () => {
     let v = route.params.id.toString();
     setIsLoading(true);
