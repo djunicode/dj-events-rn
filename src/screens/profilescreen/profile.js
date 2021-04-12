@@ -20,7 +20,7 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
-import {AuthContext} from '../../authentication/AuthProvider';
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const image = require('../../images/profile.jpg');
 
@@ -114,11 +114,7 @@ const Profile = () => {
         <View style={{flexDirection: 'row'}}>
           <TaskButton width={140} text={'VIEW TASKS'} route={'Co View Tasks'} />
           <View style={{width: 17}} />
-          <TaskButton
-            width={170}
-            text={'REFERRAL'}
-            route={'Referral Count'}
-          />
+          <TaskButton width={170} text={'REFERRAL'} route={'Referral Count'} />
         </View>
         <SafeAreaView>
           <FlatList

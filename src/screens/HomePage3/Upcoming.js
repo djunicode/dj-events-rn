@@ -4,7 +4,7 @@ import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
-import {AuthContext} from '../../authentication/AuthProvider';
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const Upcoming = () => {
   const {currentUser} = useContext(AuthContext);
@@ -17,8 +17,6 @@ const Upcoming = () => {
     setData(res.data);
     setLoading(false);
   };
-
-  
 
   useEffect(() => {
     getUpcoming();

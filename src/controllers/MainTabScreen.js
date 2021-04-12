@@ -113,5 +113,4 @@ const ProfileStackScreen = () => {
   );
 };
 
-
 export default MainTabScreen;
