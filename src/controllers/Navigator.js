@@ -1,18 +1,34 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import EventsScreen from '../screens/HomePage3/EventsScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthContext} from '../authentication/AuthProvider';
+import {AuthContext} from '../Authentication/AuthProvider';
 import {bgColor, textColor} from '../Constants';
 import MainTabScreen from '../controllers/MainTabScreen';
 import RootStackScreen from '../controllers/RootStackScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
 const Navigator = () => {
-  const {currentUser, isLoading} = useContext(AuthContext);
+  const {currentUser, isLoading, signIn} = useContext(AuthContext);
+
+  const getUser = async () => {
+    try {
+      const u = await AsyncStorage.getItem('username');
+      const p = await AsyncStorage.getItem('password');
+      if (u != null && p != null) {
+        signIn(u, p);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   if (isLoading) {
     return (
@@ -32,7 +48,6 @@ const Navigator = () => {
       {currentUser != null ? (
         <Stack.Navigator headerMode="none" initialRouteName="MainTab">
           <Stack.Screen component={MainTabScreen} name="MainTab" />
-          <Stack.Screen component={EventsScreen} name="EventPage" />
         </Stack.Navigator>
       ) : (
         <RootStackScreen />

@@ -7,11 +7,11 @@ import {backDropColor, subtextColor, textColor} from '../Constants';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AuthContext} from '../authentication/AuthProvider';
+import {AuthContext} from '../Authentication/AuthProvider';
 
 const image = require('../images/events.jpg');
 
-const EventCard = ({id, name, summary, likes, committee,description}) => {
+const EventCard = ({id, name, summary, likes, committee, description}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
   const {currentUser} = useContext(AuthContext);
@@ -20,8 +20,13 @@ const EventCard = ({id, name, summary, likes, committee,description}) => {
     try {
       const result = await Share.share({
         message:
-          'https://djacm.co.in/events/'+'\n This is the event '+name+' hosted by '+committee+
-          '\n '+description,
+          'https://djacm.co.in/events/' +
+          '\n This is the event ' +
+          name +
+          ' hosted by ' +
+          committee +
+          '\n ' +
+          description,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -100,7 +105,12 @@ const EventCard = ({id, name, summary, likes, committee,description}) => {
             }}
             size={20}
           />
-          <FontAwesome name="share-alt" size={20} color={subtextColor} onPress={onShare}/>
+          <FontAwesome
+            name="share-alt"
+            size={20}
+            color={subtextColor}
+            onPress={onShare}
+          />
         </View>
       </View>
     </Animatable.View>

@@ -22,7 +22,8 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
-import {AuthContext} from '../../authentication/AuthProvider';
+import {AuthContext} from '../../Authentication/AuthProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [remember, setRemember] = useState(false);
@@ -104,6 +105,9 @@ const Login = () => {
         <View style={{paddingTop: 33}}>
           <TouchableOpacity
             onPress={() => {
+              AsyncStorage.clear();
+              AsyncStorage.setItem('username', username);
+              AsyncStorage.setItem('password', password);
               signIn(username, password);
             }}>
             <LinearGradient

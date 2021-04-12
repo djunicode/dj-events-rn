@@ -12,13 +12,14 @@ import {
   statusbarColor,
   subtextColor,
 } from '../../Constants';
-import {AuthContext} from '../../authentication/AuthProvider';
+import {AuthContext} from '../../Authentication/AuthProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ToastAndroid} from 'react-native';
 
 const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
-  
   return (
     <SafeAreaProvider>
       <Header
