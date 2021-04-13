@@ -1,14 +1,84 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import React, {useEffect, useState, useContext} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {bgColor, subtextColor, textColor} from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {AuthContext} from '../../Authentication/AuthProvider';
+import ReferralStats from '../../components/ProfileScreen/ReferralStats';
 
 const ReferralCount = () => {
+  const {currentUser} = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [referral, setReferral] = useState([]);
+  var id = currentUser.id;
+  var items = [];
+
+  const fetchReferrals = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Token ' + currentUser.Token);
+    myHeaders.append('Content-Type', 'application/json');
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/student_profile/' + id,
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.coCommittees);
+        for (var i = 0; i < data.length; i++) {
+          for (var j = 0; j < data[i].referrals.length; j++) {
+            const obj = {
+              event: data[i].referrals[j].event,
+              committee: data[i].committee,
+              id: data[i].referrals[j].id,
+              participant: data[i].referrals[j].participant,
+            };
+            items.push(obj);
+          }
+        }
+        console.log(items);
+        setReferral(items);
+      })
+      .catch((error) => console.log('error', error));
+  };
+
+  useEffect(() => {
+    fetchReferrals();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const navigation = useNavigation();
+  if (referral.length === 0) {
+    setTimeout(() => {
+      fetchReferrals();
+    }, 500);
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: bgColor,
+        }}>
+        <ActivityIndicator size="large" color={textColor} />
+      </View>
+    );
+  }
   return (
-    <ScrollView style={styles.body}>
+    <View style={styles.body}>
       <View style={{flexDirection: 'row'}}>
         <Ionicons
           name="chevron-back-outline"
@@ -20,7 +90,20 @@ const ReferralCount = () => {
         />
         <Text style={styles.heading}>REFERRAL COUNT</Text>
       </View>
-    </ScrollView>
+      <FlatList
+        data={referral}
+        keyExtractor={(ref) => ref.id.toString()}
+        renderItem={({item}) => {
+          return (
+            <ReferralStats
+              event={item.event}
+              name={item.committee}
+              person={item.participant}
+            />
+          );
+        }}
+      />
+    </View>
   );
 };
 

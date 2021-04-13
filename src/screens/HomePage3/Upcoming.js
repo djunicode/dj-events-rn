@@ -1,15 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
 import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
-import {AuthContext} from '../../Authentication/AuthProvider';
 
 const Upcoming = () => {
-  const {currentUser} = useContext(AuthContext);
   const [data, setData] = useState([]);
-  const [check, setCheck] = useState([]);
+  // const [check, setCheck] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getUpcoming = async () => {
@@ -20,7 +18,6 @@ const Upcoming = () => {
 
   useEffect(() => {
     getUpcoming();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return loading ? (

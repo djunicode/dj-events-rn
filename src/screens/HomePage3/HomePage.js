@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Header} from 'react-native-elements';
@@ -13,8 +13,6 @@ import {
   subtextColor,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ToastAndroid} from 'react-native';
 
 const image = require('../../images/profile.jpg');
 

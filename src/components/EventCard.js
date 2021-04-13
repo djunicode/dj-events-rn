@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity, Share} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
@@ -7,14 +7,11 @@ import {backDropColor, subtextColor, textColor} from '../Constants';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AuthContext} from '../Authentication/AuthProvider';
-
 const image = require('../images/events.jpg');
 
 const EventCard = ({id, name, summary, likes, committee, description}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
-  const {currentUser} = useContext(AuthContext);
 
   const onShare = async () => {
     try {
@@ -38,6 +35,7 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
         // dismissed
       }
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert(error.message);
     }
   };

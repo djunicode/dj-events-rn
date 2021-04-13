@@ -12,10 +12,10 @@ import {
   width,
 } from '../../Constants';
 import * as Animatable from 'react-native-animatable';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
-const ComCard = ({name, followers, image,id}) => {
+const ComCard = ({name, followers, image, id}) => {
   const [added, setAdded] = useState(false);
   const navigation = useNavigation();
 
@@ -26,8 +26,9 @@ const ComCard = ({name, followers, image,id}) => {
       delay={1000}
       style={{width: '50%', paddingTop: 20, paddingLeft: 6, paddingRight: 6}}
       useNativeDriver={true}>
-      <TouchableOpacity onPress={() =>navigation.navigate('Committee', {id: id})}>
-      <Image source={image} style={styles.image} />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Committee', {id: id})}>
+        <Image source={image} style={styles.image} />
       </TouchableOpacity>
       <View style={styles.info}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -52,7 +53,9 @@ const ComCard = ({name, followers, image,id}) => {
               <Feather
                 name={added ? 'check' : 'plus'}
                 style={styles.addIcon}
-                onPress={() => {setAdded(!added)}}
+                onPress={() => {
+                  setAdded(!added);
+                }}
               />
             </View>
           </LinearGradient>
