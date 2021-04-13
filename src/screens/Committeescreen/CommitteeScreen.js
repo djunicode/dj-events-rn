@@ -9,7 +9,6 @@ import {
   StatusBar,
   FlatList,
   ActivityIndicator,
-  TouchableOpacity,
 } from 'react-native';
 import Faccard from '../../components/CommitteeScreen/FaceCard';
 import Profilecard from '../../components/CommitteeScreen/Profilecard';
@@ -50,6 +49,7 @@ const Committee = ({route, navigation}) => {
   };
   useEffect(() => {
     fetchCommitteeData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (isloading) {
     return (

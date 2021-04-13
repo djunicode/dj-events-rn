@@ -1,19 +1,57 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, StyleSheet, Text, FlatList, ScrollView} from 'react-native';
-import {bgColor, subtextColor, textColor} from '../../Constants';
+import React, {useEffect, useContext, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import {bgColor, subtextColor, textColor, height} from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-
-const Tasks = [
-  {task: 'Task 1', name: 'John Smith', key: 1},
-  {task: 'Task 2', name: 'John Smith', key: 2},
-  {task: 'Task 3', name: 'John Smith', key: 3},
-  {task: 'Task 4', name: 'John Smith', key: 4},
-];
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const CoViewTask = () => {
+  const {currentUser} = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [isBig, setIsBig] = useState(false);
+  const onClick = () => {
+    isBig ? setIsBig(false) : setIsBig(true);
+  };
+
+  const getCoViewTaskData = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Token ' + currentUser.Token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/cotasklist/' +
+        currentUser.id +
+        '/5/\n',
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setData(result);
+      })
+      .catch((error) => console.log('error', error));
+  };
+
+  useEffect(() => {
+    getCoViewTaskData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const navigation = useNavigation();
+
   return (
     <ScrollView style={styles.body}>
       <View style={{flexDirection: 'row'}}>
@@ -34,45 +72,44 @@ const CoViewTask = () => {
           paddingTop: 24,
         }}
       />
-      <Text style={styles.heading1}>UNICODE TASK LIST</Text>
       <FlatList
-        data={Tasks}
-        style={{paddingTop: 9, paddingLeft: 14}}
-        keyExtractor={(task) => task.key.toString()}
+        data={data}
+        style={{paddingTop: 50, paddingLeft: 14}}
+        keyExtractor={(task) => task.id.toString()}
         renderItem={({item}) => {
           return (
-            <View style={{flexDirection: 'column', paddingTop: 20}}>
-              <Text style={{fontSize: 20, color: 'white'}}>
-                {item.key}. {item.task}
-              </Text>
-              <Text style={{fontSize: 20, color: 'white', paddingLeft: 20}}>
-                Assigned by: {item.name}
-              </Text>
-            </View>
-          );
-        }}
-      />
-      <View
-        style={{
-          borderBottomColor: 'rgba(255,255,255,0.25)',
-          borderBottomWidth: 1,
-          paddingTop: 24,
-        }}
-      />
-      <Text style={styles.heading1}>ACM TASK LIST</Text>
-      <FlatList
-        data={Tasks}
-        style={{paddingTop: 9, paddingLeft: 14}}
-        keyExtractor={(task) => task.key.toString()}
-        renderItem={({item}) => {
-          return (
-            <View style={{flexDirection: 'column', paddingTop: 20}}>
-              <Text style={{fontSize: 20, color: 'white'}}>
-                {item.key}. {item.task}
-              </Text>
-              <Text style={{fontSize: 20, color: 'white', paddingLeft: 20}}>
-                Assigned by: {item.name}
-              </Text>
+            <View>
+              <TouchableOpacity
+                onPress={onClick}
+                style={{
+                  padding: 15,
+                  backgroundColor: '#505050',
+                  width: '100%',
+                  height: height * (isBig ? 0.5 : 0.25),
+                  borderRadius: 20,
+                }}>
+                <Text style={styles.comphead}>Assigned by: </Text>
+                <Text style={styles.content}>{item.assignedbyName}</Text>
+                <Text style={styles.comphead}>Task: </Text>
+                <View>
+                  {isBig ? (
+                    <Text
+                      style={styles.content}
+                      ellipsizeMode="tail"
+                      numberOfLines={10}>
+                      {item.task}
+                    </Text>
+                  ) : (
+                    <Text
+                      style={styles.content}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}>
+                      {item.task}
+                    </Text>
+                  )}
+                </View>
+              </TouchableOpacity>
+              <View style={{height: 20}} />
             </View>
           );
         }}
@@ -104,6 +141,15 @@ const styles = StyleSheet.create({
     paddingLeft: 19,
     paddingTop: 9,
     fontSize: 20,
+  },
+  comphead: {
+    color: textColor,
+    fontSize: 26,
+    textDecorationLine: 'underline',
+  },
+  content: {
+    color: subtextColor,
+    fontSize: 17,
   },
 });
 

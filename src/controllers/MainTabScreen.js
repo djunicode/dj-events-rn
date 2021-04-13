@@ -15,7 +15,6 @@ import AssignTask from '../screens/ProfileScreen/AssignTask';
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
-const CommitteeStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 
 const MainTabScreen = () => {
