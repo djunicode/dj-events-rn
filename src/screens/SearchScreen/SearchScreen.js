@@ -53,7 +53,7 @@ const SearchScreen = () => {
       'http://aryan123456.pythonanywhere.com/api/committee_search/',
       requestOptions,
     )
-      .then((response) => response.json)
+      .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.log('error: ', error));
   };
