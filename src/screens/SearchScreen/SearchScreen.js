@@ -20,17 +20,17 @@ import {
   textColor,
 } from '../../Constants';
 import axios from '../../controllers/axios';
-import { Button } from 'react-native-paper';
 
 const image = require('../../images/Logo.jpg');
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
-  const getSearchData = async () => {
+
+  const getSearchData = () => {
     setIsLoading(true);
     try {
-      await axios.get('/committees').then((search) => {
+      axios.get('/committees').then((search) => {
         setData(search.data);
         setIsLoading(false);
       });
@@ -39,8 +39,28 @@ const SearchScreen = () => {
     }
   };
 
+  const getSearchBar = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    var raw = JSON.stringify({q: 'DJ ACM'});
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+    fetch(
+      'http://aryan123456.pythonanywhere.com/api/committee_search/',
+      requestOptions,
+    )
+      .then((response) => response.json)
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error: ', error));
+  };
+
   useEffect(() => {
     getSearchData();
+    getSearchBar();
   }, []);
 
   if (isloading) {
@@ -76,7 +96,12 @@ const SearchScreen = () => {
           numColumns={2}
           renderItem={({item}) => {
             return (
-              <ComCard name={item.committeeName} followers={42} image={image} id={item.id} />
+              <ComCard
+                name={item.committeeName}
+                followers={42}
+                image={image}
+                id={item.id}
+              />
             );
           }}
         />
