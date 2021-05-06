@@ -19,28 +19,28 @@ const image = require('../../images/profile.jpg');
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
 
-  const getSearchBar = () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    var raw = JSON.stringify({q: 'Digihunt'});
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-    fetch(
-      'http://aryan123456.pythonanywhere.com/api/event_search/',
-      requestOptions,
-    )
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error: ', error));
+  const getEvents = (query) => {
+    if (query) {
+      var myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      var raw = JSON.stringify({q: `${query}`});
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      };
+      fetch(
+        'http://aryan123456.pythonanywhere.com/api/event_search/',
+        requestOptions,
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => console.log('error: ', error));
+    }
   };
-
-  useEffect(() => {
-    getSearchBar();
-  }, []);
 
   return (
     <SafeAreaProvider>
@@ -57,7 +57,7 @@ export function HomePage() {
         </View>
         <Text style={styles.subtitle}>{currentUser.Username}</Text>
         <View style={styles.icon}>
-          <SearchBar title={'Search for an event'} />
+          <SearchBar title={'Search for an event'} onSearch={getEvents} />
           <View style={{width: 8}} />
           <TouchableOpacity style={styles.sort} onPress={() => {}}>
             <Entypo name="sound-mix" size={25} color={'#dadada'} />

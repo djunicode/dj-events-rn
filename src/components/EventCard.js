@@ -13,6 +13,16 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
 
+  const LikeHandler = () => {
+    if (didLike) {
+      //RemoveFromLiked
+      setdidLike(false);
+    } else {
+      //AddToLiked
+      setdidLike(true);
+    }
+  };
+
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -45,7 +55,6 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
       style={styles.container}
       animation="slideInLeft"
       duration={2000}
-      delay={1000}
       useNativeDriver={true}>
       <TouchableOpacity onPress={() => navigation.navigate('Event', {id: id})}>
         <ImageBackground source={image} style={{height: 160, width: 370}}>
@@ -90,9 +99,7 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
           <FontAwesome
             name={didLike ? 'heart' : 'heart-o'}
             color={didLike ? textColor : subtextColor}
-            onPress={() => {
-              setdidLike(!didLike);
-            }}
+            onPress={LikeHandler}
             size={20}
           />
           <MaterialCommunityIcons

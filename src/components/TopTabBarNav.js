@@ -6,7 +6,7 @@ import Following from '../screens/HomePage3/FollowCommittees';
 import {bgColor, subtextColor, textColor} from '../Constants';
 
 const TopTab = createMaterialTopTabNavigator();
-export default function MyTopTabs() {
+export default MyTopTabs = () => {
   return (
     <TopTab.Navigator
       backBehavior="Upcoming"
@@ -38,4 +38,4 @@ export default function MyTopTabs() {
       />
     </TopTab.Navigator>
   );
-}
+};
