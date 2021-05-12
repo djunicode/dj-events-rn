@@ -14,6 +14,7 @@ import ComCard from '../../components/SearchScreen/ComCard';
 import SearchBar from '../../components/SearchBar';
 import {
   backDropColor,
+  baseURL,
   bgColor,
   statusbarColor,
   subtextColor,
@@ -27,7 +28,7 @@ const SearchScreen = () => {
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
 
-  const getSearchData = () => {
+  const getDefaultData = () => {
     setIsLoading(true);
     try {
       axios.get('/committees').then((search) => {
@@ -39,28 +40,9 @@ const SearchScreen = () => {
     }
   };
 
-  const getSearchBar = () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    var raw = JSON.stringify({q: 'DJ ACM'});
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-    fetch(
-      'http://aryan123456.pythonanywhere.com/api/committee_search/',
-      requestOptions,
-    )
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error: ', error));
-  };
-
   useEffect(() => {
-    getSearchData();
-    getSearchBar();
+    getDefaultData();
+    //getSearchBar();
   }, []);
 
   if (isloading) {
@@ -78,11 +60,15 @@ const SearchScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40}}>
+    <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40, flex: 1}}>
       <StatusBar backgroundColor={statusbarColor} />
 
       <View style={{flexDirection: 'row', paddingLeft: 19, paddingRight: 19}}>
-        <SearchBar title={'Search Committees'} />
+        <SearchBar
+          title={'Search Committees'}
+          type={'committee'}
+          callback={setData}
+        />
         <View style={{width: 8}} />
         <TouchableOpacity style={styles.sort}>
           <Entypo name="sound-mix" size={25} color={'#dadada'} />
