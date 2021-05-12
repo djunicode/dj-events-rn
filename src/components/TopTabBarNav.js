@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Upcoming from '../screens/HomePage3/Upcoming';
 import Latest from '../screens/HomePage3/Latest';
@@ -6,7 +6,8 @@ import Following from '../screens/HomePage3/FollowCommittees';
 import {bgColor, subtextColor, textColor} from '../Constants';
 
 const TopTab = createMaterialTopTabNavigator();
-export default MyTopTabs = () => {
+export default MyTopTabs = ({data}) => {
+  
   return (
     <TopTab.Navigator
       backBehavior="Upcoming"
@@ -23,7 +24,7 @@ export default MyTopTabs = () => {
       }}>
       <TopTab.Screen
         name="Upcoming"
-        component={Upcoming}
+        children={() => <Upcoming d={data} />}
         options={{tabBarLabel: 'Upcoming'}}
       />
       <TopTab.Screen

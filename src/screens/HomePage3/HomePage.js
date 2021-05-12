@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Header} from 'react-native-elements';
@@ -13,11 +13,22 @@ import {
   subtextColor,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
+import axios from '../../controllers/axios';
 
 const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
+  const [data, setData] = useState([]);
+
+  const getDefault = async () => {
+    let res = await axios.get('/events');
+    setData(res.data);
+  };
+
+  useEffect(() => {
+    getDefault();
+  }, []);
 
   return (
     <SafeAreaProvider>
@@ -37,10 +48,7 @@ export function HomePage() {
           <SearchBar
             title={'Search for an event'}
             type={'event'}
-            callback={(res, load) => {
-              console.log(res); // enter code for setting data of searched.
-              console.log(load);
-            }}
+            callback={setData}
           />
           <View style={{width: 8}} />
           <TouchableOpacity style={styles.sort} onPress={() => {}}>
@@ -49,7 +57,7 @@ export function HomePage() {
         </View>
       </View>
       <View style={{height: 25, backgroundColor: bgColor}} />
-      <MyTopTabs />
+      <MyTopTabs data={data} />
     </SafeAreaProvider>
   );
 }
