@@ -19,29 +19,6 @@ const image = require('../../images/profile.jpg');
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
 
-  const getEvents = (query) => {
-    if (query) {
-      var myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'application/json');
-      var raw = JSON.stringify({q: `${query}`});
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow',
-      };
-      fetch(
-        'http://aryan123456.pythonanywhere.com/api/event_search/',
-        requestOptions,
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => console.log('error: ', error));
-    }
-  };
-
   return (
     <SafeAreaProvider>
       <Header
@@ -57,7 +34,14 @@ export function HomePage() {
         </View>
         <Text style={styles.subtitle}>{currentUser.Username}</Text>
         <View style={styles.icon}>
-          <SearchBar title={'Search for an event'} onSearch={getEvents} />
+          <SearchBar
+            title={'Search for an event'}
+            type={'event'}
+            callback={(res, load) => {
+              console.log(res); // enter code for setting data of searched.
+              console.log(load);
+            }}
+          />
           <View style={{width: 8}} />
           <TouchableOpacity style={styles.sort} onPress={() => {}}>
             <Entypo name="sound-mix" size={25} color={'#dadada'} />

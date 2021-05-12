@@ -1,26 +1,56 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity, Share} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-import {backDropColor, subtextColor, textColor} from '../Constants';
+import {backDropColor, baseURL, subtextColor, textColor} from '../Constants';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios';
+import {AuthContext} from '../Authentication/AuthProvider';
+import {ToastAndroid} from 'react-native';
+
 const image = require('../images/events.jpg');
 
 const EventCard = ({id, name, summary, likes, committee, description}) => {
   const [didLike, setdidLike] = useState(false);
   const [notify, setNotify] = useState(false);
+  const {currentUser} = useContext(AuthContext);
 
   const LikeHandler = () => {
     if (didLike) {
       //RemoveFromLiked
+      liker('dislike', 'delete');
       setdidLike(false);
     } else {
       //AddToLiked
+      liker('like', 'post');
       setdidLike(true);
     }
+  };
+
+  const liker = (type, method) => {
+    var config = {
+      method: method,
+      url: `${baseURL}/event_${type}/${id}/${currentUser.id}/`,
+      headers: {
+        Authorization: `Token ${currentUser.Token}`,
+      },
+    };
+
+    axios(config)
+      .then((response) => {
+        if (response.data.success === 'Event Liked') {
+          ToastAndroid.show(`Event added to Liked`, ToastAndroid.SHORT);
+        } else {
+          ToastAndroid.show(`Event removed from Liked`, ToastAndroid.SHORT);
+        }
+        //console.log(response.data);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
   };
 
   const onShare = async () => {
