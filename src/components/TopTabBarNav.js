@@ -4,22 +4,23 @@ import Upcoming from '../screens/HomePage3/Upcoming';
 import Latest from '../screens/HomePage3/Latest';
 import Following from '../screens/HomePage3/FollowCommittees';
 import {bgColor, subtextColor, textColor} from '../Constants';
+import {heightToDp, widthToDp} from '../Responsive';
+import {PixelRatio} from 'react-native';
 
 const TopTab = createMaterialTopTabNavigator();
 export default MyTopTabs = ({data}) => {
-  
   return (
     <TopTab.Navigator
       backBehavior="Upcoming"
       tabBarOptions={{
         indicatorStyle: {backgroundColor: textColor},
         labelStyle: {
-          fontSize: 19,
+          fontSize: PixelRatio.getFontScale() * 19,
           color: subtextColor,
           textTransform: 'none',
           fontFamily: 'OpenSans-Regular',
         },
-        tabStyle: {width: 139, height: 60},
+        tabStyle: {width: widthToDp('33'), height: heightToDp('8')},
         style: {backgroundColor: bgColor},
       }}>
       <TopTab.Screen
