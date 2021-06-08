@@ -10,6 +10,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import axios from 'axios';
 import {AuthContext} from '../Authentication/AuthProvider';
 import {ToastAndroid} from 'react-native';
+import {heightToDp, widthToDp} from '../Responsive';
+import {PixelRatio} from 'react-native';
 
 const image = require('../images/events.jpg');
 
@@ -87,7 +89,9 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
       duration={2000}
       useNativeDriver={true}>
       <TouchableOpacity onPress={() => navigation.navigate('Event', {id: id})}>
-        <ImageBackground source={image} style={{height: 160, width: 370}}>
+        <ImageBackground
+          source={image}
+          style={{height: heightToDp('20'), width: widthToDp('95')}}>
           <View
             style={{
               flexDirection: 'row',
@@ -97,8 +101,9 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
             <Text
               style={{
                 color: subtextColor,
-                fontSize: 16,
-                marginLeft: 5,
+                fontSize: PixelRatio.getFontScale() * 16,
+                fontWeight: 'bold',
+                marginLeft: PixelRatio.getFontScale() * 5,
               }}>
               {likes} Likes
             </Text>
@@ -106,8 +111,9 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
             <Text
               style={{
                 color: subtextColor,
-                fontSize: 16,
-                marginRight: 5,
+                fontSize: PixelRatio.getFontScale() * 16,
+                marginRight: PixelRatio.getFontScale() * 5,
+                fontWeight: 'bold',
               }}>
               {committee}
             </Text>
@@ -123,7 +129,7 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
         <View
           style={{
             flexDirection: 'row',
-            width: 100,
+            width: PixelRatio.getFontScale() * 100,
             justifyContent: 'space-between',
           }}>
           <FontAwesome
@@ -154,8 +160,9 @@ const EventCard = ({id, name, summary, likes, committee, description}) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 237,
-    width: 370,
+    height: heightToDp('30'),
+    width: widthToDp('95'),
+    marginLeft: 0,
     backgroundColor: backDropColor,
   },
   text: {
@@ -167,28 +174,26 @@ const styles = StyleSheet.create({
   },
   title: {
     color: subtextColor,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 120,
-    fontSize: 27,
+    paddingHorizontal: widthToDp('3'),
+    paddingTop: PixelRatio.getFontScale() * 115,
+    fontSize: PixelRatio.getFontScale() * 27,
     position: 'absolute',
     fontWeight: 'bold',
   },
   info: {
     flexDirection: 'row',
-    paddingTop: 14,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingTop: PixelRatio.getFontScale() * 14,
+    paddingHorizontal: widthToDp('4'),
     justifyContent: 'space-between',
   },
   know: {
     color: textColor,
-    fontSize: 15,
+    fontSize: PixelRatio.getFontScale() * 15,
   },
   committee: {
     color: textColor,
-    fontSize: 15,
-    paddingLeft: 106,
+    fontSize: PixelRatio.getFontScale() * 15,
+    paddingLeft: 10,
   },
 });
 

@@ -14,6 +14,8 @@ import {
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import axios from '../../controllers/axios';
+import {heightToDp, widthToDp} from '../../Responsive';
+import {PixelRatio} from 'react-native';
 
 const image = require('../../images/profile.jpg');
 
@@ -29,11 +31,11 @@ export function HomePage() {
   useEffect(() => {
     getDefault();
   }, []);
-
+  //console.log(PixelRatio.getPixelSizeForLayoutSize(100));
   return (
     <SafeAreaProvider>
       <Header
-        containerStyle={{height: 3, backgroundColor: bgColor}}
+        containerStyle={{height: heightToDp('2'), backgroundColor: bgColor}}
         statusBarProps={{backgroundColor: statusbarColor}}
       />
       <View style={styles.container}>
@@ -50,13 +52,18 @@ export function HomePage() {
             type={'event'}
             callback={setData}
           />
-          <View style={{width: 8}} />
+          <View style={{width: widthToDp('3')}} />
           <TouchableOpacity style={styles.sort} onPress={() => {}}>
             <Entypo name="sound-mix" size={25} color={'#dadada'} />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{height: 25, backgroundColor: bgColor}} />
+      <View
+        style={{
+          height: heightToDp('1%'),
+          backgroundColor: bgColor,
+        }}
+      />
       <MyTopTabs data={data} />
     </SafeAreaProvider>
   );
@@ -66,8 +73,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 27,
-    paddingRight: 26,
+    paddingLeft: PixelRatio.get() * 9,
+    paddingRight: PixelRatio.get() * 9,
   },
   upperRow: {
     flexDirection: 'row',
@@ -75,38 +82,37 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'OpenSans-Regular',
-    paddingTop: 27,
+    paddingTop: heightToDp('4%'),
     color: subtextColor,
-    fontSize: 25,
+    fontSize: PixelRatio.getFontScale() * 30,
   },
   profileImgContainer: {
-    marginLeft: 8,
-    height: 42,
-    width: 42,
+    height: heightToDp('10%'),
+    width: widthToDp('10%'),
     borderRadius: 40,
-    paddingRight: 20,
-    paddingLeft: 70,
-    paddingTop: 20,
+    paddingRight: widthToDp('5%'),
+    paddingLeft: widthToDp('15%'),
+    paddingTop: heightToDp('3%'),
   },
   profileImg: {
-    height: 62,
-    width: 62,
-    borderRadius: 40,
+    height: heightToDp('9%'),
+    width: heightToDp('9%'),
+    borderRadius: 50,
   },
   subtitle: {
     color: 'rgba(255,255,255,0.75)',
-    paddingTop: 10,
+    paddingTop: PixelRatio.getPixelSizeForLayoutSize(5),
   },
   sort: {
     backgroundColor: backDropColor,
-    borderRadius: 100,
-    width: 60,
-    height: 46,
+    borderRadius: 50,
+    width: widthToDp('12%'),
+    height: widthToDp('12%'),
     alignItems: 'center',
     justifyContent: 'center',
   },
   icon: {
-    paddingTop: 22,
+    paddingTop: heightToDp('2%'),
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -4,7 +4,8 @@ import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
-
+import {heightToDp, widthToDp} from '../../Responsive';
+import {PixelRatio} from 'react-native';
 const Upcoming = ({d}) => {
   const [data, setData] = useState([]);
   // const [check, setCheck] = useState([]);
@@ -27,7 +28,7 @@ const Upcoming = ({d}) => {
       size={'large'}
     />
   ) : (
-    <View style={{backgroundColor: bgColor, paddingBottom: 10}}>
+    <View style={{backgroundColor: bgColor}}>
       <FlatList
         keyExtractor={(event, index) => index.toString()}
         data={d}
@@ -55,8 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 23,
-    paddingTop: 17,
+    padding: PixelRatio.getFontScale() * 10,
   },
 });
 

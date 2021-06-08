@@ -4,7 +4,8 @@ import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
-
+import {heightToDp, widthToDp} from '../../Responsive';
+import {PixelRatio} from 'react-native';
 const Following = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,8 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 23,
-    paddingTop: 17,
+    padding: PixelRatio.getFontScale() * 10,
   },
 });
 
