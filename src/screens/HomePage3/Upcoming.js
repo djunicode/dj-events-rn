@@ -6,33 +6,28 @@ import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
 import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
-const Upcoming = ({d}) => {
-  const [data, setData] = useState([]);
-  // const [check, setCheck] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const getUpcoming = async () => {
-    let res = await axios.get('/events');
-    setData(res.data);
-    setLoading(false);
-  };
-
+const Upcoming = ({d, type, liked}) => {
   useEffect(() => {
-    getUpcoming();
+    //getUpcoming();
+    console.log('This is ' + type + ' screen');
   }, []);
 
-  return loading ? (
+  return !d ? (
     <ActivityIndicator
       style={styles.container}
       color={textColor}
       size={'large'}
     />
   ) : (
-    <View style={{backgroundColor: bgColor}}>
+    <View style={{backgroundColor: bgColor, flex: 1}}>
       <FlatList
         keyExtractor={(event, index) => index.toString()}
         data={d}
         renderItem={({item}) => {
+          //console.log(liked.includes(item));
+          const arr = liked.find(({id}) => id === item.id);
+          const isliked = arr ? true : false;
           return (
             <View style={styles.container}>
               <EventCard
@@ -42,6 +37,7 @@ const Upcoming = ({d}) => {
                 likes={item.likes}
                 committee={item.organisingCommitteeName}
                 description={item.eventDescription}
+                isLiked={isliked}
               />
             </View>
           );

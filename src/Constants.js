@@ -21,10 +21,13 @@ const getSearched = (type, query, callback) => {
     body: raw,
     redirect: 'follow',
   };
-  fetch(`${baseURL}/${type}_search/`, requestOptions)
-    .then((response) => response.json())
-    .then((result) => callback(result))
-    .catch((error) => console.warn('error: ', error));
+
+  query
+    ? fetch(`${baseURL}/${type}_search/`, requestOptions)
+        .then((response) => response.json())
+        .then((result) => callback(result))
+        .catch((error) => console.warn('error: ', error))
+    : callback(null);
 };
 
 export {
