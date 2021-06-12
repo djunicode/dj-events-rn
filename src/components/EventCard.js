@@ -15,8 +15,16 @@ import {PixelRatio} from 'react-native';
 
 const image = require('../images/events.jpg');
 
-const EventCard = ({id, name, summary, likes, committee, description}) => {
-  const [didLike, setdidLike] = useState(false);
+const EventCard = ({
+  id,
+  name,
+  summary,
+  likes,
+  committee,
+  description,
+  isLiked,
+}) => {
+  const [didLike, setdidLike] = useState(isLiked);
   const [notify, setNotify] = useState(false);
   const {currentUser} = useContext(AuthContext);
 

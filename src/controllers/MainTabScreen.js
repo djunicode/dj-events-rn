@@ -5,13 +5,13 @@ import {statusbarColor, textColor} from '../Constants';
 import {HomePage} from '../screens/HomePage3/HomePage';
 import SearchScreen from '../screens/SearchScreen/SearchScreen';
 import Committee from '../screens/Committeescreen/CommitteeScreen';
-import Profile from '../screens/ProfileScreen/Profile';
+import Profile from '../screens/Profilescreen/Profile';
 import {createStackNavigator} from '@react-navigation/stack';
 import EventsScreen from '../screens/HomePage3/EventsScreen';
-import CoViewTask from '../screens/ProfileScreen/CoViewTask';
-import CoreViewTask from '../screens/ProfileScreen/CoreViewTask';
-import ReferralCount from '../screens/ProfileScreen/ReferralCount';
-import AssignTask from '../screens/ProfileScreen/AssignTask';
+import CoreViewTask from '../screens/Profilescreen/CoreViewTask';
+import ReferralCount from '../screens/Profilescreen/ReferralCount';
+import AssignTask from '../screens/Profilescreen/AssignTask';
+import CoViewTask from '../screens/Profilescreen/CoViewTask';
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();

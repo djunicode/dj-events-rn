@@ -16,22 +16,42 @@ import {AuthContext} from '../../Authentication/AuthProvider';
 import axios from '../../controllers/axios';
 import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
+import Upcoming from './Upcoming';
 
 const image = require('../../images/profile.jpg');
 
 export function HomePage() {
   const {currentUser} = useContext(AuthContext);
   const [data, setData] = useState([]);
+  const [searchedData, setSearchedData] = useState(null);
+  const [likedEvents, setLikedEvents] = useState([]);
 
   const getDefault = async () => {
-    let res = await axios.get('/events');
+    var res;
+    try {
+      res = await axios.get('/events');
+    } catch (e) {
+      console.log('Events:-' + e);
+    }
     setData(res.data);
   };
 
+  const getLikedEvents = async () => {
+    var res;
+    try {
+      res = await axios.get(`/get_liked_events/${currentUser.id}/`);
+    } catch (e) {
+      console.log('Liked Events:- ' + e);
+    }
+
+    setLikedEvents(res.data);
+  };
+
   useEffect(() => {
+    getLikedEvents();
     getDefault();
   }, []);
-  //console.log(PixelRatio.getPixelSizeForLayoutSize(100));
+
   return (
     <SafeAreaProvider>
       <Header
@@ -50,7 +70,7 @@ export function HomePage() {
           <SearchBar
             title={'Search for an event'}
             type={'event'}
-            callback={setData}
+            callback={setSearchedData}
           />
           <View style={{width: widthToDp('3')}} />
           <TouchableOpacity style={styles.sort} onPress={() => {}}>
@@ -64,7 +84,11 @@ export function HomePage() {
           backgroundColor: bgColor,
         }}
       />
-      <MyTopTabs data={data} />
+      {searchedData ? (
+        <Upcoming d={searchedData} type={'searchEvent'} liked={likedEvents} />
+      ) : (
+        <MyTopTabs data={data} liked={likedEvents} />
+      )}
     </SafeAreaProvider>
   );
 }
