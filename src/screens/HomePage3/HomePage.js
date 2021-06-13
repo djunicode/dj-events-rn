@@ -85,7 +85,12 @@ export function HomePage() {
         }}
       />
       {searchedData ? (
-        <Upcoming d={searchedData} type={'searchEvent'} liked={likedEvents} />
+        <Upcoming
+          d={searchedData}
+          type={'searchEvent'}
+          liked={likedEvents}
+          callBack={setSearchedData}
+        />
       ) : (
         <MyTopTabs data={data} liked={likedEvents} />
       )}
