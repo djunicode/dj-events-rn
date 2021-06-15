@@ -1,13 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
-import {StyleSheet, View, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import EventCard from '../../components/EventCard';
-import {bgColor, textColor} from '../../Constants';
-import axios from '../../controllers/axios';
-import {heightToDp, widthToDp} from '../../Responsive';
+import {bgColor, subtextColor, textColor} from '../../Constants';
 import {PixelRatio} from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
 
-const Upcoming = ({d, type, liked}) => {
+const Upcoming = ({d, type, liked, callBack}) => {
   useEffect(() => {
     //getUpcoming();
     console.log('This is ' + type + ' screen');
@@ -43,6 +47,13 @@ const Upcoming = ({d, type, liked}) => {
           );
         }}
       />
+      {type === 'searchEvent' ? (
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={() => callBack(null)}>
+          <Entypo name="cross" size={40} color={subtextColor} />
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -53,6 +64,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: bgColor,
     padding: PixelRatio.getFontScale() * 10,
+  },
+  cancelButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+    height: 60,
+    backgroundColor: textColor,
+    borderRadius: 30,
   },
 });
 
