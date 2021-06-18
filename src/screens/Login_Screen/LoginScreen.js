@@ -24,7 +24,8 @@ import {
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 const Login = () => {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState('');
@@ -55,14 +56,18 @@ const Login = () => {
         delay={1000}
         duration={1000}
         useNativeDriver={true}>
-        <View style={{paddingTop: 62}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 62}}>
           <TextField title={'SAP ID or Username'} function={handleUser} />
         </View>
-        <View style={{paddingTop: 17}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 17}}>
           <Password title={'Password'} function={handlePassword} />
         </View>
         <View style={styles.row}>
-          <View style={{paddingRight: 5, paddingTop: 2}}>
+          <View
+            style={{
+              paddingRight: PixelRatio.getFontScale() * 5,
+              paddingTop: PixelRatio.getFontScale() * 2,
+            }}>
             <MaterialCommunityIcons
               name={
                 remember ? 'checkbox-marked-outline' : 'checkbox-blank-outline'
@@ -76,19 +81,19 @@ const Login = () => {
           </View>
           <Text
             style={{
-              fontSize: 17,
+              fontSize: PixelRatio.getFontScale() * 17,
               fontFamily: 'OpenSans-Regular',
               color: subtextColor,
             }}>
             Remember Me
           </Text>
           <TouchableOpacity
-            style={{paddingLeft: 40}}
+            style={{paddingLeft: PixelRatio.getFontScale() * 40}}
             onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
               style={{
                 textDecorationLine: 'underline',
-                fontSize: 17,
+                fontSize: PixelRatio.getFontScale() * 17,
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
               }}>
@@ -102,7 +107,7 @@ const Login = () => {
         duration={1000}
         delay={1500}
         useNativeDriver={true}>
-        <View style={{paddingTop: 33}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 33}}>
           <TouchableOpacity
             onPress={() => {
               AsyncStorage.clear();
@@ -121,13 +126,13 @@ const Login = () => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingTop: 48,
+            paddingTop: PixelRatio.getFontScale() * 48,
           }}>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
           <View>
             <Text
               style={{
-                fontSize: 17,
+                fontSize: PixelRatio.getFontScale() * 17,
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
               }}>
@@ -136,7 +141,7 @@ const Login = () => {
           </View>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
         </View>
-        <View style={{paddingTop: 14}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 14}}>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <LinearGradient
               colors={[textColor, linearColor]}
@@ -155,13 +160,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 43,
-    paddingRight: 42,
+    paddingLeft: PixelRatio.getFontScale() * 43,
+    paddingRight: PixelRatio.getFontScale() * 42,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 38,
-    paddingTop: 72,
+    fontSize: PixelRatio.getFontScale() * 38,
+    paddingTop: PixelRatio.getFontScale() * 72,
     color: subtextColor,
   },
   textinput: {
@@ -169,23 +174,23 @@ const styles = StyleSheet.create({
     backgroundColor: backDropColor,
     height: 47,
     width: 315,
-    borderRadius: 40,
-    fontSize: 15,
-    paddingLeft: 22,
+    borderRadius: PixelRatio.getFontScale() * 40,
+    fontSize: PixelRatio.getFontScale() * 15,
+    paddingLeft: PixelRatio.getFontScale() * 22,
   },
   row: {
     flexDirection: 'row',
-    paddingTop: 20,
+    paddingTop: PixelRatio.getFontScale() * 20,
   },
   ltext: {
     textAlign: 'center',
-    paddingTop: 15,
+    paddingTop: PixelRatio.getFontScale() * 15,
     color: subtextColor,
-    fontSize: 17,
+    fontSize: PixelRatio.getFontScale() * 17,
     fontFamily: 'OpenSans-Regular',
   },
   button: {
-    height: 55,
+    height: heightToDp('8%'),
     borderRadius: 8,
   },
   circle: {

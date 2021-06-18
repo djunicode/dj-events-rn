@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {bgColor, subtextColor, textColor} from '../../Constants';
 import Radiobutton from '../../components/Radio';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {PixelRatio} from 'react-native';
 
 const Team = [
   {name: 'John Smith', key: 1},
@@ -37,7 +38,11 @@ const AssignTask = () => {
         <Text style={styles.heading}>ASSIGN TASK</Text>
       </View>
       <Text style={styles.title}>Task to be completed: </Text>
-      <View style={{paddingLeft: 20, paddingTop: 10}}>
+      <View
+        style={{
+          paddingLeft: PixelRatio.getFontScale() * 20,
+          paddingTop: PixelRatio.getFontScale() * 10,
+        }}>
         <TextInput
           style={styles.textinput}
           placeholder="Title of the task"
@@ -46,10 +51,19 @@ const AssignTask = () => {
           value={count}
           onChangeText={(text) => setCount(text)}
         />
-        <Text style={{color: 'white', paddingLeft: 310}}>
+        <Text
+          style={{
+            color: 'white',
+            paddingLeft: PixelRatio.getFontScale() * 300,
+          }}>
           {count.length}/50
         </Text>
-        <Text style={{paddingTop: 40, color: 'white', fontSize: 25}}>
+        <Text
+          style={{
+            paddingTop: PixelRatio.getFontScale() * 40,
+            color: 'white',
+            fontSize: PixelRatio.getFontScale() * 25,
+          }}>
           Assign it to:{' '}
         </Text>
         <FlatList
@@ -57,9 +71,18 @@ const AssignTask = () => {
           keyExtractor={(team) => team.key.toString()}
           renderItem={({item}) => {
             return (
-              <View style={{flexDirection: 'row', paddingTop: 20}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  paddingTop: PixelRatio.getFontScale() * 20,
+                }}>
                 <Radiobutton />
-                <Text style={{paddingLeft: 10, color: 'white', fontSize: 19}}>
+                <Text
+                  style={{
+                    paddingLeft: PixelRatio.getFontScale() * 10,
+                    color: 'white',
+                    fontSize: PixelRatio.getFontScale() * 19,
+                  }}>
                   {item.name}
                 </Text>
               </View>
@@ -75,30 +98,30 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: bgColor,
     height: '100%',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: PixelRatio.getFontScale() * 20,
+    paddingRight: PixelRatio.getFontScale() * 20,
   },
   backIcon: {
     color: subtextColor,
-    paddingTop: 40,
+    paddingTop: PixelRatio.getFontScale() * 40,
   },
   heading: {
-    paddingLeft: 65,
+    paddingLeft: PixelRatio.getFontScale() * 65,
     color: textColor,
-    paddingRight: 35,
-    paddingTop: 40,
-    fontSize: 30,
+    paddingRight: PixelRatio.getFontScale() * 35,
+    paddingTop: PixelRatio.getFontScale() * 40,
+    fontSize: PixelRatio.getFontScale() * 30,
   },
   title: {
     color: 'white',
-    paddingTop: 53,
-    paddingLeft: 15,
-    fontSize: 25,
+    paddingTop: PixelRatio.getFontScale() * 53,
+    paddingLeft: PixelRatio.getFontScale() * 15,
+    fontSize: PixelRatio.getFontScale() * 25,
   },
   textinput: {
     backgroundColor: 'rgba(255,255,255,0.35)',
-    padding: 10,
-    fontSize: 17,
+    padding: PixelRatio.getFontScale() * 10,
+    fontSize: PixelRatio.getFontScale() * 17,
     color: 'white',
   },
 });

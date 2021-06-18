@@ -21,8 +21,11 @@ import {
   textColor,
   backDropColor,
   subtextColor,
+  height,
 } from '../../Constants';
 import axios from '../../controllers/axios';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const Committee = ({route, navigation}) => {
   const [notify, setNotify] = useState(false);
@@ -73,7 +76,10 @@ const Committee = ({route, navigation}) => {
             <Ionicons
               name="chevron-back-outline"
               size={40}
-              style={{color: subtextColor, marginHorizontal: 8}}
+              style={{
+                color: subtextColor,
+                marginHorizontal: PixelRatio.getFontScale() * 8,
+              }}
               onPress={() => navigation.goBack()}
             />
             <Text style={styles.heading}>{data.committeeName}</Text>
@@ -99,13 +105,19 @@ const Committee = ({route, navigation}) => {
           </View>
           <About about={data.committeeDescription} />
           <View>
-            <View style={{margin: 3, flexDirection: 'row'}}>
+            <View
+              style={{
+                margin: PixelRatio.getFontScale() * 3,
+                flexDirection: 'row',
+              }}>
               <Text style={{color: textColor, fontSize: 18}}>
                 Events related to this committee
               </Text>
             </View>
             <FlatList
-              contentContainerStyle={{marginVertical: 2}}
+              contentContainerStyle={{
+                marginVertical: PixelRatio.getFontScale() * 2,
+              }}
               keyExtractor={(event) => event.id.toString()}
               data={events}
               horizontal={true}
@@ -118,8 +130,16 @@ const Committee = ({route, navigation}) => {
                 );
               }}
             />
-            <View style={{margin: 10, flexDirection: 'row'}}>
-              <Text style={{color: textColor, fontSize: 18}}>
+            <View
+              style={{
+                margin: PixelRatio.getFontScale() * 10,
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  color: textColor,
+                  fontSize: PixelRatio.getFontScale() * 18,
+                }}>
                 Faculty Members
               </Text>
               <View style={[styles.dropdown, {marginLeft: 152}]}>
@@ -134,7 +154,9 @@ const Committee = ({route, navigation}) => {
               </View>
             </View>
             <FlatList
-              contentContainerStyle={{marginVertical: 5}}
+              contentContainerStyle={{
+                marginVertical: PixelRatio.getFontScale() * 5,
+              }}
               keyExtractor={(member) => member.id.toString()}
               data={faculty}
               horizontal={true}
@@ -144,23 +166,37 @@ const Committee = ({route, navigation}) => {
                 );
               }}
             />
-            <View style={{margin: 10, flexDirection: 'row'}}>
-              <Text style={{color: textColor, fontSize: 18}}>
+            <View
+              style={{
+                margin: PixelRatio.getFontScale() * 10,
+                flexDirection: 'row',
+              }}>
+              <Text
+                style={{
+                  color: textColor,
+                  fontSize: PixelRatio.getFontScale() * 18,
+                }}>
                 Core Committee Members
               </Text>
-              <View style={[styles.dropdown, {marginLeft: 80}]}>
+              <View
+                style={[
+                  styles.dropdown,
+                  {marginLeft: PixelRatio.getFontScale() * 80},
+                ]}>
                 <Text
                   style={{
                     color: subtextColor,
                     fontWeight: 'bold',
-                    paddingHorizontal: 8,
+                    paddingHorizontal: PixelRatio.getFontScale() * 8,
                   }}>
                   2020-21
                 </Text>
               </View>
             </View>
             <FlatList
-              contentContainerStyle={{marginVertical: 5}}
+              contentContainerStyle={{
+                marginVertical: 5,
+              }}
               keyExtractor={(member) => member.id.toString()}
               data={core}
               horizontal={true}
@@ -184,7 +220,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: bgColor,
     height: '100%',
-    paddingTop: 35,
+    paddingTop: PixelRatio.getFontScale() * 35,
     //paddingBottom: 20,
     //position: 'absolute',
   },
@@ -192,9 +228,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   heading: {
-    fontSize: 30,
+    fontSize: PixelRatio.getFontScale() * 30,
     color: subtextColor,
-    marginHorizontal: 20,
+    marginHorizontal: PixelRatio.getFontScale() * 20,
     textDecorationLine: 'underline',
     fontFamily: 'Merriweather-Regular',
     textAlign: 'center',
@@ -203,22 +239,17 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor: backDropColor,
   },
-  years: {
-    borderRadius: 10,
-    width: 70,
-    height: 30,
-    backgroundColor: backDropColor,
-  },
+
   icon: {
     color: subtextColor,
-    marginLeft: 370,
-    marginVertical: 6,
+    marginLeft: PixelRatio.getFontScale() * 370,
+    marginVertical: PixelRatio.getFontScale() * 6,
     position: 'absolute',
   },
   dropdown: {
-    borderRadius: 10,
-    width: 90,
-    height: 30,
+    borderRadius: PixelRatio.getFontScale() * 10,
+    width: widthToDp('18%'),
+    height: heightToDp('4%'),
     backgroundColor: backDropColor,
     justifyContent: 'center',
     alignItems: 'center',

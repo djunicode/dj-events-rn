@@ -20,7 +20,8 @@ import {
   textColor,
 } from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 const SignUp = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
@@ -66,7 +67,7 @@ const SignUp = ({navigation}) => {
             </View>
           </Animatable.View>
           <Animatable.View
-            style={{paddingTop: 41}}
+            style={{paddingTop: PixelRatio.getFontScale() * 41}}
             animation="fadeInUp"
             duration={2000}
             delay={2000}
@@ -89,21 +90,21 @@ const SignUp = ({navigation}) => {
 const styles = StyleSheet.create({
   backButton: {
     color: subtextColor,
-    fontSize: 36,
+    fontSize: PixelRatio.getFontScale() * 36,
     alignSelf: 'flex-start',
-    marginTop: 20,
+    marginTop: PixelRatio.getFontScale() * 20,
   },
   container: {
-    paddingLeft: 44,
-    paddingRight: 41,
+    paddingLeft: PixelRatio.getFontScale() * 44,
+    paddingRight: PixelRatio.getFontScale() * 41,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 38,
-    paddingTop: 30,
+    fontSize: PixelRatio.getFontScale() * 38,
+    paddingTop: PixelRatio.getFontScale() * 30,
     color: subtextColor,
   },
   textinput: {
@@ -112,18 +113,18 @@ const styles = StyleSheet.create({
     height: 47,
     width: 315,
     borderRadius: 40,
-    fontSize: 15,
-    paddingLeft: 13,
+    fontSize: PixelRatio.getFontScale() * 15,
+    paddingLeft: PixelRatio.getFontScale() * 13,
   },
   ltext: {
     textAlign: 'center',
-    paddingTop: 15,
+    paddingTop: PixelRatio.getFontScale() * 15,
     color: subtextColor,
-    fontSize: 17,
+    fontSize: PixelRatio.getFontScale() * 17,
     fontFamily: 'OpenSans-Regular',
   },
   button: {
-    height: 55,
+    height: heightToDp('8%'),
     borderRadius: 8,
   },
 });

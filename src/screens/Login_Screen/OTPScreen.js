@@ -19,6 +19,8 @@ import {
   subtextColor,
   textColor,
 } from '../../Constants';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const OtpScreen = () => {
   const [username, setUsername] = useState('');
@@ -33,7 +35,7 @@ const OtpScreen = () => {
       <StatusBar backgroundColor={statusbarColor} />
 
       <Text style={styles.basetext}> Enter the 4-digit OTP</Text>
-      <View style={{paddingTop: 62}}>
+      <View style={{paddingTop: PixelRatio.getFontScale() * 62}}>
         <OTPTextView
           handleTextChange={handleUser}
           inputCount={4}
@@ -43,7 +45,7 @@ const OtpScreen = () => {
           textInputStyle={styles.roundedTextInput}
         />
       </View>
-      <View style={{paddingTop: 33}}>
+      <View style={{paddingTop: PixelRatio.getFontScale() * 33}}>
         <TouchableOpacity onPress={() => navigation.navigate('NewPassword')}>
           <LinearGradient
             colors={[textColor, linearColor]}
@@ -61,29 +63,29 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 43,
-    paddingRight: 42,
+    paddingLeft: PixelRatio.getFontScale() * 43,
+    paddingRight: PixelRatio.getFontScale() * 42,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 26,
-    paddingTop: 72,
+    fontSize: PixelRatio.getFontScale() * 26,
+    paddingTop: PixelRatio.getFontScale() * 72,
     color: subtextColor,
   },
   roundedTextInput: {
-    borderRadius: 10,
+    borderRadius: PixelRatio.getFontScale() * 10,
     backgroundColor: backDropColor,
   },
 
   ltext: {
     textAlign: 'center',
-    paddingTop: 15,
+    paddingTop: PixelRatio.getFontScale() * 15,
     color: subtextColor,
-    fontSize: 17,
+    fontSize: PixelRatio.getFontScale() * 17,
     fontFamily: 'OpenSans-Regular',
   },
   button: {
-    height: 55,
+    height: PixelRatio.getFontScale() * 55,
     borderRadius: 8,
   },
 });

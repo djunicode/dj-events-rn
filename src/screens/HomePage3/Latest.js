@@ -4,7 +4,6 @@ import {StyleSheet, View, FlatList} from 'react-native';
 import EventCard from '../../components/EventCard';
 import {bgColor, textColor} from '../../Constants';
 import axios from '../../controllers/axios';
-import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
 const Latest = () => {
   const [data, setData] = useState([]);

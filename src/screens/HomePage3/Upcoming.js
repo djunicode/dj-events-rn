@@ -28,7 +28,7 @@ const Upcoming = ({d}) => {
       size={'large'}
     />
   ) : (
-    <View style={{backgroundColor: bgColor}}>
+    <View style={{backgroundColor: bgColor, flex: 1}}>
       <FlatList
         keyExtractor={(event, index) => index.toString()}
         data={d}

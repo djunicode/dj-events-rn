@@ -65,6 +65,7 @@ export function HomePage() {
         }}
       />
       <MyTopTabs data={data} />
+      {/* <SearchView/> */}
     </SafeAreaProvider>
   );
 }

@@ -19,6 +19,8 @@ import {
 } from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ToastAndroid} from 'react-native';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const ForgotPasswordScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -36,12 +38,12 @@ const ForgotPasswordScreen = ({navigation}) => {
         onPress={() => navigation.goBack()}
       />
       <Text style={styles.basetext}> Enter your SAP ID</Text>
-      <View style={{paddingTop: 50}}>
+      <View style={{paddingTop: PixelRatio.getFontScale() * 50}}>
         <TextField title={'Enter your SAP ID'} function={handleUser} />
       </View>
-      <View style={{paddingTop: 33}}>
+      <View style={{paddingTop: PixelRatio.getFontScale() * 33}}>
         <TouchableOpacity
-          style={{marginTop: 15}}
+          style={{marginTop: PixelRatio.getFontScale() * 15}}
           onPress={() => {
             navigation.navigate('OtpScreen');
             ToastAndroid.show(
@@ -65,32 +67,32 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 43,
-    paddingRight: 42,
+    paddingLeft: PixelRatio.getFontScale() * 43,
+    paddingRight: PixelRatio.getFontScale() * 42,
   },
   backButton: {
     color: subtextColor,
-    fontSize: 36,
+    fontSize: PixelRatio.getFontScale() * 36,
     alignSelf: 'flex-start',
-    marginTop: 20,
+    marginTop: PixelRatio.getFontScale() * 20,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 38,
-    paddingTop: 72,
+    fontSize: PixelRatio.getFontScale() * 38,
+    paddingTop: PixelRatio.getFontScale() * 72,
     color: subtextColor,
   },
   ltext: {
     textAlign: 'center',
-    paddingTop: 15,
+    paddingTop: PixelRatio.getFontScale() * 15,
     color: subtextColor,
-    fontSize: 17,
+    fontSize: PixelRatio.getFontScale() * 17,
     fontFamily: 'OpenSans-Regular',
   },
   button: {
-    height: 55,
+    height: PixelRatio.getFontScale() * 55,
     borderRadius: 8,
-    marginTop: 15,
+    marginTop: PixelRatio.getFontScale() * 15,
   },
 });
 

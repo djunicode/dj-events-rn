@@ -12,7 +12,8 @@ import {bgColor, subtextColor, textColor} from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import ReferralStats from '../../components/ProfileScreen/ReferralStats';
-
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 const ReferralCount = () => {
   const {currentUser} = useContext(AuthContext);
   const [data, setData] = useState([]);
@@ -111,19 +112,19 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: bgColor,
     height: '100%',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: PixelRatio.getFontScale() * 20,
+    paddingRight: PixelRatio.getFontScale() * 20,
   },
   backIcon: {
     color: subtextColor,
-    paddingTop: 40,
+    paddingTop: PixelRatio.getFontScale() * 40,
   },
   heading: {
-    paddingLeft: 45,
+    paddingLeft: PixelRatio.getFontScale() * 45,
     color: textColor,
-    paddingRight: 35,
-    paddingTop: 40,
-    fontSize: 30,
+    paddingRight: PixelRatio.getFontScale() * 35,
+    paddingTop: PixelRatio.getFontScale() * 40,
+    fontSize: PixelRatio.getFontScale() * 30,
   },
 });
 
