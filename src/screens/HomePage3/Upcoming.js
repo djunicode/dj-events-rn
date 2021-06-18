@@ -1,27 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
-import {StyleSheet, View, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import EventCard from '../../components/EventCard';
-import {bgColor, textColor} from '../../Constants';
-import axios from '../../controllers/axios';
-import {heightToDp, widthToDp} from '../../Responsive';
+import {bgColor, subtextColor, textColor} from '../../Constants';
 import {PixelRatio} from 'react-native';
-const Upcoming = ({d}) => {
-  const [data, setData] = useState([]);
-  // const [check, setCheck] = useState([]);
-  const [loading, setLoading] = useState(true);
+import Entypo from 'react-native-vector-icons/Entypo';
 
-  const getUpcoming = async () => {
-    let res = await axios.get('/events');
-    setData(res.data);
-    setLoading(false);
-  };
-
+const Upcoming = ({d, type, liked, callBack}) => {
   useEffect(() => {
-    getUpcoming();
+    //getUpcoming();
+    console.log('This is ' + type + ' screen');
   }, []);
 
-  return loading ? (
+  return !d ? (
     <ActivityIndicator
       style={styles.container}
       color={textColor}
@@ -33,6 +29,9 @@ const Upcoming = ({d}) => {
         keyExtractor={(event, index) => index.toString()}
         data={d}
         renderItem={({item}) => {
+          //console.log(liked.includes(item));
+          const arr = liked.find(({id}) => id === item.id);
+          const isliked = arr ? true : false;
           return (
             <View style={styles.container}>
               <EventCard
@@ -42,11 +41,19 @@ const Upcoming = ({d}) => {
                 likes={item.likes}
                 committee={item.organisingCommitteeName}
                 description={item.eventDescription}
+                isLiked={isliked}
               />
             </View>
           );
         }}
       />
+      {type === 'searchEvent' ? (
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={() => callBack(null)}>
+          <Entypo name="cross" size={40} color={subtextColor} />
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -57,6 +64,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: bgColor,
     padding: PixelRatio.getFontScale() * 10,
+  },
+  cancelButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+    height: 60,
+    backgroundColor: textColor,
+    borderRadius: 30,
   },
 });
 

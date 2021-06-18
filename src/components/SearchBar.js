@@ -33,7 +33,7 @@ const SearchBar = (props) => {
 
 const styles = StyleSheet.create({
   icon: {
-    paddingLeft: 19,
+    paddingLeft: 15,
     paddingTop: 9,
     paddingBottom: 9,
   },
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: backDropColor,
     borderRadius: 100,
-    width: '85%',
+    width: '90%',
     height: 46,
   },
 });

@@ -1,15 +1,27 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Upcoming from '../screens/HomePage3/Upcoming';
-import Latest from '../screens/HomePage3/Latest';
-import Following from '../screens/HomePage3/FollowCommittees';
 import {bgColor, subtextColor, textColor} from '../Constants';
 import {heightToDp, widthToDp} from '../Responsive';
 import {PixelRatio} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 
 const TopTab = createMaterialTopTabNavigator();
-export default MyTopTabs = ({data}) => {
-  return (
+
+export default MyTopTabs = ({data, liked}) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  return loading ? (
+    <ActivityIndicator
+      style={{flex: 1, backgroundColor: bgColor}}
+      color={textColor}
+      size={'large'}
+    />
+  ) : (
     <TopTab.Navigator
       backBehavior="Upcoming"
       tabBarOptions={{
@@ -25,17 +37,19 @@ export default MyTopTabs = ({data}) => {
       }}>
       <TopTab.Screen
         name="Upcoming"
-        children={() => <Upcoming d={data} />}
+        children={() => <Upcoming d={data} type={'upcoming'} liked={liked} />}
         options={{tabBarLabel: 'Upcoming'}}
       />
       <TopTab.Screen
         name="Latest"
-        component={Latest}
+        //component={Latest}
+        children={() => <Upcoming d={data} type={'latest'} liked={liked} />}
         options={{tabBarLabel: 'Latest'}}
       />
       <TopTab.Screen
         name="Following"
-        component={Following}
+        //component={Following}
+        children={() => <Upcoming d={data} type={'following'} liked={liked} />}
         options={{tabBarLabel: 'Following'}}
       />
     </TopTab.Navigator>
