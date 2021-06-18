@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     paddingTop: heightToDp('4%'),
     color: subtextColor,
-    fontSize: PixelRatio.getFontScale() * 30,
+    fontSize: PixelRatio.getFontScale() * 25,
   },
   profileImgContainer: {
     height: heightToDp('10%'),
@@ -144,5 +144,6 @@ const styles = StyleSheet.create({
     paddingTop: heightToDp('2%'),
     flexDirection: 'row',
     alignItems: 'center',
+    paddingRight: PixelRatio.get() * 12,
   },
 });

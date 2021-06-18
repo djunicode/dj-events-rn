@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    padding: PixelRatio.getFontScale() * 10,
+    padding: PixelRatio.getFontScale() * 15,
   },
   cancelButton: {
     alignItems: 'center',

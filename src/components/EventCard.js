@@ -110,7 +110,6 @@ const EventCard = ({
               style={{
                 color: subtextColor,
                 fontSize: PixelRatio.getFontScale() * 16,
-                fontWeight: 'bold',
                 marginLeft: PixelRatio.getFontScale() * 5,
               }}>
               {likes} Likes
@@ -121,7 +120,6 @@ const EventCard = ({
                 color: subtextColor,
                 fontSize: PixelRatio.getFontScale() * 16,
                 marginRight: PixelRatio.getFontScale() * 5,
-                fontWeight: 'bold',
               }}>
               {committee}
             </Text>

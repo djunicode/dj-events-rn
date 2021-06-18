@@ -73,8 +73,8 @@ const SearchScreen = () => {
       <View
         style={{
           flexDirection: 'row',
-          paddingLeft: PixelRatio.getFontScale() * 19,
-          paddingRight: PixelRatio.getFontScale() * 19,
+          paddingLeft: PixelRatio.getFontScale() * 20,
+          paddingRight: PixelRatio.getFontScale() * 20,
         }}>
         <SearchBar
           title={'Search Committees'}
@@ -85,6 +85,7 @@ const SearchScreen = () => {
         <TouchableOpacity style={styles.sort}>
           <Entypo name="sound-mix" size={25} color={'#dadada'} />
         </TouchableOpacity>
+        <View style={{width: PixelRatio.getFontScale() * 8}} />
       </View>
       <View
         style={{
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: backDropColor,
     borderRadius: 100,
     width: widthToDp('12%'),
-    height: heightToDp('7%'),
+    height: heightToDp('5%'),
     alignItems: 'center',
     justifyContent: 'center',
   },
