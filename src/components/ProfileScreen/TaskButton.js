@@ -20,7 +20,7 @@ const TaskButton = ({width, text, route}) => {
       onPress={() => navigation.navigate(route)}>
       <LinearGradient
         colors={[textColor, linearColor]}
-        style={{height: 26, opacity: 0.9}}>
+        style={{height: 36,width:135, opacity: 0.9,justifyContent: 'center',alignItems: 'center'}}>
         <Text
           style={{
             fontSize: 16,

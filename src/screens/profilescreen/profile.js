@@ -98,6 +98,7 @@ const Profile = () => {
             route={'Core View Tasks'}
           />
         </View>
+        <View style={{height:20}}/>
         <SafeAreaView>
           <FlatList
             data={core}
@@ -118,6 +119,7 @@ const Profile = () => {
           <View style={{width: 17}} />
           <TaskButton width={170} text={'REFERRAL'} route={'Referral Count'} />
         </View>
+        <View style={{height:20}}/>
         <SafeAreaView>
           <FlatList
             data={coCommittee}
@@ -144,13 +146,13 @@ const styles = StyleSheet.create({
   nametext: {
     color: subtextColor,
     textAlign: 'center',
-    fontSize: PixelRatio.getFontScale() * 28,
+    fontSize: PixelRatio.getFontScale() * 21,
     paddingTop: PixelRatio.getFontScale() * 21,
   },
   saptext: {
     color: 'rgba(255, 255, 255, 0.55)',
     textAlign: 'center',
-    fontSize: PixelRatio.getFontScale() * 28,
+    fontSize: PixelRatio.getFontScale() * 21,
     paddingTop: PixelRatio.getFontScale() * 21,
   },
   emailtext: {

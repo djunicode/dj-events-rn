@@ -27,7 +27,7 @@ export default MyTopTabs = ({data, liked}) => {
       tabBarOptions={{
         indicatorStyle: {backgroundColor: textColor},
         labelStyle: {
-          fontSize: PixelRatio.getFontScale() * 19,
+          fontSize: PixelRatio.getFontScale() * 15,
           color: subtextColor,
           textTransform: 'none',
           fontFamily: 'OpenSans-Regular',
