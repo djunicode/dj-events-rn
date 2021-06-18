@@ -21,6 +21,8 @@ import {
   textColor,
 } from '../../Constants';
 import axios from '../../controllers/axios';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const image = require('../../images/Logo.jpg');
 
@@ -60,23 +62,40 @@ const SearchScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{backgroundColor: bgColor, paddingTop: 40, flex: 1}}>
+    <SafeAreaView
+      style={{
+        backgroundColor: bgColor,
+        paddingTop: PixelRatio.getFontScale() * 40,
+        flex: 1,
+      }}>
       <StatusBar backgroundColor={statusbarColor} />
 
-      <View style={{flexDirection: 'row', paddingLeft: 19, paddingRight: 19}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingLeft: PixelRatio.getFontScale() * 19,
+          paddingRight: PixelRatio.getFontScale() * 19,
+        }}>
         <SearchBar
           title={'Search Committees'}
           type={'committee'}
           callback={setData}
         />
-        <View style={{width: 8}} />
+        <View style={{width: PixelRatio.getFontScale() * 8}} />
         <TouchableOpacity style={styles.sort}>
           <Entypo name="sound-mix" size={25} color={'#dadada'} />
         </TouchableOpacity>
       </View>
-      <View style={{marginTop: 20, marginLeft: 20, marginRight: 20}}>
+      <View
+        style={{
+          marginTop: PixelRatio.getFontScale() * 20,
+          marginLeft: PixelRatio.getFontScale() * 20,
+          marginRight: PixelRatio.getFontScale() * 20,
+        }}>
         <FlatList
-          contentContainerStyle={{paddingBottom: 200}}
+          contentContainerStyle={{
+            paddingBottom: PixelRatio.getFontScale() * 200,
+          }}
           keyExtractor={(committee) => committee.id.toString()}
           data={data}
           numColumns={2}
@@ -97,44 +116,13 @@ const SearchScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  Searchbar: {
-    height: 40,
-    width: '73%',
-    borderRadius: 100,
-    marginTop: 27,
-    marginLeft: 19,
-    backgroundColor: backDropColor,
-  },
-  searchInput: {
-    fontSize: 20,
-    fontWeight: '400',
-    fontFamily: 'Roboto',
-    paddingTop: 9,
-    paddingBottom: 9,
-    color: subtextColor,
-  },
-  filter: {
-    marginLeft: 8,
-    marginTop: 27,
-    width: 50,
-    height: 40,
-    borderRadius: 100,
-    backgroundColor: backDropColor,
-    marginRight: 19,
-  },
   sort: {
     backgroundColor: backDropColor,
     borderRadius: 100,
-    width: 60,
-    height: 46,
+    width: widthToDp('12%'),
+    height: heightToDp('7%'),
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  Ficon: {
-    position: 'absolute',
-    marginTop: 32,
-    marginLeft: 23,
-    color: '#2E2E2E',
   },
 });
 

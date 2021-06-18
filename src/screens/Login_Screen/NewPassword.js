@@ -19,6 +19,8 @@ import {
   height,
 } from '../../Constants';
 // import {AuthContext} from '../../Authentication/AuthProvider';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const NewPassword = ({navigation}) => {
   const [newpassword, setNewPass] = useState('');
@@ -36,16 +38,16 @@ const NewPassword = ({navigation}) => {
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={statusbarColor} />
       <View style={{marginTop: height / 6.3}}>
-        <View style={{paddingTop: 20}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 20}}>
           <Text style={styles.basetext}> Enter new password</Text>
           <Password title={'Password'} function={handleNewPass} />
         </View>
-        <View style={{paddingTop: 16}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 16}}>
           <Text style={styles.basetext}> Re-enter password</Text>
           <Password title={'Confirm Password'} function={handlePassword} />
         </View>
 
-        <View style={{paddingTop: 20}}>
+        <View style={{paddingTop: PixelRatio.getFontScale() * 20}}>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <LinearGradient
               colors={[textColor, linearColor]}
@@ -64,26 +66,26 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: 43,
-    paddingRight: 42,
+    paddingLeft: PixelRatio.getFontScale() * 43,
+    paddingRight: PixelRatio.getFontScale() * 42,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: 26,
-    paddingTop: 20,
-    paddingBottom: 10,
+    fontSize: PixelRatio.getFontScale() * 26,
+    paddingTop: PixelRatio.getFontScale() * 20,
+    paddingBottom: PixelRatio.getFontScale() * 10,
     color: subtextColor,
   },
   ltext: {
     textAlign: 'center',
-    padding: 15,
+    padding: PixelRatio.getFontScale() * 15,
     color: subtextColor,
-    fontSize: 18,
+    fontSize: PixelRatio.getFontScale() * 18,
     fontFamily: 'OpenSans-Regular',
   },
   button: {
-    marginTop: 40,
-    height: 50,
+    marginTop: PixelRatio.getFontScale() * 40,
+    height: heightToDp('8%'),
     borderRadius: 8,
   },
 });

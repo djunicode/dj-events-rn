@@ -12,6 +12,8 @@ import {bgColor, subtextColor, textColor, height} from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../Authentication/AuthProvider';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const CoViewTask = () => {
   const {currentUser} = useContext(AuthContext);
@@ -69,12 +71,15 @@ const CoViewTask = () => {
         style={{
           borderBottomColor: 'rgba(255,255,255,0.25)',
           borderBottomWidth: 1,
-          paddingTop: 24,
+          paddingTop: PixelRatio.getFontScale() * 24,
         }}
       />
       <FlatList
         data={data}
-        style={{paddingTop: 50, paddingLeft: 14}}
+        style={{
+          paddingTop: PixelRatio.getFontScale() * 50,
+          paddingLeft: PixelRatio.getFontScale() * 14,
+        }}
         keyExtractor={(task) => task.id.toString()}
         renderItem={({item}) => {
           return (
@@ -82,7 +87,7 @@ const CoViewTask = () => {
               <TouchableOpacity
                 onPress={onClick}
                 style={{
-                  padding: 15,
+                  padding: PixelRatio.getFontScale() * 15,
                   backgroundColor: '#505050',
                   width: '100%',
                   height: height * (isBig ? 0.5 : 0.25),
@@ -122,34 +127,34 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: bgColor,
     height: '100%',
-    paddingLeft: 30,
-    paddingRight: 30,
+    paddingLeft: PixelRatio.getFontScale() * 30,
+    paddingRight: PixelRatio.getFontScale() * 30,
   },
   backIcon: {
     color: subtextColor,
-    paddingTop: 40,
+    paddingTop: PixelRatio.getFontScale() * 40,
   },
   heading: {
-    paddingLeft: 100,
+    paddingLeft: PixelRatio.getFontScale() * 100,
     color: textColor,
-    paddingRight: 85,
-    paddingTop: 40,
-    fontSize: 30,
+    paddingRight: PixelRatio.getFontScale() * 85,
+    paddingTop: PixelRatio.getFontScale() * 40,
+    fontSize: PixelRatio.getFontScale() * 30,
   },
   heading1: {
     color: textColor,
-    paddingLeft: 19,
-    paddingTop: 9,
-    fontSize: 20,
+    paddingLeft: PixelRatio.getFontScale() * 19,
+    paddingTop: PixelRatio.getFontScale() * 9,
+    fontSize: PixelRatio.getFontScale() * 20,
   },
   comphead: {
     color: textColor,
-    fontSize: 26,
+    fontSize: PixelRatio.getFontScale() * 26,
     textDecorationLine: 'underline',
   },
   content: {
     color: subtextColor,
-    fontSize: 17,
+    fontSize: PixelRatio.getFontScale() * 17,
   },
 });
 

@@ -22,6 +22,8 @@ import Tabs from '../../components/HomePage/Tabs';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import axios from '../../controllers/axios';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const EventsScreen = ({route}) => {
   //const [about, setAbout] = useState();
@@ -98,35 +100,35 @@ const EventsScreen = ({route}) => {
 
 const styles = StyleSheet.create({
   Header: {
-    marginTop: 20,
+    marginTop: PixelRatio.getFontScale() * 14,
     flexDirection: 'row',
     alignContent: 'center',
   },
   title: {
     fontFamily: 'Open Sans',
-    fontSize: 26,
+    fontSize: PixelRatio.getFontScale() * 26,
     fontWeight: '700',
     color: subtextColor,
-    marginTop: 8,
-    letterSpacing: 5,
+    marginTop: PixelRatio.getFontScale() * 8,
+    letterSpacing: PixelRatio.getFontScale() * 5,
   },
   arrow: {
-    marginLeft: 18.51,
-    marginTop: 10,
+    marginLeft: PixelRatio.getFontScale() * 18.51,
+    marginTop: PixelRatio.getFontScale() * 10,
     color: subtextColor,
-    fontSize: 26,
+    fontSize: PixelRatio.getFontScale() * 26,
   },
   tabStyle: {},
   cover: {
     height: width * 0.61,
     width: width * 0.61,
-    marginTop: 11,
+    marginTop: PixelRatio.getFontScale() * 11,
     alignSelf: 'center',
   },
   filler: {
     backgroundColor: bgColor,
     position: 'absolute',
-    marginTop: 77,
+    marginTop: PixelRatio.getFontScale() * 77,
     width: width,
     height: 1,
   },
@@ -134,26 +136,26 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Open Sans',
     fontWeight: '400',
-    fontSize: 16,
+    fontSize: PixelRatio.getFontScale() * 16,
     color: subtextColor,
   },
   question: {
     color: textColor,
-    fontSize: 18,
+    fontSize: PixelRatio.getFontScale() * 18,
     fontFamily: 'Roboto',
     fontWeight: '500',
-    marginLeft: 40,
+    marginLeft: PixelRatio.getFontScale() * 40,
   },
   paragraph: {
-    fontSize: 13,
+    fontSize: PixelRatio.getFontScale() * 13,
     fontWeight: '400',
     fontFamily: 'Roboto',
   },
   contact: {
-    marginTop: 17.33,
-    marginLeft: 43,
+    marginTop: PixelRatio.getFontScale() * 17.33,
+    marginLeft: PixelRatio.getFontScale() * 43,
     flexDirection: 'row',
-    margin: 2,
+    margin: PixelRatio.getFontScale() * 2,
   },
 });
 

@@ -21,6 +21,8 @@ import {
   textColor,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
+import {PixelRatio} from 'react-native';
+import {heightToDp, widthToDp} from '../../Responsive';
 
 const image = require('../../images/profile.jpg');
 
@@ -142,37 +144,37 @@ const styles = StyleSheet.create({
   nametext: {
     color: subtextColor,
     textAlign: 'center',
-    fontSize: 28,
-    paddingTop: 21,
+    fontSize: PixelRatio.getFontScale() * 28,
+    paddingTop: PixelRatio.getFontScale() * 21,
   },
   saptext: {
     color: 'rgba(255, 255, 255, 0.55)',
     textAlign: 'center',
-    fontSize: 28,
-    paddingTop: 21,
+    fontSize: PixelRatio.getFontScale() * 28,
+    paddingTop: PixelRatio.getFontScale() * 21,
   },
   emailtext: {
-    fontSize: 20,
+    fontSize: PixelRatio.getFontScale() * 20,
     color: 'rgba(255,255,255,0.75)',
     textAlign: 'center',
     textDecorationLine: 'underline',
-    paddingTop: 20,
+    paddingTop: PixelRatio.getFontScale() * 20,
   },
   info: {
-    fontSize: 23,
+    fontSize: PixelRatio.getFontScale() * 23,
     color: subtextColor,
     textAlign: 'center',
-    paddingTop: 20,
+    paddingTop: PixelRatio.getFontScale() * 20,
   },
   profile: {
-    margin: 5,
+    margin: PixelRatio.getFontScale() * 5,
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: PixelRatio.getFontScale() * 30,
   },
   propic: {
-    margin: 10,
-    height: 120,
-    width: 120,
+    margin: PixelRatio.getFontScale() * 10,
+    height: 100,
+    width: 100,
     borderRadius: 200,
     alignContent: 'center',
   },
