@@ -33,7 +33,8 @@
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-tab-view": "^2.15.2",
     "react-native-vector-icons": "^8.0.0",
-    "react-native-webview": "^11.2.3"
+    "react-native-webview": "^11.2.3",
+    "shorthash": "^0.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

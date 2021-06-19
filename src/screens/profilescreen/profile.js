@@ -26,7 +26,7 @@ import {heightToDp, widthToDp} from '../../Responsive';
 
 const image = require('../../images/profile.jpg');
 
-const Profile = () => {
+const ProfileScreen = () => {
   const [core, setCore] = useState([]);
   const [coCommittee, setCoCommittee] = useState([]);
   const {currentUser} = useContext(AuthContext);
@@ -98,7 +98,7 @@ const Profile = () => {
             route={'Core View Tasks'}
           />
         </View>
-        <View style={{height:20}}/>
+        <View style={{height: 20}} />
         <SafeAreaView>
           <FlatList
             data={core}
@@ -119,7 +119,7 @@ const Profile = () => {
           <View style={{width: 17}} />
           <TaskButton width={170} text={'REFERRAL'} route={'Referral Count'} />
         </View>
-        <View style={{height:20}}/>
+        <View style={{height: 20}} />
         <SafeAreaView>
           <FlatList
             data={coCommittee}
@@ -201,4 +201,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default ProfileScreen;
