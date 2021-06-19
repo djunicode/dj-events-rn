@@ -25,15 +25,17 @@ import {PixelRatio} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {heightToDp, widthToDp} from '../../Responsive';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const image = require('../../images/profile.jpg');
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = () => {
   const [core, setCore] = useState([]);
   const [coCommittee, setCoCommittee] = useState([]);
-  const {currentUser,signOut} = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext);
   const [isloading, setIsLoading] = useState(true);
   var id = currentUser.id;
+  const navigation=useNavigation();
 
   const fetchProfileData = async () => {
     var myHeaders = new Headers();
@@ -87,7 +89,7 @@ const ProfileScreen = ({navigation}) => {
             name="logout-variant" 
             style={styles.logout} 
             onPress={()=>{
-              signOut();
+              AsyncStorage.clear();
             }}
           />
           </View>

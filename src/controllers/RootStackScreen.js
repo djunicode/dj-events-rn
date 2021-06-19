@@ -6,7 +6,6 @@ import ForgotPasswordScreen from '../screens/Login_Screen/ForgotPasswordScreen';
 import OTPScreen from '../screens/Login_Screen/OTPScreen';
 import NewPassword from '../screens/Login_Screen/NewPassword';
 import MainTabScreen from '../controllers/MainTabScreen';
-import ProfileScreen from '../screens/ProfileScreen/Profile';
 
 const RootStackScreen = () => {
   const Stack = createStackNavigator();
