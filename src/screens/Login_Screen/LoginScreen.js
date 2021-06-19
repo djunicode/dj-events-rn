@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState,useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -31,7 +31,7 @@ const Login = () => {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {signIn, currentUser} = useContext(AuthContext);
+  const {signIn, setCurrentUser} = useContext(AuthContext);
   const navigation = useNavigation();
 
   const handleUser = (text) => {
@@ -41,6 +41,10 @@ const Login = () => {
   const handlePassword = (text) => {
     setPassword(text);
   };
+
+  useEffect(() => {
+    setCurrentUser(null);
+  }, [])
 
   return (
     <ScrollView style={styles.container}>

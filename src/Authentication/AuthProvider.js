@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {baseURL} from '../Constants';
 import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
@@ -12,6 +13,7 @@ export const AuthProvider = ({children}) => {
     <AuthContext.Provider
       value={{
         currentUser,
+        setCurrentUser,
         isLoading,
         signIn: async (username, password) => {
           setIsLoading(true);
@@ -46,7 +48,13 @@ export const AuthProvider = ({children}) => {
 
         signUp: () => {},
 
-        signOut: () => {},
+        signOut: async () => {
+          try{
+            await AsyncStorage.clear();
+          }catch(e){
+            console.log(e);
+          }
+        },
       }}>
       {children}
     </AuthContext.Provider>
