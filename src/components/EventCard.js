@@ -90,6 +90,7 @@ const EventCard = ({
     }
   };
   const navigation = useNavigation();
+
   return (
     <Animatable.View
       style={styles.container}
@@ -112,7 +113,7 @@ const EventCard = ({
                 fontSize: PixelRatio.getFontScale() * 16,
                 marginLeft: PixelRatio.getFontScale() * 5,
               }}>
-              {likes} Likes
+              {likes} {likes == 1 ? 'like' : 'likes'}
             </Text>
 
             <Text

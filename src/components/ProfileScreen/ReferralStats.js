@@ -8,7 +8,7 @@ const ReferralStats = ({event, name, person}) => {
     <View
       style={{
         margin: 15,
-        height: 185,
+        height: 130, //was 185
         backgroundColor: '#a9a9a9',
         flexDirection: 'row',
       }}>

@@ -8,18 +8,19 @@ import {
   FlatList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {bgColor, subtextColor, textColor} from '../../Constants';
+import {bgColor, subtextColor, textColor, width} from '../../Constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import ReferralStats from '../../components/ProfileScreen/ReferralStats';
 import {PixelRatio} from 'react-native';
 import {heightToDp, widthToDp} from '../../Responsive';
+
 const ReferralCount = () => {
   const {currentUser} = useContext(AuthContext);
   const [data, setData] = useState([]);
-  const [referral, setReferral] = useState([]);
+  const [referral, setReferral] = useState([[]]);
+
   var id = currentUser.id;
-  var items = [];
 
   const fetchReferrals = () => {
     var myHeaders = new Headers();
@@ -38,8 +39,11 @@ const ReferralCount = () => {
     )
       .then((response) => response.json())
       .then((result) => {
+        //console.log(result);
         setData(result.coCommittees);
+        var list = [];
         for (var i = 0; i < data.length; i++) {
+          var items = [];
           for (var j = 0; j < data[i].referrals.length; j++) {
             const obj = {
               event: data[i].referrals[j].event,
@@ -49,9 +53,12 @@ const ReferralCount = () => {
             };
             items.push(obj);
           }
+          //console.log(items);
+          list.push(items);
         }
-        console.log(items);
-        setReferral(items);
+        //console.log(items);
+        //console.log(list);
+        setReferral(list);
       })
       .catch((error) => console.log('error', error));
   };
@@ -78,6 +85,8 @@ const ReferralCount = () => {
       </View>
     );
   }
+
+  //console.log(referral);
   return (
     <View style={styles.body}>
       <View style={{flexDirection: 'row'}}>
@@ -93,14 +102,27 @@ const ReferralCount = () => {
       </View>
       <FlatList
         data={referral}
-        keyExtractor={(ref) => ref.id.toString()}
+        keyExtractor={(ref) => ref.toString()}
         renderItem={({item}) => {
           return (
-            <ReferralStats
-              event={item.event}
-              name={item.committee}
-              person={item.participant}
-            />
+            <View>
+              <View style={styles.line} />
+              <FlatList
+                data={item}
+                keyExtractor={(ref) => ref.id.toString()}
+                renderItem={({item}) => {
+                  return (
+                    <View>
+                      <ReferralStats
+                        event={item.event}
+                        name={item.committee}
+                        person={item.participant}
+                      />
+                    </View>
+                  );
+                }}
+              />
+            </View>
           );
         }}
       />
@@ -125,6 +147,11 @@ const styles = StyleSheet.create({
     paddingRight: PixelRatio.getFontScale() * 35,
     paddingTop: PixelRatio.getFontScale() * 40,
     fontSize: PixelRatio.getFontScale() * 30,
+  },
+  line: {
+    height: 5,
+    width: width * 0.95,
+    backgroundColor: textColor,
   },
 });
 

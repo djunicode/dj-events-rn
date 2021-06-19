@@ -5,9 +5,9 @@ import {statusbarColor, textColor} from '../Constants';
 import {HomePage} from '../screens/HomePage3/HomePage';
 import SearchScreen from '../screens/SearchScreen/SearchScreen';
 import Committee from '../screens/Committeescreen/CommitteeScreen';
-import Profile from '../screens/ProfileScreen/Profile';
 import {createStackNavigator} from '@react-navigation/stack';
 import EventsScreen from '../screens/HomePage3/EventsScreen';
+import ProfileScreen from '../screens/ProfileScreen/Profile';
 import CoreViewTask from '../screens/ProfileScreen/CoreViewTask';
 import ReferralCount from '../screens/ProfileScreen/ReferralCount';
 import AssignTask from '../screens/ProfileScreen/AssignTask';
@@ -103,7 +103,7 @@ const ProfileStackScreen = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <ProfileStack.Screen name="Profile" component={Profile} />
+      <ProfileStack.Screen name="Profile" component={ProfileScreen} />
       <ProfileStack.Screen name="Co View Tasks" component={CoViewTask} />
       <ProfileStack.Screen name="Core View Tasks" component={CoreViewTask} />
       <ProfileStack.Screen name="Referral Count" component={ReferralCount} />
