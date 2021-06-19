@@ -82,9 +82,6 @@ const SearchScreen = () => {
           callback={setData}
         />
         <View style={{width: PixelRatio.getFontScale() * 8}} />
-        <TouchableOpacity style={styles.sort}>
-          <Entypo name="sound-mix" size={25} color={'#dadada'} />
-        </TouchableOpacity>
         <View style={{width: PixelRatio.getFontScale() * 8}} />
       </View>
       <View

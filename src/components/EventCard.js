@@ -27,16 +27,19 @@ const EventCard = ({
   const [didLike, setdidLike] = useState(isLiked);
   const [notify, setNotify] = useState(false);
   const {currentUser} = useContext(AuthContext);
+  const [lks,setLks]=useState(likes);
 
   const LikeHandler = () => {
     if (didLike) {
       //RemoveFromLiked
       liker('dislike', 'delete');
       setdidLike(false);
+      setLks(lks-1);
     } else {
       //AddToLiked
       liker('like', 'post');
       setdidLike(true);
+      setLks(lks+1);
     }
   };
 
@@ -113,7 +116,7 @@ const EventCard = ({
                 fontSize: PixelRatio.getFontScale() * 16,
                 marginLeft: PixelRatio.getFontScale() * 5,
               }}>
-              {likes} {likes == 1 ? 'like' : 'likes'}
+              {lks} {lks == 1 ? 'like' : 'likes'}
             </Text>
 
             <Text

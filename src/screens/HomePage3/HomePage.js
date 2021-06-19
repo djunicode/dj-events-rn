@@ -73,9 +73,6 @@ export function HomePage() {
             callback={setSearchedData}
           />
           <View style={{width: widthToDp('3')}} />
-          {/* <TouchableOpacity style={styles.sort} onPress={() => {}}>
-            <Entypo name="sound-mix" size={25} color={'#dadada'} />
-          </TouchableOpacity> */}
         </View>
       </View>
       <View
@@ -144,6 +141,5 @@ const styles = StyleSheet.create({
     paddingTop: heightToDp('2%'),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: PixelRatio.get() * 12,
   },
 });
