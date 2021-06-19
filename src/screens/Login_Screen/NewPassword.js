@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: PixelRatio.getFontScale() * 43,
-    paddingRight: PixelRatio.getFontScale() * 42,
+    paddingLeft: PixelRatio.getFontScale() * 12,
+    paddingRight: PixelRatio.getFontScale() * 12,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',

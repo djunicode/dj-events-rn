@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     marginTop: PixelRatio.getFontScale() * 20,
   },
   container: {
-    paddingLeft: PixelRatio.getFontScale() * 44,
-    paddingRight: PixelRatio.getFontScale() * 41,
+    paddingLeft: PixelRatio.getFontScale() * 12,
+    paddingRight: PixelRatio.getFontScale() * 12,
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,

@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: PixelRatio.getFontScale() * 43,
-    paddingRight: PixelRatio.getFontScale() * 42,
+    paddingLeft: PixelRatio.getFontScale() * 12,
+    paddingRight: PixelRatio.getFontScale() * 12,
   },
   backButton: {
     color: subtextColor,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',
-    fontSize: PixelRatio.getFontScale() * 38,
+    fontSize: PixelRatio.getFontScale() * 32,
     paddingTop: PixelRatio.getFontScale() * 72,
     color: subtextColor,
   },
