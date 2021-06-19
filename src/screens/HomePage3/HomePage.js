@@ -73,9 +73,9 @@ export function HomePage() {
             callback={setSearchedData}
           />
           <View style={{width: widthToDp('3')}} />
-          <TouchableOpacity style={styles.sort} onPress={() => {}}>
+          {/* <TouchableOpacity style={styles.sort} onPress={() => {}}>
             <Entypo name="sound-mix" size={25} color={'#dadada'} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View

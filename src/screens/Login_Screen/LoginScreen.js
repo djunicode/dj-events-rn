@@ -21,6 +21,7 @@ import {
   statusbarColor,
   subtextColor,
   textColor,
+  width,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,7 +64,7 @@ const Login = () => {
           <Password title={'Password'} function={handlePassword} />
         </View>
         <View style={styles.row}>
-          <View
+          {/* <View
             style={{
               paddingRight: PixelRatio.getFontScale() * 5,
               paddingTop: PixelRatio.getFontScale() * 2,
@@ -72,7 +73,7 @@ const Login = () => {
               name={
                 remember ? 'checkbox-marked-outline' : 'checkbox-blank-outline'
               }
-              style={{color: subtextColor}}
+              style={{color: subtextColor,paddingTop:3}}
               size={20}
               onPress={() => {
                 setRemember(!remember);
@@ -86,14 +87,14 @@ const Login = () => {
               color: subtextColor,
             }}>
             Remember Me
-          </Text>
+          </Text> */}
           <TouchableOpacity
-            style={{paddingLeft: PixelRatio.getFontScale() * 40}}
+            style={{paddingLeft: width*0.5}}
             onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
               style={{
                 textDecorationLine: 'underline',
-                fontSize: PixelRatio.getFontScale() * 17,
+                fontSize: PixelRatio.getFontScale() * 15,
                 fontFamily: 'OpenSans-Regular',
                 color: subtextColor,
               }}>
@@ -129,7 +130,8 @@ const Login = () => {
             paddingTop: PixelRatio.getFontScale() * 48,
           }}>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
-          <View>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{width:5}}/>
             <Text
               style={{
                 fontSize: PixelRatio.getFontScale() * 17,
@@ -138,6 +140,7 @@ const Login = () => {
               }}>
               Don't Have an Account?
             </Text>
+            <View style={{width:5}}/>
           </View>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
         </View>
@@ -160,8 +163,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: bgColor,
-    paddingLeft: PixelRatio.getFontScale() * 43,
-    paddingRight: PixelRatio.getFontScale() * 42,
+    paddingLeft: PixelRatio.getFontScale() * 12,
+    paddingRight: PixelRatio.getFontScale() * 12,
   },
   basetext: {
     fontFamily: 'OpenSans-Regular',

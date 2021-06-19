@@ -22,7 +22,10 @@ import {
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import {PixelRatio} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {heightToDp, widthToDp} from '../../Responsive';
+import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const image = require('../../images/profile.jpg');
 
@@ -32,6 +35,7 @@ const ProfileScreen = () => {
   const {currentUser} = useContext(AuthContext);
   const [isloading, setIsLoading] = useState(true);
   var id = currentUser.id;
+  const navigation=useNavigation();
 
   const fetchProfileData = async () => {
     var myHeaders = new Headers();
@@ -80,6 +84,15 @@ const ProfileScreen = () => {
       <StatusBar backgroundColor={statusbarColor} />
       <ScrollView>
         <View style={styles.profile}>
+          <View style={{flexDirection:'row'}}>
+          <MaterialCommunityIcons 
+            name="logout-variant" 
+            style={styles.logout} 
+            onPress={()=>{
+              AsyncStorage.clear();
+            }}
+          />
+          </View>
           <Image source={image} style={styles.propic} />
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.nametext}> {currentUser.Name}</Text>
@@ -143,6 +156,14 @@ const styles = StyleSheet.create({
     backgroundColor: bgColor,
     height: '100%',
   },
+  logout: {
+    color: subtextColor,
+    fontSize: PixelRatio.getFontScale() * 35,
+    paddingTop: PixelRatio.getFontScale() * 5,
+    paddingRight: PixelRatio.getFontScale() * 10,
+    textAlign: 'right',
+    flex: 1,
+  },
   nametext: {
     color: subtextColor,
     textAlign: 'center',
@@ -174,9 +195,8 @@ const styles = StyleSheet.create({
     marginTop: PixelRatio.getFontScale() * 30,
   },
   propic: {
-    margin: PixelRatio.getFontScale() * 10,
-    height: 100,
-    width: 100,
+    height: 110,
+    width: 110,
     borderRadius: 200,
     alignContent: 'center',
   },
