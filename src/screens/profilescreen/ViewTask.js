@@ -7,24 +7,34 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {bgColor, subtextColor, textColor, height} from '../../Constants';
+import {
+  bgColor,
+  subtextColor,
+  textColor,
+  height,
+  baseURL,
+} from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import {PixelRatio} from 'react-native';
 import {heightToDp, widthToDp} from '../../Responsive';
 
-const CoreViewTask = () => {
+const ViewTask = ({route}) => {
   const [data, setData] = useState([]);
   const [isBig, setIsBig] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {currentUser} = useContext(AuthContext);
+  const {tag, comID} = route.params;
 
   const onClick = () => {
     isBig ? setIsBig(false) : setIsBig(true);
   };
 
-  const getCoreViewTaskData = () => {
+  const getViewTaskData = () => {
+    setLoading(true);
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Token ' + currentUser.Token);
 
@@ -35,25 +45,34 @@ const CoreViewTask = () => {
     };
 
     fetch(
-      'http://aryan123456.pythonanywhere.com/api/coretasklist/' +
-        currentUser.id +
-        '/6/\n',
+      `${baseURL}/${tag}tasklist/${currentUser.id}/${comID}/\n`,
       requestOptions,
     )
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
         setData(result);
+        setLoading(false);
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        console.log('error', error);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
-    getCoreViewTaskData();
+    getViewTaskData();
+    console.log('This is view task Screen with tag:- ' + tag);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const navigation = useNavigation();
-  return (
+  return loading ? (
+    <ActivityIndicator
+      style={{flex: 1, backgroundColor: bgColor}}
+      color={textColor}
+      size={'large'}
+    />
+  ) : (
     <ScrollView style={styles.body}>
       <View style={{flexDirection: 'row'}}>
         <Ionicons
@@ -72,7 +91,7 @@ const CoreViewTask = () => {
           paddingTop: PixelRatio.getFontScale() * 50,
           paddingLeft: PixelRatio.getFontScale() * 14,
         }}
-        keyExtractor={(task) => task.id.toString()}
+        keyExtractor={(x, i) => i}
         renderItem={({item}) => {
           return (
             <View>
@@ -144,4 +163,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CoreViewTask;
+export default ViewTask;

@@ -8,10 +8,9 @@ import Committee from '../screens/Committeescreen/CommitteeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import EventsScreen from '../screens/HomePage3/EventsScreen';
 import ProfileScreen from '../screens/ProfileScreen/Profile';
-import CoreViewTask from '../screens/ProfileScreen/CoreViewTask';
 import ReferralCount from '../screens/ProfileScreen/ReferralCount';
 import AssignTask from '../screens/ProfileScreen/AssignTask';
-import CoViewTask from '../screens/ProfileScreen/CoViewTask';
+import ViewTask from '../screens/ProfileScreen/ViewTask';
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
@@ -104,10 +103,9 @@ const ProfileStackScreen = () => {
         headerShown: false,
       }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
-      <ProfileStack.Screen name="Co View Tasks" component={CoViewTask} />
-      <ProfileStack.Screen name="Core View Tasks" component={CoreViewTask} />
       <ProfileStack.Screen name="Referral Count" component={ReferralCount} />
       <ProfileStack.Screen name="Assign Tasks" component={AssignTask} />
+      <ProfileStack.Screen name="View Tasks" component={ViewTask} />
     </ProfileStack.Navigator>
   );
 };

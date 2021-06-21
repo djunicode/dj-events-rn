@@ -32,10 +32,12 @@ const image = require('../../images/profile.jpg');
 const ProfileScreen = () => {
   const [core, setCore] = useState([]);
   const [coCommittee, setCoCommittee] = useState([]);
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser, setCurrentUser} = useContext(AuthContext);
   const [isloading, setIsLoading] = useState(true);
+
   var id = currentUser.id;
-  const navigation=useNavigation();
+
+  const navigation = useNavigation();
 
   const fetchProfileData = async () => {
     var myHeaders = new Headers();
@@ -55,6 +57,7 @@ const ProfileScreen = () => {
     )
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         setCore(result.coreCommittees);
         setCoCommittee(result.coCommittees);
         setIsLoading(false);
@@ -79,19 +82,21 @@ const ProfileScreen = () => {
       </View>
     );
   }
+
   return (
     <SafeAreaView style={styles.body}>
       <StatusBar backgroundColor={statusbarColor} />
       <ScrollView>
         <View style={styles.profile}>
-          <View style={{flexDirection:'row'}}>
-          <MaterialCommunityIcons 
-            name="logout-variant" 
-            style={styles.logout} 
-            onPress={()=>{
-              AsyncStorage.clear();
-            }}
-          />
+          <View style={{flexDirection: 'row'}}>
+            <MaterialCommunityIcons
+              name="logout-variant"
+              style={styles.logout}
+              onPress={() => {
+                AsyncStorage.clear();
+                //setCurrentUser(null);
+              }}
+            />
           </View>
           <Image source={image} style={styles.propic} />
           <View style={{flexDirection: 'row'}}>
@@ -102,7 +107,7 @@ const ProfileScreen = () => {
           <Text style={styles.info}>Department: {currentUser.Department}</Text>
         </View>
         <Text style={styles.coretext}>CORE COMMITTEE:</Text>
-        <View style={{flexDirection: 'row'}}>
+        {/* <View style={{flexDirection: 'row'}}>
           <TaskButton width={140} text={'ASSIGN TASK'} route={'Assign Tasks'} />
           <View style={{width: 17}} />
           <TaskButton
@@ -110,7 +115,7 @@ const ProfileScreen = () => {
             text={'VIEW TASKS'}
             route={'Core View Tasks'}
           />
-        </View>
+        </View> */}
         <View style={{height: 20}} />
         <SafeAreaView>
           <FlatList
@@ -121,17 +126,18 @@ const ProfileScreen = () => {
                 <ProfileStats
                   position={item.positionAssigned}
                   name={item.committee}
+                  tag={'core'}
                 />
               );
             }}
           />
         </SafeAreaView>
         <Text style={styles.cotext}>CO-COMMITTEE: </Text>
-        <View style={{flexDirection: 'row'}}>
+        {/* <View style={{flexDirection: 'row'}}>
           <TaskButton width={140} text={'VIEW TASKS'} route={'Co View Tasks'} />
           <View style={{width: 17}} />
           <TaskButton width={170} text={'REFERRAL'} route={'Referral Count'} />
-        </View>
+        </View> */}
         <View style={{height: 20}} />
         <SafeAreaView>
           <FlatList
@@ -142,6 +148,7 @@ const ProfileScreen = () => {
                 <ProfileStats
                   position={item.positionAssigned}
                   name={item.committee}
+                  tag={'co'}
                 />
               );
             }}
