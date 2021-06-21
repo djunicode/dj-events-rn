@@ -17,7 +17,7 @@ import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
 import Upcoming from './Upcoming';
 import NetInfo from "@react-native-community/netinfo";
-import Modal from 'react-native-modal';
+import NoInternetModal from '../../components/NoInternetModal';
 
 const image = require('../../images/profile.jpg');
 
@@ -27,6 +27,7 @@ export function HomePage() {
   const [searchedData, setSearchedData] = useState(null);
   const [likedEvents, setLikedEvents] = useState([]);
   const [isOffline, setOfflineStatus] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const getDefault = async () => {
     var res;
@@ -51,16 +52,7 @@ export function HomePage() {
     setLikedEvents(res.data);
   };
 
-  const NoInternetModal = ({show, onRetry, isRetrying}) => (
-    <Modal isVisible={show} style={styles.modal} animationInTiming={600}>
-      <View style={styles.modalContainer}>
-        <Text style={styles.modalTitle}>Connection Error</Text>
-        <Text style={styles.modalText}>
-          Oops! Looks like your device is not connected to the Internet.
-        </Text>
-      </View>
-    </Modal>
-  );
+  
 
   useEffect(() => {
     const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
@@ -79,7 +71,11 @@ export function HomePage() {
         statusBarProps={{backgroundColor: statusbarColor}}
       />
       <View style={styles.container}>
-      <NoInternetModal />
+      <NoInternetModal 
+        show={isOffline}
+        onRetry={getDefault}
+        isRetrying={isLoading}
+      />
         <View style={styles.upperRow}>
           <Text style={styles.title}>Hi, {currentUser.Name}</Text>
           <TouchableOpacity style={styles.profileImgContainer}>

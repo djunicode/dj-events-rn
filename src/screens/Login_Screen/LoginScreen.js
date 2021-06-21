@@ -12,7 +12,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import Password from '../../components/SignUpLogin/PasswordTextBox';
 import TextField from '../../components/SignUpLogin/TextField';
 import * as Animatable from 'react-native-animatable';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {
   backDropColor,
@@ -64,31 +63,7 @@ const Login = () => {
           <Password title={'Password'} function={handlePassword} />
         </View>
         <View style={styles.row}>
-          {/* <View
-            style={{
-              paddingRight: PixelRatio.getFontScale() * 5,
-              paddingTop: PixelRatio.getFontScale() * 2,
-            }}>
-            <MaterialCommunityIcons
-              name={
-                remember ? 'checkbox-marked-outline' : 'checkbox-blank-outline'
-              }
-              style={{color: subtextColor,paddingTop:3}}
-              size={20}
-              onPress={() => {
-                setRemember(!remember);
-              }}
-            />
-          </View>
-          <Text
-            style={{
-              fontSize: PixelRatio.getFontScale() * 17,
-              fontFamily: 'OpenSans-Regular',
-              color: subtextColor,
-            }}>
-            Remember Me
-          </Text> */}
-          <TouchableOpacity
+        <TouchableOpacity
             style={{paddingLeft: width*0.5}}
             onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
