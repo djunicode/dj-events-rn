@@ -3,7 +3,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Header} from 'react-native-elements';
-import Entypo from 'react-native-vector-icons/Entypo';
 import SearchBar from '../../components/SearchBar';
 import MyTopTabs from '../../components/TopTabBarNav';
 import {
@@ -17,6 +16,8 @@ import axios from '../../controllers/axios';
 import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
 import Upcoming from './Upcoming';
+import NetInfo from "@react-native-community/netinfo";
+import Modal from 'react-native-modal';
 
 const image = require('../../images/profile.jpg');
 
@@ -25,11 +26,13 @@ export function HomePage() {
   const [data, setData] = useState([]);
   const [searchedData, setSearchedData] = useState(null);
   const [likedEvents, setLikedEvents] = useState([]);
+  const [isOffline, setOfflineStatus] = useState(false);
 
   const getDefault = async () => {
     var res;
     try {
       res = await axios.get('/events');
+      isOffline && setOfflineStatus(false);
     } catch (e) {
       console.log('Events:-' + e);
     }
@@ -40,6 +43,7 @@ export function HomePage() {
     var res;
     try {
       res = await axios.get(`/get_liked_events/${currentUser.id}/`);
+      isOffline && setOfflineStatus(false);
     } catch (e) {
       console.log('Liked Events:- ' + e);
     }
@@ -47,9 +51,25 @@ export function HomePage() {
     setLikedEvents(res.data);
   };
 
+  const NoInternetModal = ({show, onRetry, isRetrying}) => (
+    <Modal isVisible={show} style={styles.modal} animationInTiming={600}>
+      <View style={styles.modalContainer}>
+        <Text style={styles.modalTitle}>Connection Error</Text>
+        <Text style={styles.modalText}>
+          Oops! Looks like your device is not connected to the Internet.
+        </Text>
+      </View>
+    </Modal>
+  );
+
   useEffect(() => {
+    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
+      const offline = !(state.isConnected && state.isInternetReachable);
+      setOfflineStatus(offline);
+    });
     getLikedEvents();
     getDefault();
+    return () => removeNetInfoSubscription();
   }, []);
 
   return (
@@ -59,6 +79,7 @@ export function HomePage() {
         statusBarProps={{backgroundColor: statusbarColor}}
       />
       <View style={styles.container}>
+      <NoInternetModal />
         <View style={styles.upperRow}>
           <Text style={styles.title}>Hi, {currentUser.Name}</Text>
           <TouchableOpacity style={styles.profileImgContainer}>
