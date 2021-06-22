@@ -35,7 +35,7 @@ const ProfileScreen = () => {
   const {currentUser, setCurrentUser} = useContext(AuthContext);
   const [isloading, setIsLoading] = useState(true);
 
-  var id = currentUser.id;
+  //var id = currentUser.id;
 
   const navigation = useNavigation();
 
@@ -52,17 +52,22 @@ const ProfileScreen = () => {
     };
 
     fetch(
-      'http://aryan123456.pythonanywhere.com/api/student_profile/' + id,
+      `http://aryan123456.pythonanywhere.com/api/student_profile/${currentUser.id}`,
       requestOptions,
     )
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
+
         setCore(result.coreCommittees);
         setCoCommittee(result.coCommittees);
+
         setIsLoading(false);
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        console.log('error', error);
+        setIsLoading(false);
+      });
   };
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -127,6 +132,7 @@ const ProfileScreen = () => {
                   position={item.positionAssigned}
                   name={item.committee}
                   tag={'core'}
+                  cID={item.committee_id}
                 />
               );
             }}
@@ -149,6 +155,7 @@ const ProfileScreen = () => {
                   position={item.positionAssigned}
                   name={item.committee}
                   tag={'co'}
+                  cID={item.committee_id}
                 />
               );
             }}

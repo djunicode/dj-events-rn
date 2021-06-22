@@ -19,6 +19,14 @@ const ComCard = ({name, followers, image, id}) => {
   const [added, setAdded] = useState(false);
   const navigation = useNavigation();
 
+  const followHandler = () => {
+    if (added) {
+      setAdded(false); //un-follow code here
+    } else {
+      setAdded(true); //following code here
+    }
+  };
+
   return (
     <Animatable.View
       animation="bounceInUp"
@@ -53,9 +61,7 @@ const ComCard = ({name, followers, image, id}) => {
               <Feather
                 name={added ? 'check' : 'plus'}
                 style={styles.addIcon}
-                onPress={() => {
-                  setAdded(!added);
-                }}
+                onPress={followHandler}
               />
             </View>
           </LinearGradient>

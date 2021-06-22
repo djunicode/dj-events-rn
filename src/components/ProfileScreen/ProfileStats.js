@@ -4,7 +4,7 @@ import {View, Text} from 'react-native';
 import {backDropColor, subtextColor} from '../../Constants';
 import TaskButton from './TaskButton';
 
-const ProfileStats = ({position, name, tag}) => {
+const ProfileStats = ({position, name, tag, cID}) => {
   return (
     <View
       style={{
@@ -55,6 +55,7 @@ const ProfileStats = ({position, name, tag}) => {
             text={'VIEW TASKS'}
             route={'View Tasks'}
             tag={tag}
+            cID={cID}
           />
         </View>
       </View>

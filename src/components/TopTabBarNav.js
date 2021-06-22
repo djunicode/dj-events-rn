@@ -3,8 +3,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Upcoming from '../screens/HomePage3/Upcoming';
 import {bgColor, subtextColor, textColor} from '../Constants';
 import {heightToDp, widthToDp} from '../Responsive';
-import {PixelRatio} from 'react-native';
-import {View, ActivityIndicator} from 'react-native';
+import {PixelRatio, ActivityIndicator} from 'react-native';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -24,6 +23,15 @@ export default MyTopTabs = ({data, liked}) => {
   ) : (
     <TopTab.Navigator
       backBehavior="Upcoming"
+      lazy={true}
+      lazyPreloadDistance={0}
+      lazyPlaceholder={() => (
+        <ActivityIndicator
+          style={{flex: 1, backgroundColor: bgColor}}
+          color={textColor}
+          size={'large'}
+        />
+      )}
       tabBarOptions={{
         indicatorStyle: {backgroundColor: textColor},
         labelStyle: {
