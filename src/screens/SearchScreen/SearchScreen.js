@@ -101,7 +101,7 @@ const SearchScreen = () => {
             return (
               <ComCard
                 name={item.committeeName}
-                followers={42}
+                followers={item.followers}
                 image={image}
                 id={item.id}
               />

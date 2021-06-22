@@ -1,17 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useState} from 'react';
-import {Text, StyleSheet, View, TouchableOpacity, Share} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Share,
+  ImageBackground,
+  ToastAndroid,
+  PixelRatio,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import {backDropColor, baseURL, subtextColor, textColor} from '../Constants';
-import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 import {AuthContext} from '../Authentication/AuthProvider';
-import {ToastAndroid} from 'react-native';
 import {heightToDp, widthToDp} from '../Responsive';
-import {PixelRatio} from 'react-native';
 
 const image = require('../images/events.jpg');
 
@@ -27,19 +32,19 @@ const EventCard = ({
   const [didLike, setdidLike] = useState(isLiked);
   const [notify, setNotify] = useState(false);
   const {currentUser} = useContext(AuthContext);
-  const [lks,setLks]=useState(likes);
+  const [lks, setLks] = useState(likes);
 
   const LikeHandler = () => {
     if (didLike) {
       //RemoveFromLiked
       liker('dislike', 'delete');
       setdidLike(false);
-      setLks(lks-1);
+      setLks((lks) => lks - 1);
     } else {
       //AddToLiked
       liker('like', 'post');
       setdidLike(true);
-      setLks(lks+1);
+      setLks((lks) => lks + 1);
     }
   };
 
@@ -55,9 +60,9 @@ const EventCard = ({
     axios(config)
       .then((response) => {
         if (response.data.success === 'Event Liked') {
-          ToastAndroid.show(`Event added to Liked`, ToastAndroid.SHORT);
+          ToastAndroid.show(`Event added to Liked`, 500);
         } else {
-          ToastAndroid.show(`Event removed from Liked`, ToastAndroid.SHORT);
+          ToastAndroid.show(`Event removed from Liked`, 500);
         }
         //console.log(response.data);
       })
@@ -140,7 +145,7 @@ const EventCard = ({
           style={{
             flexDirection: 'row',
             width: PixelRatio.getFontScale() * 100,
-            justifyContent: 'space-between',
+            justifyContent: 'space-around',
           }}>
           <FontAwesome
             name={didLike ? 'heart' : 'heart-o'}
@@ -148,14 +153,14 @@ const EventCard = ({
             onPress={LikeHandler}
             size={20}
           />
-          <MaterialCommunityIcons
+          {/* <MaterialCommunityIcons
             name={notify ? 'bell-ring' : 'bell'}
             color={subtextColor}
             onPress={() => {
               notify ? setNotify(false) : setNotify(true);
             }}
             size={20}
-          />
+          /> */}
           <FontAwesome
             name="share-alt"
             size={20}

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,14 +10,31 @@ import EventCard from '../../components/EventCard';
 import {bgColor, subtextColor, textColor} from '../../Constants';
 import {PixelRatio} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import axios from '../../controllers/axios';
 
 const Upcoming = ({d, type, liked, callBack}) => {
+  const [data, setData] = useState(d);
+
   useEffect(() => {
-    //getUpcoming();
+    if (type === 'upcoming') {
+      getUpcoming();
+      console.log('Loaded');
+    }
+
     console.log('This is ' + type + ' screen');
   }, []);
 
-  return !d ? (
+  const getUpcoming = async () => {
+    try {
+      const res = await axios.get('/sort_events_by_date');
+      //console.log(res.data);
+      setData(res.data);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  return data === [] ? (
     <ActivityIndicator
       style={styles.container}
       color={textColor}
@@ -27,7 +44,7 @@ const Upcoming = ({d, type, liked, callBack}) => {
     <View style={{backgroundColor: bgColor, flex: 1}}>
       <FlatList
         keyExtractor={(event, index) => index.toString()}
-        data={d}
+        data={data}
         renderItem={({item}) => {
           //console.log(liked.includes(item));
           const arr = liked.find(({id}) => id === item.id);

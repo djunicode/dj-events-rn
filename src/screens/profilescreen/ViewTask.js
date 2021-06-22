@@ -26,6 +26,7 @@ const ViewTask = ({route}) => {
   const [data, setData] = useState([]);
   const [isBig, setIsBig] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState(null);
   const {currentUser} = useContext(AuthContext);
   const {tag, comID} = route.params;
 
@@ -51,7 +52,11 @@ const ViewTask = ({route}) => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        setData(result);
+        if (result.Message) {
+          setMsg(result.Message);
+        } else {
+          setData(result);
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -73,7 +78,7 @@ const ViewTask = ({route}) => {
       size={'large'}
     />
   ) : (
-    <ScrollView style={styles.body}>
+    <View style={styles.body}>
       <View style={{flexDirection: 'row'}}>
         <Ionicons
           name="chevron-back-outline"
@@ -85,52 +90,65 @@ const ViewTask = ({route}) => {
         />
         <Text style={styles.heading}>VIEW TASK</Text>
       </View>
-      <FlatList
-        data={data}
-        style={{
-          paddingTop: PixelRatio.getFontScale() * 50,
-          paddingLeft: PixelRatio.getFontScale() * 14,
-        }}
-        keyExtractor={(x, i) => i}
-        renderItem={({item}) => {
-          return (
-            <View>
-              <TouchableOpacity
-                onPress={onClick}
-                style={{
-                  padding: PixelRatio.getFontScale() * 15,
-                  backgroundColor: '#505050',
-                  width: '100%',
-                  height: height * (isBig ? 0.5 : 0.25),
-                  borderRadius: 20,
-                }}>
-                <Text style={styles.comphead}>Assigned by: </Text>
-                <Text style={styles.content}>{item.assignedbyName}</Text>
-                <Text style={styles.comphead}>Task: </Text>
-                <View>
-                  {isBig ? (
-                    <Text
-                      style={styles.content}
-                      ellipsizeMode="tail"
-                      numberOfLines={10}>
-                      {item.task}
-                    </Text>
-                  ) : (
-                    <Text
-                      style={styles.content}
-                      ellipsizeMode="tail"
-                      numberOfLines={1}>
-                      {item.task}
-                    </Text>
-                  )}
-                </View>
-              </TouchableOpacity>
-              <View style={{height: 20}} />
-            </View>
-          );
-        }}
-      />
-    </ScrollView>
+      {msg ? (
+        <Text
+          style={{
+            color: subtextColor,
+            fontSize: 28,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+          }}>
+          {msg}
+        </Text>
+      ) : (
+        <FlatList
+          data={data}
+          style={{
+            paddingTop: PixelRatio.getFontScale() * 50,
+            paddingLeft: PixelRatio.getFontScale() * 14,
+          }}
+          keyExtractor={(x, i) => i}
+          renderItem={({item}) => {
+            return (
+              <View>
+                <TouchableOpacity
+                  onPress={onClick}
+                  style={{
+                    padding: PixelRatio.getFontScale() * 15,
+                    backgroundColor: '#505050',
+                    width: '100%',
+                    height: height * (isBig ? 0.5 : 0.25),
+                    borderRadius: 20,
+                  }}>
+                  <Text style={styles.comphead}>Assigned by: </Text>
+                  <Text style={styles.content}>{item.assignedbyName}</Text>
+                  <Text style={styles.comphead}>Task: </Text>
+                  <View>
+                    {isBig ? (
+                      <Text
+                        style={styles.content}
+                        ellipsizeMode="tail"
+                        numberOfLines={10}>
+                        {item.task}
+                      </Text>
+                    ) : (
+                      <Text
+                        style={styles.content}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}>
+                        {item.task}
+                      </Text>
+                    )}
+                  </View>
+                </TouchableOpacity>
+                <View style={{height: 20}} />
+              </View>
+            );
+          }}
+        />
+      )}
+    </View>
   );
 };
 
