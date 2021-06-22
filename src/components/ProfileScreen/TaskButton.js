@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import {linearColor, subtextColor, textColor} from '../../Constants';
 
-const TaskButton = ({width, text, route}) => {
+const TaskButton = ({width, text, route, tag}) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -13,17 +13,24 @@ const TaskButton = ({width, text, route}) => {
         paddingTop: 10,
         marginBottom: 20,
         height: 19,
+        margin: 8,
         width: width,
         paddingLeft: 24,
         borderRadius: 2,
       }}
-      onPress={() => navigation.navigate(route)}>
+      onPress={() => navigation.navigate(route, {comID: 6, tag: tag})}>
       <LinearGradient
         colors={[textColor, linearColor]}
-        style={{height: 36,width:135, opacity: 0.9,justifyContent: 'center',alignItems: 'center'}}>
+        style={{
+          height: 36,
+          width: width,
+          opacity: 0.9,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <Text
           style={{
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: 'bold',
             color: subtextColor,
             textAlign: 'center',

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState,useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {PixelRatio} from 'react-native';
 import {
+  baseURL,
   bgColor,
   linearColor,
   subtextColor,
@@ -21,34 +22,37 @@ import {
 import {heightToDp} from '../../Responsive';
 import {AuthContext} from '../../Authentication/AuthProvider';
 
-
 const AssignTask = () => {
   const navigation = useNavigation();
-  const [count, setCount] = useState('');
+  const [tdata, setTdata] = useState('');
+  const [person, setPerson] = useState('');
   const {currentUser} = useContext(AuthContext);
 
-  const getData = async () => {
+  const assign = () => {
     try {
       var myHeaders = new Headers();
       myHeaders.append('Authorization', 'Token ' + currentUser.Token);
-      myHeaders.append("Content-Type", "application/json");
-  
+      myHeaders.append('Content-Type', 'application/json');
+
       var raw = JSON.stringify({
-        "coCommittee": "TestStudent3",
-        "task": "task blah"
+        coCommittee: person,
+        task: tdata,
       });
-  
-    var requestOptions = {
+
+      var requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: raw,
-        redirect: 'follow'
-    };
-  
-  fetch('http://aryan123456.pythonanywhere.com/api/coretaskcreate/'+currentUser.id+'/committeeid/', requestOptions,)
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+        redirect: 'follow',
+      };
+
+      fetch(
+        `${baseURL}/coretaskcreate/${currentUser.id}/committeeid/`,
+        requestOptions,
+      )
+        .then((response) => response.json())
+        .then((result) => console.log(result))
+        .catch((error) => console.log('error', error));
     } catch (error) {
       console.log(error);
     }
@@ -78,15 +82,15 @@ const AssignTask = () => {
           placeholder="Title of the task"
           placeholderTextColor="rgba(255, 255, 255, 0.87)"
           maxLength={100}
-          value={count}
-          onChangeText={(text) => setCount(text)}
+          value={tdata}
+          onChangeText={(text) => setTdata(text)}
         />
         <Text
           style={{
             color: 'white',
             paddingLeft: PixelRatio.getFontScale() * 260,
           }}>
-          {count.length}/100
+          {tdata.length}/100
         </Text>
         <Text
           style={{
@@ -96,17 +100,15 @@ const AssignTask = () => {
           }}>
           Assign it to:{' '}
         </Text>
-        <View style={{height:10}}/>
+        <View style={{height: 10}} />
         <TextInput
           style={styles.textinput}
           placeholder="Co - Committee member"
           placeholderTextColor="rgba(255, 255, 255, 0.87)"
-          onChangeText={(text) => setCount(text)}
         />
-        <View style={{height:30}}/>
-        <View style={{paddingTop: PixelRatio.getFontScale() * 25,}}>
-          <TouchableOpacity
-            onPress={() => {}}>
+        <View style={{height: 30}} />
+        <View style={{paddingTop: PixelRatio.getFontScale() * 25}}>
+          <TouchableOpacity onPress={() => {}}>
             <LinearGradient
               colors={[textColor, linearColor]}
               style={styles.button}>
@@ -157,7 +159,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: PixelRatio.getFontScale() * 15,
     color: subtextColor,
-    fontSize: PixelRatio.getFontScale() * 17,
+    fontSize: PixelRatio.getFontScale() * 20,
+    fontWeight: 'bold',
     fontFamily: 'OpenSans-Regular',
   },
 });
