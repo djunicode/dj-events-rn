@@ -17,13 +17,16 @@ import {useNavigation} from '@react-navigation/native';
 
 const ComCard = ({name, followers, image, id}) => {
   const [added, setAdded] = useState(false);
+  const [follow,setFollow]=useState(followers);
   const navigation = useNavigation();
 
   const followHandler = () => {
     if (added) {
       setAdded(false); //un-follow code here
+      etFollow(follow-1);
     } else {
       setAdded(true); //following code here
+      setFollow(follow+1)
     }
   };
 
@@ -42,7 +45,7 @@ const ComCard = ({name, followers, image, id}) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.followers}>{followers} followers</Text>
+            <Text style={styles.followers}>{follow} followers</Text>
           </View>
           <LinearGradient
             colors={[textColor, linearColor]}
