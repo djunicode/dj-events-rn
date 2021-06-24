@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Users can view the tasks for their roles in various committees in this screen.
+ */
 import React, {useEffect, useState, useContext} from 'react';
 import {
   View,

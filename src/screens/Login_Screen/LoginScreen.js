@@ -1,4 +1,6 @@
-/* eslint-disable react-native/no-inline-styles */
+/* First time users are prompted with this screen for logging into the application.
+Users are authenticated with the AuthContext helper function.
+Users are also provided with 'forgot password' option */
 import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
@@ -63,8 +65,8 @@ const Login = () => {
           <Password title={'Password'} function={handlePassword} />
         </View>
         <View style={styles.row}>
-        <TouchableOpacity
-            style={{paddingLeft: width*0.5}}
+          <TouchableOpacity
+            style={{paddingLeft: width * 0.5}}
             onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
               style={{
@@ -106,7 +108,7 @@ const Login = () => {
           }}>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
           <View style={{flexDirection: 'row'}}>
-            <View style={{width:5}}/>
+            <View style={{width: 5}} />
             <Text
               style={{
                 fontSize: PixelRatio.getFontScale() * 17,
@@ -115,7 +117,7 @@ const Login = () => {
               }}>
               Don't Have an Account?
             </Text>
-            <View style={{width:5}}/>
+            <View style={{width: 5}} />
           </View>
           <View style={{flex: 1, height: 1, backgroundColor: subtextColor}} />
         </View>

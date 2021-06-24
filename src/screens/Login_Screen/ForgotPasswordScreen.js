@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* The ForgotPasswordScreen requires the user to enter the SAP ID in order to reset the password.
+The user would receive an OTP on the registered Email Id */
 import React, {useState} from 'react';
 import {
   StyleSheet,
