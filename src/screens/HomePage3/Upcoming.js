@@ -14,11 +14,11 @@ import axios from '../../controllers/axios';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import {useNavigation} from '@react-navigation/native';
 
-const Upcoming = ({d, type, callBack, getLiked}) => {
+const Upcoming = ({d, type, callBack, getLiked, liked}) => {
   const [data, setData] = useState(d);
   const {currentUser} = useContext(AuthContext);
+  const [liked1, setLiked1] = useState(liked);
   const navigation = useNavigation();
-  const [liked, setLiked] = useState([]);
 
   const doByDefault = () => {
     if (type === 'upcoming') {
@@ -27,7 +27,7 @@ const Upcoming = ({d, type, callBack, getLiked}) => {
       getEvents(`/get_events_for_followed_committees/${currentUser.id}/`);
     }
 
-    getLiked(setLiked);
+    getLiked(setLiked1);
   };
 
   useEffect(() => {
@@ -42,7 +42,6 @@ const Upcoming = ({d, type, callBack, getLiked}) => {
 
   useEffect(() => {
     doByDefault();
-
     console.log('This is ' + type + ' screen');
   }, [type]);
 
@@ -76,9 +75,10 @@ const Upcoming = ({d, type, callBack, getLiked}) => {
       <FlatList
         keyExtractor={(event, index) => index.toString()}
         data={data}
+        extraData={liked1}
         renderItem={({item}) => {
           //console.log(liked.includes(item));
-          const arr = liked.find(({id}) => id === item.id);
+          const arr = liked1.find(({id}) => id === item.id);
           const isliked = arr ? true : false;
           return (
             <View style={styles.container}>
@@ -91,6 +91,7 @@ const Upcoming = ({d, type, callBack, getLiked}) => {
                 description={item.eventDescription}
                 isLiked={isliked}
                 getLiked={getLiked}
+                callback={setLiked1}
               />
             </View>
           );

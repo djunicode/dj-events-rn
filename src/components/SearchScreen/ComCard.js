@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   addIcon: {
     color: subtextColor,
-    fontSize: 18,
+    fontSize: 22,
   },
 });
 export default ComCard;

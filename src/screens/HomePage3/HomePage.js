@@ -1,4 +1,6 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Home screen of the application that is displayed on signing in.
+ The function  getLikedEvents is used to show the events liked by the current user.
+ Props are passed to the upcoming screen */
 import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -49,9 +51,12 @@ export function HomePage() {
     } catch (e) {
       console.log('Liked Events:- ' + e);
     }
-
-    setLikedEvents(res.data);
-    callback(res.data);
+    if (likedEvents === res.data) {
+      return;
+    } else {
+      setLikedEvents(res.data);
+      if (callback) callback(res.data);
+    }
   };
 
   useEffect(() => {

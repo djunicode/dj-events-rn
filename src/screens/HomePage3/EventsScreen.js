@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Event screen opens up on clicking the various event cards on the upcoming,latest and following pages.
+ getEvent function is used to fetch data about the event and it's title. */
 import React, {useEffect, useState} from 'react';
 import {
   Text,
@@ -48,7 +49,6 @@ const EventsScreen = ({route}) => {
 
   useEffect(() => {
     getEvent();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return loading ? (

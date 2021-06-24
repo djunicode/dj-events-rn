@@ -29,6 +29,7 @@ const EventCard = ({
   description,
   isLiked,
   getLiked,
+  callback,
 }) => {
   const [didLike, setdidLike] = useState(isLiked);
   const [notify, setNotify] = useState(false);
@@ -40,15 +41,16 @@ const EventCard = ({
       //RemoveFromLiked
       liker('dislike', 'delete');
       setdidLike(false);
-      getLiked();
-      //setLks((lks) => lks - 1);
+
+      setLks((lks) => lks - 1);
     } else {
       //AddToLiked
       liker('like', 'post');
       setdidLike(true);
-      getLiked();
-      //setLks((lks) => lks + 1);
+      setLks((lks) => lks + 1);
     }
+
+    getLiked(callback);
   };
 
   const liker = (type, method) => {
