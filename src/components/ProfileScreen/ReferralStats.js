@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Referral stats are displayed for co committee members to show reference details*/
 import React from 'react';
 import {View, Text} from 'react-native';
 import {backDropColor, subtextColor} from '../../Constants';

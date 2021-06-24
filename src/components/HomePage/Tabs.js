@@ -1,3 +1,4 @@
+/* Custom Tab navigator for event contents */
 import React from 'react';
 import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';

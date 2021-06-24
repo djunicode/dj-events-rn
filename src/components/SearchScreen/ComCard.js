@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+
+/* Card to display the image,name,number of followers of committee in search screen.*/
 import React, {useState, useContext} from 'react';
 import {StyleSheet, View, Text, Image, Alert} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,6 +18,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import axios from 'axios';
+
 
 const ComCard = ({name, followers, image, id, isFollowed}) => {
   const [added, setAdded] = useState(isFollowed);
@@ -52,6 +54,7 @@ const ComCard = ({name, followers, image, id, isFollowed}) => {
       Follower('follow');
       setAdded(true); //following code here
       setFollow((follow) => follow + 1);
+
     }
   };
 

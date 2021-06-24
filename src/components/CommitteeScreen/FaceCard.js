@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Face Card is used to display the events of the committees in the commmittee screen using a flatlist*/
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {backDropColor, subtextColor} from '../../Constants';

@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* This component displays the details of the user currently logged in in the profile screen.
+It takes position,name,tag and ID as props */
 import React from 'react';
 import {View, Text} from 'react-native';
 import {backDropColor, subtextColor} from '../../Constants';
