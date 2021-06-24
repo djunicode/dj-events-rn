@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Committee screen displays the details about the committee and the faulty and core members of the committee.
+fetchCommittee function is used to get and set data about the faculty members,events,core members of the committee*/
 import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
@@ -52,7 +53,6 @@ const Committee = ({route, navigation}) => {
   };
   useEffect(() => {
     fetchCommitteeData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (isloading) {
     return (

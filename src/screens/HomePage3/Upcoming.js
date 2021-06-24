@@ -1,3 +1,6 @@
+/* The upcoming screen displays the events which are sorted by date. 
+This is achieved with the help of getUpcoming function.
+Props received from the homepage are used to call the getUpcoming function in useEffect */
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,

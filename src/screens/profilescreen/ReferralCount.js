@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Co-committee members keep a track of their referrals in this screen.
+fetchReferrals function is used to get referral data for the current user.  */
 import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
