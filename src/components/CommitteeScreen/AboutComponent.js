@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* About component displays the information of the committee on the committee screen. */
 import React, {useState} from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';

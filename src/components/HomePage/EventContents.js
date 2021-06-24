@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-native/no-inline-styles */
+/* Displays details about an event along with gallery, contact information and option to register.*/
 import React, {useState, useEffect} from 'react';
 import {
   Text,

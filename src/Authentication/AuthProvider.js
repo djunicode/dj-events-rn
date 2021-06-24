@@ -1,3 +1,4 @@
+/* User is authenticated with the help of this component in the Login Screen */
 import React, {createContext, useState} from 'react';
 import {baseURL} from '../Constants';
 import {Alert} from 'react-native';
@@ -49,9 +50,9 @@ export const AuthProvider = ({children}) => {
         signUp: () => {},
 
         signOut: async () => {
-          try{
+          try {
             await AsyncStorage.clear();
-          }catch(e){
+          } catch (e) {
             console.log(e);
           }
         },
