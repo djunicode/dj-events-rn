@@ -16,7 +16,7 @@ import axios from '../../controllers/axios';
 import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
 import Upcoming from './Upcoming';
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo';
 import NoInternetModal from '../../components/NoInternetModal';
 
 const image = require('../../images/profile.jpg');
@@ -40,19 +40,19 @@ export function HomePage() {
     setData(res.data);
   };
 
-  const getLikedEvents = async () => {
+  const getLikedEvents = async (callback) => {
     var res;
     try {
       res = await axios.get(`/get_liked_events/${currentUser.id}/`);
+      console.log('called');
       isOffline && setOfflineStatus(false);
     } catch (e) {
       console.log('Liked Events:- ' + e);
     }
 
     setLikedEvents(res.data);
+    callback(res.data);
   };
-
-  
 
   useEffect(() => {
     const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
@@ -71,11 +71,11 @@ export function HomePage() {
         statusBarProps={{backgroundColor: statusbarColor}}
       />
       <View style={styles.container}>
-      <NoInternetModal 
-        show={isOffline}
-        onRetry={getDefault}
-        isRetrying={isLoading}
-      />
+        <NoInternetModal
+          show={isOffline}
+          onRetry={getDefault}
+          isRetrying={isLoading}
+        />
         <View style={styles.upperRow}>
           <Text style={styles.title}>Hi, {currentUser.Name}</Text>
           <TouchableOpacity style={styles.profileImgContainer}>
@@ -104,9 +104,10 @@ export function HomePage() {
           type={'searchEvent'}
           liked={likedEvents}
           callBack={setSearchedData}
+          getLiked={getLikedEvents}
         />
       ) : (
-        <MyTopTabs data={data} liked={likedEvents} />
+        <MyTopTabs data={data} liked={likedEvents} getLiked={getLikedEvents} />
       )}
     </SafeAreaProvider>
   );

@@ -1,34 +1,33 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   StyleSheet,
   SafeAreaView,
   StatusBar,
   FlatList,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
 import ComCard from '../../components/SearchScreen/ComCard';
 import SearchBar from '../../components/SearchBar';
 import {
   backDropColor,
-  baseURL,
   bgColor,
   statusbarColor,
-  subtextColor,
   textColor,
 } from '../../Constants';
 import axios from '../../controllers/axios';
 import {PixelRatio} from 'react-native';
 import {heightToDp, widthToDp} from '../../Responsive';
+import {AuthContext} from '../../Authentication/AuthProvider';
 
 const image = require('../../images/Logo.jpg');
 
 const SearchScreen = () => {
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
+  const [followedCommittees, setFollowedCommittees] = useState([]);
+  const {currentUser} = useContext(AuthContext);
 
   const getDefaultData = () => {
     setIsLoading(true);
@@ -42,8 +41,19 @@ const SearchScreen = () => {
     }
   };
 
+  const getFollowedCommittees = async () => {
+    try {
+      let res = await axios.get(`/get_followed_committees/${currentUser.id}/`);
+      //console.log(res.data);
+      setFollowedCommittees(res.data);
+    } catch (e) {
+      console.log('error' + e);
+    }
+  };
+
   useEffect(() => {
     getDefaultData();
+    getFollowedCommittees();
     //getSearchBar();
   }, []);
 
@@ -98,12 +108,15 @@ const SearchScreen = () => {
           data={data}
           numColumns={2}
           renderItem={({item}) => {
+            const followed = followedCommittees.find(({id}) => id === item.id);
+            const isFollowed = followed ? true : false;
             return (
               <ComCard
                 name={item.committeeName}
                 followers={item.followers}
                 image={image}
                 id={item.id}
+                isFollowed={isFollowed}
               />
             );
           }}

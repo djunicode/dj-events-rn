@@ -7,7 +7,7 @@ import {PixelRatio, ActivityIndicator} from 'react-native';
 
 const TopTab = createMaterialTopTabNavigator();
 
-export default MyTopTabs = ({data, liked}) => {
+export default MyTopTabs = ({data, liked, getLiked}) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -45,19 +45,40 @@ export default MyTopTabs = ({data, liked}) => {
       }}>
       <TopTab.Screen
         name="Upcoming"
-        children={() => <Upcoming d={data} type={'upcoming'} liked={liked} />}
+        children={() => (
+          <Upcoming
+            d={data}
+            type={'upcoming'}
+            liked={liked}
+            getLiked={getLiked}
+          />
+        )}
         options={{tabBarLabel: 'Upcoming'}}
       />
       <TopTab.Screen
         name="Latest"
         //component={Latest}
-        children={() => <Upcoming d={data} type={'latest'} liked={liked} />}
+        children={() => (
+          <Upcoming
+            d={data}
+            type={'latest'}
+            liked={liked}
+            getLiked={getLiked}
+          />
+        )}
         options={{tabBarLabel: 'Latest'}}
       />
       <TopTab.Screen
         name="Following"
         //component={Following}
-        children={() => <Upcoming d={data} type={'following'} liked={liked} />}
+        children={() => (
+          <Upcoming
+            d={data}
+            type={'following'}
+            liked={liked}
+            getLiked={getLiked}
+          />
+        )}
         options={{tabBarLabel: 'Following'}}
       />
     </TopTab.Navigator>

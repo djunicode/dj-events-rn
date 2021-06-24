@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,24 +11,55 @@ import {bgColor, subtextColor, textColor} from '../../Constants';
 import {PixelRatio} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import axios from '../../controllers/axios';
+import {AuthContext} from '../../Authentication/AuthProvider';
+import {useNavigation} from '@react-navigation/native';
 
-const Upcoming = ({d, type, liked, callBack}) => {
+const Upcoming = ({d, type, callBack, getLiked}) => {
   const [data, setData] = useState(d);
+  const {currentUser} = useContext(AuthContext);
+  const navigation = useNavigation();
+  const [liked, setLiked] = useState([]);
 
-  useEffect(() => {
+  const doByDefault = () => {
     if (type === 'upcoming') {
-      getUpcoming();
-      console.log('Loaded');
+      getEvents('/sort_events_by_date');
+    } else if (type === 'following') {
+      getEvents(`/get_events_for_followed_committees/${currentUser.id}/`);
     }
 
-    console.log('This is ' + type + ' screen');
-  }, []);
+    getLiked(setLiked);
+  };
 
-  const getUpcoming = async () => {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // The screen is focused
+      doByDefault();
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    doByDefault();
+
+    console.log('This is ' + type + ' screen');
+  }, [type]);
+
+  const getEvents = async (request) => {
     try {
-      const res = await axios.get('/sort_events_by_date');
-      //console.log(res.data);
-      setData(res.data);
+      const res = await axios.get(request);
+      if (type === 'following') {
+        var object = [];
+        for (let i = 0; i < res.data.data.length; i++) {
+          for (let j = 0; j < res.data.data[i].length; j++) {
+            object.push(res.data.data[i][j]);
+          }
+        }
+        setData(object);
+      } else {
+        setData(res.data);
+      }
     } catch (e) {
       console.warn(e);
     }
@@ -59,6 +90,7 @@ const Upcoming = ({d, type, liked, callBack}) => {
                 committee={item.organisingCommitteeName}
                 description={item.eventDescription}
                 isLiked={isliked}
+                getLiked={getLiked}
               />
             </View>
           );
