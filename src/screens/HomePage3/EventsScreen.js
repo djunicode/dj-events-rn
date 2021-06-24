@@ -1,5 +1,5 @@
 /* Event screen opens up on clicking the various event cards on the upcoming,latest and following pages.
- getEvent function is used to fetch data about the event and it's title. */
+ getEvent function is used to fetch and set relevant data about the event. */
 import React, {useEffect, useState} from 'react';
 import {
   Text,
@@ -37,7 +37,6 @@ const EventsScreen = ({route}) => {
     let v = route.params.id.toString();
     try {
       await axios.get(`/events/${v}`).then((response) => {
-        //console.log(data.data);
         setEventsdata(response.data);
         setTitle(response.data.eventName);
         setLoading(false);

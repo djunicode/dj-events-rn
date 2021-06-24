@@ -1,8 +1,8 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Text box for password*/
 import React, {useState} from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {backDropColor, subtextColor,width} from '../../Constants';
+import {backDropColor, subtextColor, width} from '../../Constants';
 
 const Password = (props) => {
   const [visible, setVisibility] = useState(false);
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'OpenSans-Regular',
     backgroundColor: backDropColor,
-    width: width*0.8,
+    width: width * 0.8,
     height: 47,
     borderBottomLeftRadius: 30,
     borderTopLeftRadius: 30,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     backgroundColor: backDropColor,
-    width: width*0.1,
+    width: width * 0.1,
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
   },

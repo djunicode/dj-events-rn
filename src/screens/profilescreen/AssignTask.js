@@ -100,7 +100,6 @@ const AssignTask = ({route}) => {
             result.message ===
             'Requested Core Committee/ Co Committee member not found'
           ) {
-            console.log(result);
             Alert.alert('Assignment Failed', 'Co Committee member not found', [
               {text: 'OK', onPress: () => console.log('okay')},
             ]);
@@ -170,8 +169,6 @@ const AssignTask = ({route}) => {
         <View style={{paddingTop: PixelRatio.getFontScale() * 25}}>
           <TouchableOpacity
             onPress={() => {
-              console.log(person);
-              console.log(tdata);
               assign(person, tdata);
             }}>
             <LinearGradient

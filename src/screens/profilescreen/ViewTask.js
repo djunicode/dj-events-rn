@@ -50,7 +50,6 @@ const ViewTask = ({route}) => {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result.Message) {
           setMsg(result.Message);
         } else {
@@ -66,7 +65,6 @@ const ViewTask = ({route}) => {
 
   useEffect(() => {
     getViewTaskData();
-    console.log('This is view task Screen with tag:- ' + tag);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const navigation = useNavigation();

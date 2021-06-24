@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Event card is used to display all the events occuring in the college.
+liker function is used to like or unlike events. */
 import React, {useContext, useState} from 'react';
 import {
   Text,
@@ -69,7 +70,6 @@ const EventCard = ({
         } else {
           ToastAndroid.show(`Event removed from Liked`, 500);
         }
-        //console.log(response.data);
       })
       .catch((error) => {
         console.warn(error);

@@ -57,8 +57,6 @@ const ProfileScreen = () => {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-
         setCore(result.coreCommittees);
         setCoCommittee(result.coCommittees);
 
