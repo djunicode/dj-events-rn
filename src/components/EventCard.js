@@ -108,7 +108,16 @@ const EventCard = ({
       <TouchableOpacity onPress={() => navigation.navigate('Event', {id: id})}>
         <ImageBackground
           source={image}
-          style={{height: heightToDp('20'), width: widthToDp('95')}}>
+          style={{
+            height: heightToDp('20'),
+            width: widthToDp('95'),
+          }}>
+          <View
+            style={{
+              ...StyleSheet.absoluteFill,
+              backgroundColor: 'rgba(0,0,0,0.4)',
+            }}
+          />
           <View
             style={{
               flexDirection: 'row',

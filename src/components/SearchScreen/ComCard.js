@@ -88,13 +88,14 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     marginTop: 14,
     color: subtextColor,
+    fontWeight: 'bold',
   },
   followers: {
     fontFamily: 'Oxygen',
     fontSize: 14,
     marginLeft: 7,
     marginTop: 1,
-    color: '#2E2E2E',
+    color: subtextColor,
     fontWeight: '400',
   },
   addButton: {
