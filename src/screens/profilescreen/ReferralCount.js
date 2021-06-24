@@ -40,7 +40,6 @@ const ReferralCount = () => {
     )
       .then((response) => response.json())
       .then((result) => {
-        //console.log(result);
         setData(result.coCommittees);
         var list = [];
         for (var i = 0; i < data.length; i++) {
@@ -54,11 +53,10 @@ const ReferralCount = () => {
             };
             items.push(obj);
           }
-          //console.log(items);
+
           list.push(items);
         }
-        //console.log(items);
-        //console.log(list);
+
         setReferral(list);
       })
       .catch((error) => console.log('error', error));
@@ -87,7 +85,6 @@ const ReferralCount = () => {
     );
   }
 
-  //console.log(referral);
   return (
     <View style={styles.body}>
       <View style={{flexDirection: 'row'}}>
