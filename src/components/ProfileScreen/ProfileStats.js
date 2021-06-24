@@ -49,6 +49,7 @@ const ProfileStats = ({position, name, tag, cID}) => {
             width={100}
             text={tag === 'core' ? 'ASSIGN TASK' : 'REFERRAL'}
             route={tag === 'core' ? 'Assign Tasks' : 'Referral Count'}
+            cID={cID}
           />
           <TaskButton
             width={100}
