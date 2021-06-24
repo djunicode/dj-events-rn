@@ -9,15 +9,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
 import ComCard from '../../components/SearchScreen/ComCard';
 import SearchBar from '../../components/SearchBar';
 import {
   backDropColor,
-  baseURL,
   bgColor,
   statusbarColor,
-  subtextColor,
   textColor,
 } from '../../Constants';
 import axios from '../../controllers/axios';

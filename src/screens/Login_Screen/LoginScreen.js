@@ -27,7 +27,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PixelRatio} from 'react-native';
 import {heightToDp, widthToDp} from '../../Responsive';
 const Login = () => {
-  const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {signIn, currentUser} = useContext(AuthContext);
