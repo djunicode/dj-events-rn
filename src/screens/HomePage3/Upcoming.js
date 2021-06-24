@@ -21,16 +21,12 @@ const Upcoming = ({d, type, liked, callBack}) => {
   useEffect(() => {
     if (type === 'upcoming') {
       getUpcoming();
-      console.log('Loaded');
     }
-
-    console.log('This is ' + type + ' screen');
   }, []);
 
   const getUpcoming = async () => {
     try {
       const res = await axios.get('/sort_events_by_date');
-      //console.log(res.data);
       setData(res.data);
     } catch (e) {
       console.warn(e);
@@ -49,7 +45,6 @@ const Upcoming = ({d, type, liked, callBack}) => {
         keyExtractor={(event, index) => index.toString()}
         data={data}
         renderItem={({item}) => {
-          //console.log(liked.includes(item));
           const arr = liked.find(({id}) => id === item.id);
           const isliked = arr ? true : false;
           return (

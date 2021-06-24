@@ -37,13 +37,12 @@ const EventsScreen = ({route}) => {
     let v = route.params.id.toString();
     try {
       await axios.get(`/events/${v}`).then((response) => {
-        //console.log(data.data);
         setEventsdata(response.data);
         setTitle(response.data.eventName);
         setLoading(false);
       });
     } catch (e) {
-      //console.log(e);
+      console.log(e);
     }
   };
 

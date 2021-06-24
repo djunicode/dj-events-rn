@@ -65,7 +65,6 @@ const EventCard = ({
         } else {
           ToastAndroid.show(`Event removed from Liked`, 500);
         }
-        //console.log(response.data);
       })
       .catch((error) => {
         console.warn(error);

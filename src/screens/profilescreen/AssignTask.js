@@ -30,46 +30,56 @@ const AssignTask = ({route}) => {
   const navigation = useNavigation();
   const [tdata, setTdata] = useState('');
   const [person, setPerson] = useState('');
-  const [selected,setSelected]=useState('');
+  const [selected, setSelected] = useState('');
   const {currentUser} = useContext(AuthContext);
-  const [Teams,setTeams]=useState([]);
+  const [Teams, setTeams] = useState([]);
 
-  const countryList = () =>{
-    return( Teams.map( (x,i) => { 
-          return( <Picker.Item label={x} key={i} value={x}  />)} ));
-  }
+  const countryList = () => {
+    return Teams.map((x, i) => {
+      return <Picker.Item label={x} key={i} value={x} />;
+    });
+  };
 
   useEffect(() => {
     getCoCom();
-  }, [])
+  }, []);
 
-  const getCoCom=()=>{
+  const getCoCom = () => {
     try {
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Token "+currentUser.Token);
+      myHeaders.append('Authorization', 'Token ' + currentUser.Token);
 
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow'
+        redirect: 'follow',
       };
 
-      fetch(`${baseURL}/get_co_committee_members/${route.params.comID}/`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        const list=[];
-        for(var i=0;i<result.length;i++){
-          list.push(<Picker.Item label={result[i].student} key={result[i].id} value={result[i].student}  />);
-        }
-        setTeams(list);
-      })
-      .catch(error => console.log('error', error));
+      fetch(
+        `${baseURL}/get_co_committee_members/${route.params.comID}/`,
+        requestOptions,
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          const list = [];
+          for (var i = 0; i < result.length; i++) {
+            list.push(
+              <Picker.Item
+                label={result[i].student}
+                key={result[i].id}
+                value={result[i].student}
+              />,
+            );
+          }
+          setTeams(list);
+        })
+        .catch((error) => console.log('error', error));
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  const assign = ({member,task}) => {
+  const assign = ({member, task}) => {
     try {
       var myHeaders = new Headers();
       myHeaders.append('Authorization', 'Token ' + currentUser.Token);
@@ -92,9 +102,11 @@ const AssignTask = ({route}) => {
         requestOptions,
       )
         .then((response) => response.json())
-        .then((result) =>{
-          if (result.message === 'Requested Core Committee/ Co Committee member not found') {
-            console.log(result);
+        .then((result) => {
+          if (
+            result.message ===
+            'Requested Core Committee/ Co Committee member not found'
+          ) {
             Alert.alert('Assignment Failed', 'Co Committee member not found', [
               {text: 'OK', onPress: () => console.log('okay')},
             ]);
@@ -152,23 +164,20 @@ const AssignTask = ({route}) => {
         </Text>
         <View style={{height: 10}} />
         <View style={styles.textinput}>
-        <Picker
-        style={{color:'white'}}
-          itemStyle={{backgroundColor:'white',placeholderTextColor: '#fff'}}
-          selectedValue={selected}
-          onValueChange={(itemValue, itemIndex) =>
-          setSelected(itemValue)
-          }>
-          {Teams}
-        </Picker>
+          <Picker
+            style={{color: 'white'}}
+            itemStyle={{backgroundColor: 'white', placeholderTextColor: '#fff'}}
+            selectedValue={selected}
+            onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}>
+            {Teams}
+          </Picker>
         </View>
         <View style={{height: 30}} />
         <View style={{paddingTop: PixelRatio.getFontScale() * 25}}>
-          <TouchableOpacity onPress={() => {
-            console.log(person);
-            console.log(tdata);
-            assign(person,tdata);
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              assign(person, tdata);
+            }}>
             <LinearGradient
               colors={[textColor, linearColor]}
               style={styles.button}>
