@@ -1,4 +1,6 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Home screen of the application that is displayed on signing in.
+ The function  getLikedEvents is used to show the events liked by the current user.
+ Props are passed to the upcoming screen */
 import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -16,7 +18,7 @@ import axios from '../../controllers/axios';
 import {heightToDp, widthToDp} from '../../Responsive';
 import {PixelRatio} from 'react-native';
 import Upcoming from './Upcoming';
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo';
 import NoInternetModal from '../../components/NoInternetModal';
 
 const image = require('../../images/profile.jpg');
@@ -52,8 +54,6 @@ export function HomePage() {
     setLikedEvents(res.data);
   };
 
-  
-
   useEffect(() => {
     const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
       const offline = !(state.isConnected && state.isInternetReachable);
@@ -71,11 +71,11 @@ export function HomePage() {
         statusBarProps={{backgroundColor: statusbarColor}}
       />
       <View style={styles.container}>
-      <NoInternetModal 
-        show={isOffline}
-        onRetry={getDefault}
-        isRetrying={isLoading}
-      />
+        <NoInternetModal
+          show={isOffline}
+          onRetry={getDefault}
+          isRetrying={isLoading}
+        />
         <View style={styles.upperRow}>
           <Text style={styles.title}>Hi, {currentUser.Name}</Text>
           <TouchableOpacity style={styles.profileImgContainer}>

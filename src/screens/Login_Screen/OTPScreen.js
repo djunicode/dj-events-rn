@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* User enters the received OTP on this screen and submits it. */
 import {useNavigation} from '@react-navigation/core';
 import React, {useState} from 'react';
 import {

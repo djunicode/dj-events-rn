@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Search screen is used to display all the committees.
+getDefaultData function is used to get and set the data for all the committees.*/
 import React, {useState, useEffect} from 'react';
 import {
   View,

@@ -1,4 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Core committee users can assign tasks to other members of the committee.
+Tasks can be created and assigned in this screen. */
 import React, {useState, useContext} from 'react';
 import {
   View,

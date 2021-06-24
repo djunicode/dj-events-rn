@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* On successfully entering the received OTP,Password is reset on this screen */
 import React, {useState} from 'react';
 import {
   StyleSheet,
