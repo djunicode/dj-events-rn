@@ -146,7 +146,6 @@ const Committee = ({route, navigation}) => {
                 <Text
                   style={{
                     color: subtextColor,
-                    fontWeight: 'bold',
                     paddingHorizontal: 8,
                   }}>
                   2020-21
@@ -181,13 +180,12 @@ const Committee = ({route, navigation}) => {
               <View
                 style={[
                   styles.dropdown,
-                  {marginLeft: PixelRatio.getFontScale() * 80},
+                  {marginLeft: PixelRatio.getFontScale() * 30},
                 ]}>
                 <Text
                   style={{
                     color: subtextColor,
-                    fontWeight: 'bold',
-                    paddingHorizontal: PixelRatio.getFontScale() * 8,
+                    paddingHorizontal: PixelRatio.getFontScale() * 5,
                   }}>
                   2020-21
                 </Text>

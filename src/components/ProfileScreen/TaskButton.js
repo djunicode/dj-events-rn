@@ -30,7 +30,7 @@ const TaskButton = ({width, text, route, tag, cID}) => {
         }}>
         <Text
           style={{
-            fontSize: 14,
+            fontSize: 13,
             fontWeight: 'bold',
             color: subtextColor,
             textAlign: 'center',
