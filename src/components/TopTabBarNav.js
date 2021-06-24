@@ -1,3 +1,4 @@
+/* Tab navigator used in home screen to navigate through upcoming,latest and following events */
 import React, {useEffect, useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Upcoming from '../screens/HomePage3/Upcoming';

@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Tasks for the committee are displayed using this component*/
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';

@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Search bar is used to search events or committees with the help of getSearched function*/
 import React, {useState} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';

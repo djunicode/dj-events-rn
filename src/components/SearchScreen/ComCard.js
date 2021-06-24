@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Card to display the image,name,number of followers of committee in search screen.*/
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,16 +17,16 @@ import {useNavigation} from '@react-navigation/native';
 
 const ComCard = ({name, followers, image, id}) => {
   const [added, setAdded] = useState(false);
-  const [follow,setFollow]=useState(followers);
+  const [follow, setFollow] = useState(followers);
   const navigation = useNavigation();
 
   const followHandler = () => {
     if (added) {
       setAdded(false); //un-follow code here
-      etFollow(follow-1);
+      etFollow(follow - 1);
     } else {
       setAdded(true); //following code here
-      setFollow(follow+1)
+      setFollow(follow + 1);
     }
   };
 

@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+/* Profile Card is used to display the details of faculty and core members of the committee */
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {backDropColor, subtextColor} from '../../Constants';
