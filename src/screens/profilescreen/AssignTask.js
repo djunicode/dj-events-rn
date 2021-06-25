@@ -29,87 +29,103 @@ const AssignTask = ({route}) => {
   const navigation = useNavigation();
   const [tdata, setTdata] = useState('');
   const [person, setPerson] = useState('');
-  const [selected, setSelected] = useState('');
   const {currentUser} = useContext(AuthContext);
-  const [Teams, setTeams] = useState([]);
+  const [members, setMembers] = useState([]);
 
   useEffect(() => {
     getCoCom();
+    console.log(currentUser);
   }, []);
 
   const getCoCom = () => {
-    try {
-      var myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Token ' + currentUser.Token);
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Token ' + currentUser.Token);
 
-      var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-      };
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
 
-      fetch(
-        `${baseURL}/get_co_committee_members/${route.params.comID}/`,
-        requestOptions,
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          const list = [];
-          for (var i = 0; i < result.length; i++) {
-            list.push(
-              <Picker.Item
-                label={result[i].student}
-                key={result[i].id}
-                value={result[i].student}
-              />,
-            );
-          }
-          setTeams(list);
-        })
-        .catch((error) => console.log('error', error));
-    } catch (error) {
-      console.log(error);
-    }
+    fetch(
+      `${baseURL}/get_co_committee_members/${route.params.comID}/`,
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        const list = [
+          <Picker.Item
+            label={'~SELECT_CO-COMM_MEMBER~'}
+            key={'-1'}
+            value={null}
+          />,
+        ];
+        console.log(result);
+        for (var i = 0; i < result.length; i++) {
+          list.push(
+            <Picker.Item
+              label={`${result[i].student} (${result[i].positionAssigned})`}
+              key={result[i].id}
+              value={result[i].student}
+            />,
+          );
+        }
+        setMembers(list);
+      })
+      .catch((error) => console.log('error', error));
   };
 
-  const assign = ({member, task}) => {
-    try {
-      var myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Token ' + currentUser.Token);
-      myHeaders.append('Content-Type', 'application/json');
+  const assign = () => {
+    console.log(person);
+    if (!person) {
+      Alert.alert(
+        'Select The member',
+        'No committe member was selected to whom task must be given',
+        [{text: 'okay', onPress: () => console.log('okay')}],
+      );
 
-      var raw = JSON.stringify({
-        coCommittee: member,
-        task: task,
-      });
+      return;
+    } else {
+      try {
+        var myHeaders = new Headers();
+        myHeaders.append('Authorization', 'Token ' + currentUser.Token);
+        myHeaders.append('Content-Type', 'application/json');
 
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow',
-      };
+        var raw = JSON.stringify({
+          coCommittee: person,
+          task: tdata,
+        });
 
-      fetch(
-        `${baseURL}/coretaskcreate/${currentUser.id}/${route.params.comID}/`,
-        requestOptions,
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          if (
-            result.message ===
-            'Requested Core Committee/ Co Committee member not found'
-          ) {
-            Alert.alert('Assignment Failed', 'Co Committee member not found', [
-              {text: 'OK', onPress: () => console.log('okay')},
-            ]);
-          } else {
-            console.log(result);
-          }
-        })
-        .catch((error) => console.log('error', error));
-    } catch (error) {
-      console.log(error);
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow',
+        };
+
+        fetch(
+          `${baseURL}/coretaskcreate/${currentUser.id}/${route.params.comID}/`,
+          requestOptions,
+        )
+          .then((response) => response.json())
+          .then((result) => {
+            if (
+              result.message ===
+              'Requested Core Committee/ Co Committee member not found'
+            ) {
+              Alert.alert(
+                'Assignment Failed',
+                'Co Committee member not found',
+                [{text: 'OK', onPress: () => console.log('okay')}],
+              );
+            } else {
+              console.log(result);
+            }
+          })
+          .catch((error) => console.log('error', error));
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -134,7 +150,7 @@ const AssignTask = ({route}) => {
         }}>
         <TextInput
           style={styles.textinput}
-          placeholder="Title of the task"
+          placeholder="Enter Text Here"
           placeholderTextColor="rgba(255, 255, 255, 0.87)"
           maxLength={100}
           value={tdata}
@@ -160,16 +176,18 @@ const AssignTask = ({route}) => {
           <Picker
             style={{color: 'white'}}
             itemStyle={{backgroundColor: 'white', placeholderTextColor: '#fff'}}
-            selectedValue={selected}
-            onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}>
-            {Teams}
+            selectedValue={person}
+            onValueChange={(itemValue, itemIndex) => {
+              setPerson(itemValue);
+            }}>
+            {members}
           </Picker>
         </View>
         <View style={{height: 30}} />
         <View style={{paddingTop: PixelRatio.getFontScale() * 25}}>
           <TouchableOpacity
             onPress={() => {
-              assign(person, tdata);
+              assign();
             }}>
             <LinearGradient
               colors={[textColor, linearColor]}

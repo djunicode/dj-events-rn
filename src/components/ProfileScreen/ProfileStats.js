@@ -46,12 +46,15 @@ const ProfileStats = ({position, name, tag, cID}) => {
           </Text>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <TaskButton
-            width={100}
-            text={tag === 'core' ? 'ASSIGN TASK' : 'REFERRAL'}
-            route={tag === 'core' ? 'Assign Tasks' : 'Referral Count'}
-            cID={cID}
-          />
+          {tag === 'core' ? (
+            <TaskButton
+              width={100}
+              text={tag === 'core' ? 'ASSIGN TASK' : 'REFERRAL'}
+              route={tag === 'core' ? 'Assign Tasks' : 'Referral Count'}
+              cID={cID}
+            />
+          ) : null}
+
           <TaskButton
             width={100}
             text={'VIEW TASKS'}

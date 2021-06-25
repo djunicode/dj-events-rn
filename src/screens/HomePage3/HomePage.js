@@ -46,7 +46,6 @@ export function HomePage() {
     var res;
     try {
       res = await axios.get(`/get_liked_events/${currentUser.id}/`);
-      console.log('called');
       isOffline && setOfflineStatus(false);
     } catch (e) {
       console.log('Liked Events:- ' + e);

@@ -33,6 +33,7 @@ export default MyTopTabs = ({data, liked, getLiked}) => {
           size={'large'}
         />
       )}
+      removeClippedSubviews={true}
       tabBarOptions={{
         indicatorStyle: {backgroundColor: textColor},
         labelStyle: {
