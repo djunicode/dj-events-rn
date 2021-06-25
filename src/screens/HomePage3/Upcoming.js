@@ -1,7 +1,4 @@
-/* The upcoming screen displays the events which are sorted by date. 
-This is achieved with the help of getUpcoming function.
-Props received from the homepage are used to call the getUpcoming function in useEffect */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,20 +11,54 @@ import {bgColor, subtextColor, textColor} from '../../Constants';
 import {PixelRatio} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import axios from '../../controllers/axios';
+import {AuthContext} from '../../Authentication/AuthProvider';
+import {useNavigation} from '@react-navigation/native';
 
-const Upcoming = ({d, type, liked, callBack}) => {
+const Upcoming = ({d, type, callBack, getLiked, liked}) => {
   const [data, setData] = useState(d);
+  const {currentUser} = useContext(AuthContext);
+  const [liked1, setLiked1] = useState(liked);
+  const navigation = useNavigation();
+
+  const doByDefault = () => {
+    if (type === 'upcoming') {
+      getEvents('/sort_events_by_date');
+    } else if (type === 'following') {
+      getEvents(`/get_events_for_followed_committees/${currentUser.id}/`);
+    }
+
+    getLiked(setLiked1);
+  };
 
   useEffect(() => {
-    if (type === 'upcoming') {
-      getUpcoming();
-    }
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      // The screen is focused
+      doByDefault();
+    });
 
-  const getUpcoming = async () => {
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    doByDefault();
+    console.log('This is ' + type + ' screen');
+  }, [type]);
+
+  const getEvents = async (request) => {
     try {
-      const res = await axios.get('/sort_events_by_date');
-      setData(res.data);
+      const res = await axios.get(request);
+      if (type === 'following') {
+        var object = [];
+        for (let i = 0; i < res.data.data.length; i++) {
+          for (let j = 0; j < res.data.data[i].length; j++) {
+            object.push(res.data.data[i][j]);
+          }
+        }
+        setData(object);
+      } else {
+        setData(res.data);
+      }
     } catch (e) {
       console.warn(e);
     }
@@ -44,8 +75,10 @@ const Upcoming = ({d, type, liked, callBack}) => {
       <FlatList
         keyExtractor={(event, index) => index.toString()}
         data={data}
+        extraData={liked1}
         renderItem={({item}) => {
-          const arr = liked.find(({id}) => id === item.id);
+          //console.log(liked.includes(item));
+          const arr = liked1.find(({id}) => id === item.id);
           const isliked = arr ? true : false;
           return (
             <View style={styles.container}>
@@ -57,6 +90,8 @@ const Upcoming = ({d, type, liked, callBack}) => {
                 committee={item.organisingCommitteeName}
                 description={item.eventDescription}
                 isLiked={isliked}
+                getLiked={getLiked}
+                callback={setLiked1}
               />
             </View>
           );

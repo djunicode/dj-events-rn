@@ -4,7 +4,6 @@ import React, {useEffect, useState, useContext} from 'react';
 import {
   View,
   StyleSheet,
-  ScrollView,
   Text,
   FlatList,
   TouchableOpacity,
@@ -21,7 +20,6 @@ import {
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import {PixelRatio} from 'react-native';
-import {heightToDp, widthToDp} from '../../Responsive';
 
 const ViewTask = ({route}) => {
   const [data, setData] = useState([]);

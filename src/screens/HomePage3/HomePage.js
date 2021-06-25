@@ -42,16 +42,21 @@ export function HomePage() {
     setData(res.data);
   };
 
-  const getLikedEvents = async () => {
+  const getLikedEvents = async (callback) => {
     var res;
     try {
       res = await axios.get(`/get_liked_events/${currentUser.id}/`);
+      console.log('called');
       isOffline && setOfflineStatus(false);
     } catch (e) {
       console.log('Liked Events:- ' + e);
     }
-
-    setLikedEvents(res.data);
+    if (likedEvents === res.data) {
+      return;
+    } else {
+      setLikedEvents(res.data);
+      if (callback) callback(res.data);
+    }
   };
 
   useEffect(() => {
@@ -104,9 +109,10 @@ export function HomePage() {
           type={'searchEvent'}
           liked={likedEvents}
           callBack={setSearchedData}
+          getLiked={getLikedEvents}
         />
       ) : (
-        <MyTopTabs data={data} liked={likedEvents} />
+        <MyTopTabs data={data} liked={likedEvents} getLiked={getLikedEvents} />
       )}
     </SafeAreaProvider>
   );

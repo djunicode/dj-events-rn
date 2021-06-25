@@ -1,6 +1,6 @@
 /* Core committee users can assign tasks to other members of the committee.
 Tasks can be created and assigned in this screen. */
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -9,7 +9,6 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  FlatList,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {useNavigation} from '@react-navigation/native';
@@ -33,12 +32,6 @@ const AssignTask = ({route}) => {
   const [selected, setSelected] = useState('');
   const {currentUser} = useContext(AuthContext);
   const [Teams, setTeams] = useState([]);
-
-  const countryList = () => {
-    return Teams.map((x, i) => {
-      return <Picker.Item label={x} key={i} value={x} />;
-    });
-  };
 
   useEffect(() => {
     getCoCom();

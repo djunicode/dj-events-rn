@@ -29,6 +29,8 @@ const EventCard = ({
   committee,
   description,
   isLiked,
+  getLiked,
+  callback,
 }) => {
   const [didLike, setdidLike] = useState(isLiked);
   const [notify, setNotify] = useState(false);
@@ -40,6 +42,7 @@ const EventCard = ({
       //RemoveFromLiked
       liker('dislike', 'delete');
       setdidLike(false);
+
       setLks((lks) => lks - 1);
     } else {
       //AddToLiked
@@ -47,6 +50,8 @@ const EventCard = ({
       setdidLike(true);
       setLks((lks) => lks + 1);
     }
+
+    getLiked(callback);
   };
 
   const liker = (type, method) => {
@@ -108,7 +113,16 @@ const EventCard = ({
       <TouchableOpacity onPress={() => navigation.navigate('Event', {id: id})}>
         <ImageBackground
           source={image}
-          style={{height: heightToDp('20'), width: widthToDp('95')}}>
+          style={{
+            height: heightToDp('20'),
+            width: widthToDp('95'),
+          }}>
+          <View
+            style={{
+              ...StyleSheet.absoluteFill,
+              backgroundColor: 'rgba(0,0,0,0.4)',
+            }}
+          />
           <View
             style={{
               flexDirection: 'row',

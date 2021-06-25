@@ -15,7 +15,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import ProfileStats from '../../components/ProfileScreen/ProfileStats';
-import TaskButton from '../../components/ProfileScreen/TaskButton';
 import {
   bgColor,
   statusbarColor,
@@ -25,7 +24,6 @@ import {
 import {AuthContext} from '../../Authentication/AuthProvider';
 import {PixelRatio} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {heightToDp, widthToDp} from '../../Responsive';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
