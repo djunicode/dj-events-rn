@@ -13,6 +13,7 @@ import {
   FlatList,
   LogBox,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import ProfileStats from '../../components/ProfileScreen/ProfileStats';
 import {
@@ -34,7 +35,7 @@ const image = require('../../images/profile.jpg');
 const ProfileScreen = () => {
   const [core, setCore] = useState([]);
   const [coCommittee, setCoCommittee] = useState([]);
-  const {currentUser, setCurrentUser} = useContext(AuthContext);
+  const {currentUser, signOut} = useContext(AuthContext);
   const [isloading, setIsLoading] = useState(true);
 
   //var id = currentUser.id;
@@ -92,24 +93,32 @@ const ProfileScreen = () => {
     <SafeAreaView style={styles.body}>
       <StatusBar backgroundColor={statusbarColor} />
       <ScrollView>
-        <View style={styles.profile}>
-          <View style={{flexDirection: 'row'}}>
-            <MaterialCommunityIcons
-              name="logout-variant"
-              style={styles.logout}
-              onPress={() => {
-                AsyncStorage.clear();
-                //setCurrentUser(null);
-              }}
-            />
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View
+            style={{
+              position: 'absolute',
+              right: PixelRatio.getFontScale() * 25,
+              top: PixelRatio.getFontScale() * 30,
+            }}>
+            <TouchableOpacity onPress={signOut}>
+              <MaterialCommunityIcons
+                name="logout-variant"
+                style={styles.logout}
+              />
+              <Text style={{color: subtextColor}}>SignOut</Text>
+            </TouchableOpacity>
           </View>
-          <Image source={image} style={styles.propic} />
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.nametext}> {currentUser.Name}</Text>
-            <Text style={styles.saptext}> ({currentUser.SapID})</Text>
+          <View style={styles.profile}>
+            <Image source={image} style={styles.propic} />
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.nametext}> {currentUser.Name}</Text>
+              <Text style={styles.saptext}> ({currentUser.SapID})</Text>
+            </View>
+            <Text style={styles.emailtext}>{currentUser.Email}</Text>
+            <Text style={styles.info}>
+              Department: {currentUser.Department}
+            </Text>
           </View>
-          <Text style={styles.emailtext}>{currentUser.Email}</Text>
-          <Text style={styles.info}>Department: {currentUser.Department}</Text>
         </View>
         <Text style={styles.coretext}>CORE COMMITTEE:</Text>
         {/* <View style={{flexDirection: 'row'}}>
