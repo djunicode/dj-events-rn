@@ -1,4 +1,4 @@
-/* Event card is used to display all the events occuring in the college.
+/* Event card is used to display all the events occurring in the college.
 liker function is used to like or unlike events. */
 import React, {useContext, useState} from 'react';
 import {
