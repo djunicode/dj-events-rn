@@ -25,13 +25,13 @@ import {
   width,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PixelRatio} from 'react-native';
-import {heightToDp, widthToDp} from '../../Responsive';
+import {heightToDp} from '../../Responsive';
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {signIn, currentUser} = useContext(AuthContext);
+  const {signIn} = useContext(AuthContext);
   const navigation = useNavigation();
 
   const handleUser = (text) => {
@@ -87,9 +87,9 @@ const Login = () => {
         <View style={{paddingTop: PixelRatio.getFontScale() * 33}}>
           <TouchableOpacity
             onPress={() => {
-              AsyncStorage.clear();
-              AsyncStorage.setItem('username', username);
-              AsyncStorage.setItem('password', password);
+              // AsyncStorage.clear();
+              // AsyncStorage.setItem('username', username);
+              // AsyncStorage.setItem('password', password);
               signIn(username, password);
             }}>
             <LinearGradient

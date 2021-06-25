@@ -7,23 +7,35 @@ import {AuthContext} from '../Authentication/AuthProvider';
 import {bgColor, textColor} from '../Constants';
 import MainTabScreen from '../controllers/MainTabScreen';
 import RootStackScreen from '../controllers/RootStackScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const Stack = createStackNavigator();
 
 const Navigator = () => {
-  const {currentUser, isLoading, signIn} = useContext(AuthContext);
+  const {
+    currentUser,
+    isLoading,
+    isSignedIn,
+    setCurrentUser,
+    setIsSignedIn,
+    setIsLoading,
+  } = useContext(AuthContext);
 
   const getUser = async () => {
+    setIsLoading(true);
     try {
-      const u = await AsyncStorage.getItem('username');
-      const p = await AsyncStorage.getItem('password');
-      if (u != null && p != null) {
-        signIn(u, p);
-      }
+      // const u = await AsyncStorage.getItem('username');
+      // const p = await AsyncStorage.getItem('password');
+      const user = await EncryptedStorage.getItem('user');
+      setCurrentUser(JSON.parse(user));
+      setIsSignedIn(true);
+      // if (u != null && p != null) {
+      //   signIn(u, p);
+      // }
     } catch (e) {
       console.log(e);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -46,7 +58,7 @@ const Navigator = () => {
   }
   return (
     <NavigationContainer>
-      {currentUser != null ? (
+      {isSignedIn && currentUser ? (
         <Stack.Navigator headerMode="none" initialRouteName="MainTab">
           <Stack.Screen component={MainTabScreen} name="MainTab" />
         </Stack.Navigator>

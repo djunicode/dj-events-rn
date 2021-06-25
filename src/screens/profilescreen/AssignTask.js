@@ -54,11 +54,7 @@ const AssignTask = ({route}) => {
       .then((response) => response.json())
       .then((result) => {
         const list = [
-          <Picker.Item
-            label={'~SELECT_CO-COMM_MEMBER~'}
-            key={'-1'}
-            value={null}
-          />,
+          <Picker.Item label={'~SELECT_CO-COMM_MEMBER~'} value={null} />,
         ];
         console.log(result);
         for (var i = 0; i < result.length; i++) {
