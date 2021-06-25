@@ -79,17 +79,16 @@ const Upcoming = ({d, type, callBack, getLiked, liked}) => {
         renderItem={({item}) => {
           //console.log(liked.includes(item));
           const arr = liked1.find(({id}) => id === item.id);
-          const isliked = arr ? true : false;
           return (
             <View style={styles.container}>
               <EventCard
                 name={item.eventName}
                 id={item.id}
                 summary={item.eventSummary}
-                likes={item.likes}
+                likes={arr ? arr.likes : item.likes}
                 committee={item.organisingCommitteeName}
                 description={item.eventDescription}
-                isLiked={isliked}
+                isLiked={arr ? true : false}
                 getLiked={getLiked}
                 callback={setLiked1}
               />

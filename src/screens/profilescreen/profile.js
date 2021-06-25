@@ -20,12 +20,14 @@ import {
   statusbarColor,
   subtextColor,
   textColor,
+  width,
 } from '../../Constants';
 import {AuthContext} from '../../Authentication/AuthProvider';
 import {PixelRatio} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TaskButton from '../../components/ProfileScreen/TaskButton';
 
 const image = require('../../images/profile.jpg');
 
@@ -136,12 +138,23 @@ const ProfileScreen = () => {
             }}
           />
         </SafeAreaView>
-        <Text style={styles.cotext}>CO-COMMITTEE: </Text>
-        {/* <View style={{flexDirection: 'row'}}>
-          <TaskButton width={140} text={'VIEW TASKS'} route={'Co View Tasks'} />
-          <View style={{width: 17}} />
-          <TaskButton width={170} text={'REFERRAL'} route={'Referral Count'} />
-        </View> */}
+        <View
+          style={{
+            width: width,
+            backgroundColor: textColor,
+            height: 10,
+            borderRadius: 2.5,
+            margin: 10,
+          }}
+        />
+        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+          <Text style={styles.cotext}>CO-COMMITTEE: </Text>
+          <TaskButton
+            width={130}
+            text={'ALL REFERRALS'}
+            route={'Referral Count'}
+          />
+        </View>
         <View style={{height: 20}} />
         <SafeAreaView>
           <FlatList
