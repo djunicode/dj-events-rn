@@ -28,13 +28,12 @@ import {AuthContext} from '../../Authentication/AuthProvider';
 const AssignTask = ({route}) => {
   const navigation = useNavigation();
   const [tdata, setTdata] = useState('');
-  const [person, setPerson] = useState('');
+  const [person, setPerson] = useState({});
   const {currentUser} = useContext(AuthContext);
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
     getCoCom();
-    console.log(currentUser);
   }, []);
 
   const getCoCom = () => {
@@ -54,15 +53,18 @@ const AssignTask = ({route}) => {
       .then((response) => response.json())
       .then((result) => {
         const list = [
-          <Picker.Item label={'~SELECT_CO-COMM_MEMBER~'} value={null} />,
+          <Picker.Item
+            label={'~SELECT_CO-COMM_MEMBER~'}
+            value={null}
+            key={-1}
+          />,
         ];
-        console.log(result);
         for (var i = 0; i < result.length; i++) {
           list.push(
             <Picker.Item
               label={`${result[i].student} (${result[i].positionAssigned})`}
               key={result[i].id}
-              value={result[i].student}
+              value={{student: result[i].student, username: result[i].username}}
             />,
           );
         }
@@ -72,7 +74,6 @@ const AssignTask = ({route}) => {
   };
 
   const assign = () => {
-    console.log(person);
     if (!person) {
       Alert.alert(
         'Select The member',
@@ -88,7 +89,7 @@ const AssignTask = ({route}) => {
         myHeaders.append('Content-Type', 'application/json');
 
         var raw = JSON.stringify({
-          coCommittee: person,
+          coCommittee: person.username,
           task: tdata,
         });
 
@@ -105,17 +106,18 @@ const AssignTask = ({route}) => {
         )
           .then((response) => response.json())
           .then((result) => {
-            if (
-              result.message ===
-              'Requested Core Committee/ Co Committee member not found'
-            ) {
+            if (result.success) {
               Alert.alert(
-                'Assignment Failed',
-                'Co Committee member not found',
-                [{text: 'OK', onPress: () => console.log('okay')}],
+                'Task assigned Successfully:)',
+                `"${tdata}"...\n to ${person.student} `,
+                [{text: 'OK', onPress: () => navigation.navigate('Profile')}],
               );
             } else {
-              console.log(result);
+              Alert.alert(
+                'Assignment Failed:(',
+                'Co Committee member not found or some error might have occured',
+                [{text: 'OK', onPress: () => console.log('okay')}],
+              );
             }
           })
           .catch((error) => console.log('error', error));
